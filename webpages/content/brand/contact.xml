@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Kontakt">
+    <div>
+      <h1>Kontakt</h1>
+      <p>
+        Gottfried Wilhelm Leibniz Bibliothek<br />
+        Niedersächsische Landesbibliothek<br />
+        Waterloostraße 8<br />
+        30169 Hannover<br />
+        Tel. 49 511 1267-0<br />
+        Fax 49 511 1267-202<br />
+        <a href="http://www.gwlb.de">http://www.gwlb.de</a><br />
+        <span class="madress">pflichtexemplar [at] gwlb.de</span>
+      </p>
+    </div>
+    <div>
+      <h1>Die Technik</h1>
+      <p>
+        Die Entwicklung und Implementierung dieses Dokumentenservers erfolgt auf Basis des Repository-Frameworks MyCoRe. Analoge
+        Projekte wurden bereits mit den Hochschulschriftenservern DBT und DuEPublico umgesetzt. MyCoRe bildet sowohl die Grundlage
+        für den DMS-Service der Verbundzentrale als auch für den zentralen Betrieb der digitalen Bibliothek des Freistaates Thüringen
+        unter Federführung der Thüringischen Landes- und Universitätsbibliothek (ThULB) Jena, so dass ein langfristiger Betrieb sowie eine
+        kontinuierliche Weiterentwicklung durch die VZG und die ThULB Jena garantiert sind. Außerdem wird somit die Anbindung des
+        DMS an die CBS-/LBS-Struktur zur automatischen Übernahme der Metadaten und Verknüpfung der Nachweise mit dem DMS sowie die
+        Replizierung der Institutsstruktur in die OPACs gewährleistet.
+      </p>
+
+      <h2>Verbundzentrale des GBV (VZG)</h2>
+      <p>
+        Platz der Göttinger Sieben 1<br />
+        37073 Göttingen<br />
+        Tel.: 0551 39 5207<br />
+        Fax: 0551 39 13980<br />
+        Digitale Bibliothek, Reposis<br />
+        <a href="https://www.gbv.de/Verbundzentrale/serviceangebote/reposis-repository-service">https://www.gbv.de/Verbundzentrale/serviceangebote/reposis-repository-service</a><br />
+        <span class="madress">dms-list [at] gbv.de</span>
+      </p>
+    </div>
+
+  </section>
+  <meta>
+    <log date="2014-05-05" time="16:37" labelPath=" » Kontakt" lastEditor="Kathleen Neumann" />
+  </meta>
+</MyCoReWebPage>

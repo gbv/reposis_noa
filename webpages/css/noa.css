@@ -1,0 +1,483 @@
+/* base ******************************************************************** */
+
+body {
+  background-color: #F7F7F7;
+  background-image: none;
+  font-family: verdana,arial,sans-serif;
+  color: #464646;
+}
+
+html body #page {
+  padding-bottom: 80px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
+  font-weight: 300;
+  line-height: 1.1;
+  color: inherit;
+}
+
+a, a:hover, a:focus {
+  color: #27568F;
+}
+
+.tab-pane {
+  padding: 20px 10px;
+}
+
+
+/* header ****************************************************************** */
+
+header {
+  margin-top: 0px;
+}
+
+header #head .row #header_back,
+header .container .row #header_back {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+header .container .row #header_top {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-image: none;
+}
+
+header .mir-prop-nav .navbar-nav > li > a {
+    padding: 10px 15px 0px 15px;
+    font-size: 14px;
+}
+
+/* xs: default up to 750px ***************************************************/
+
+header .container .row #header_back {
+  background-image: url("../images/banner_350.jpg");
+  background-position: top left;
+  background-size: cover;
+  height: 110px;
+}
+
+@media (min-width: 320px) {
+  header .container .row #header_back {
+    height: 120px;
+  }
+}
+
+
+/* xs hd */
+@media (min-width: 350px) {
+  header .container .row #header_back {
+    background-image: url("../images/banner_750.jpg");
+    height: 100px;
+  }
+}
+
+@media (min-width: 410px) {
+  header .container .row #header_back {
+    height: 120px;
+  }
+}
+@media (min-width: 450px) {
+  header .container .row #header_back {
+    height: 140px;
+  }
+}
+@media (min-width: 570px) {
+  header .container .row #header_back {
+    height: 160px;
+  }
+}
+@media (min-width: 650px) {
+  header .container .row #header_back {
+    height: 180px;
+  }
+}
+/* sm: up to 970 px **********************************************************/
+@media (min-width: 751px) {
+  header .container .row #header_back {
+    background-image: url("../images/banner_970.jpg");
+    height: 180px;
+  }
+}
+
+
+/* md: up to 1170 px *********************************************************/
+@media (min-width: 971px) {
+  header .container .row #header_back {
+    background-image: url("../images/banner_1170.jpg");
+    height: 180px;
+  }
+}
+
+
+/* lg: larger than 1170 px ***************************************************/
+@media (min-width: 1171px) {
+}
+
+
+/* footer ****************************************************************** */
+
+footer .container {
+  border-top: 1px solid #DDD;
+  padding-top: 0px;
+}
+
+footer .container #menu {
+  background-color: transparent;
+  background-image: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+footer .container #menu #sub_menu li a, footer .container #menu #sub_menu li:before {
+  color: #27568F;
+}
+
+footer .container #menu #copyright {
+  color: #333;
+}
+
+
+/* buttons ***************************************************************** */
+
+.btn-default,
+.btn-primary,
+.btn-default:focus,
+.btn-primary:focus,
+.btn-default:active,
+.btn-primary:active {
+  color: #255595;
+  background-color: transparent;
+  border-color: #D3D3D3;
+  border-radius: 0;
+}
+
+.btn-default:hover,
+.open > .dropdown-toggle.btn-default,
+.btn-primary:hover,
+.open > .dropdown-toggle.btn-primary {
+  background-color: #3685D4;
+  border-color: #3685D4;
+  color: white;
+}
+
+
+/* forms ******************************************************************* */
+
+.form-control {
+  border-radius: 0px;
+}
+
+.navbar-default .form-control:focus {
+  border-color: #3685D4;
+}
+
+.form-control::-moz-placeholder{
+  color:#ccc;
+  opacity:1
+}
+
+.form-control:-ms-input-placeholder{
+  color:#ccc;
+}
+
+.form-control::-webkit-input-placeholder{
+  color:#ccc;
+}
+
+#dynamic_editor-large .form-group,
+#dynamic_editor .form-group,
+#editor-admin-form-large .form-group,
+#editor-admin-form .form-group {
+  margin-bottom: 10px;
+}
+
+#dynamic_editor-large label, #editor-admin-form-large label {
+  font-weight: normal;
+}
+
+#dynamic_editor label, #editor-admin-form label {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+#dynamic_editor .form-control, #editor-admin-form .form-control {
+  padding: 6px 8px;
+  height: 31px;
+  font-size: 12px;
+}
+
+#dynamic_editor .btn, #editor-admin-form .btn {
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+#dynamic_editor .form-pmud .btn, #editor-admin-form .form-pmud .btn {
+  margin-right: -1px;
+}
+
+.tooltip {
+  font-family:Verdana;
+  font-size:11px;
+}
+
+#editor-buttons {
+  margin-top: 20px;
+}
+
+/* pagination  ************************************************************* */
+
+.pagination .disabled > a,
+.pagination .disabled > a:hover,
+.pagination .disabled > a:focus,
+.pagination .disabled > span {
+    background-color: #ffffff;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    color: white;
+    background-color: #3685D4;
+    border-color: #3685D4;
+}
+
+/* label  ****************************************************************** */
+
+.label-info[href]:hover,
+.label-info[href]:focus {
+    color: #fff;
+    background-color: #3685D4;
+}
+
+.label-primary {
+    background-color: #369;
+}
+h3 label {
+  font-weight: 300;
+}
+
+
+/* classification  ********************************************************* */
+
+ul.cbList li {
+    background-color: #EDF5FB;
+    border-radius: 0px;
+}
+
+ul.cbList li:nth-child(2n+1) {
+    background-color: transparent;
+}
+
+ul.cbList li:last-child {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+ul.cbList li:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+
+/* name index ***************************************************************** */
+ul.names li a {
+    color: #27568F;
+    background-color: #EDF5FB;
+    border: none;
+}
+ul.names li.active a {
+    color: white;
+    background-color: #27568E;
+}
+
+ul.names li a:hover,
+ul.names li.active a:hover {
+    color: white;
+    background-color: #3685D4;
+}
+
+/* navigation ************************************************************** */
+
+ul.navbar-nav {
+  /* font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif; */
+  font-weight: 300;
+}
+
+.navbar {
+  font-family: verdana,arial,sans-serif;
+}
+
+
+/* sidenav ****************************************************************** */
+
+#searchInput {
+  padding: 4px 8px;
+  border-radius: 0;
+  font-family: verdana,arial,sans-serif;
+  font-weight: normal;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-form {
+  margin: 0px 0px 30px 15px;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-form #searchInput {
+  width: 198px;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-form .btn {
+  margin: 0px;
+}
+
+#side_nav_column form button span {
+  color: #999999;
+  text-rendering: optimizeLegibility;
+  font-size: 16px;
+}
+#side_nav_column form button:hover span {
+  color: #ffffff;
+}
+
+#side_nav_column nav > ul > li > a {
+  font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-nav > li > a,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active > a {
+  color: white;
+  color: #191919;
+  background-color: #BCD2F2;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 18px;
+  padding: 0px 15px;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-nav > li > a:hover,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active > a:hover,
+#side_nav_column .mir-side-nav nav .navbar-nav > li > a:focus,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active > a:focus {
+  background-color: transparent;
+  color: #191919;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-nav > li .dropdown-menu,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active .dropdown-menu {
+  border-width: 0px 0px 0px 0px;
+}
+
+.button_box #hide_side_button.navbar-toggle {
+  background-color: #C8D8E8;
+  border-color: #C8D8E8 #C8D8E8 transparent #C8D8E8;
+  border-radius: 0;
+}
+
+.button_box #hide_side_button.navbar-toggle:hover,
+#side_nav_column .mir-side-nav nav .navbar-form .btn:hover {
+  background-color: #3685D4;
+  border-color: #3685D4; /*#27568E*/;
+  color: white;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-nav > li .dropdown-menu > li > a,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active .dropdown-menu > li > a {
+  padding: 3px 10px 3px 25px;
+  line-height: 18px;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-nav > li .dropdown-menu > li > a:hover,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active .dropdown-menu > li > a:hover,
+#side_nav_column .mir-side-nav nav .navbar-nav > li .dropdown-menu > li > a:focus,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active .dropdown-menu > li > a:focus {
+  background-color: #C8D8E8;
+  color: #15516E;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-nav > li .dropdown-menu > li.active > a,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active .dropdown-menu > li.active > a {
+  border-left: 2px solid transparent;
+  background-color: #C8D8E8;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-nav li.dropdown {
+  border-top: 1px solid #CCC;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+#basket-list-item > a:before {
+  content:"Merkliste ";
+}
+
+#basket-list-item > a > i.fa {
+  display: none;
+}
+
+#side_nav_column .mir-side-nav nav .navbar-form #searchInput.form-control {
+  height: 30px;
+}
+
+/* result list ************************************************************* */
+
+.result_body .result_list #hit_list .hit_item:hover,
+.result_body .result_list #hit_list .hit_item:hover .btn {
+  border-color: #27568E;
+}
+
+.result_body .result_list #hit_list .hit_item:hover .hit_icon {
+  border-left-color: #27568E;
+}
+
+.result_body .result_list #hit_list .hit_item:hover .hit_counter {
+  color: #27568E;
+  border-color: #27568E;
+}
+
+.result_body .result_list #hit_list .hit_item:hover .hit_stars_5 .hit_star {
+  background-color: #27568E;
+}
+
+.result_body .result_list #hit_list .hit_item .hit_options .dropdown-menu > li > a:hover {
+  background-color: #3685D4;
+}
+.result_body .result_list #hit_list .hit_item .hit_options .open > .dropdown-toggle,
+.result_body .result_list #hit_list .hit_item .hit_options .btn:hover,
+.result_body .result_list #hit_list .hit_item .hit_options .open .btn:hover {
+  color: #27568F;
+}
+
+/* bread crumb ************************************************************* */
+
+.breadcrumb {
+    padding: 8px 150px 8px 15px;
+    margin-bottom: 20px;
+    list-style: outside none none;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+}
+
+/* details ***************************************************************** */
+
+.detail_block > h1 {
+  font-size: 28px;
+}
+
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+  color: #B94A48;
+}
+
+.has-error .form-control, .has-error .form-control:focus {
+  border-color: #B94A48;
+}
+
+.has-error .form-control:focus {
+  box-shadow: 0px 1px 1px rgba(185, 74, 72, 0.38) inset, 0px 0px 8px rgba(185, 74, 72, 0.39);
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="mir_genres">
+  <label xml:lang="en" text="genre" description="A list of publication types" />
+  <label xml:lang="x-uri" text="http://www.mycore.org/classifications/mir_genres" />
+  <label xml:lang="de" text="Genre" description="Liste der Publikationsarten" />
+  <categories>
+    <category ID="article">
+      <label xml:lang="en" text="Article / Chapter" />
+      <label xml:lang="de" text="Artikel / Aufsatz" />
+      <label xml:lang="x-hosts" text="journal collection standalone" />
+      <category ID="chapter">
+        <label xml:lang="de" text="Buchkapitel" />
+        <label xml:lang="en" text="Book chapter" />
+        <label xml:lang="x-hosts" text="monograph book collection" />
+      </category>
+    </category>
+    <category ID="book">
+      <label xml:lang="de" text="Buch / Broschüre" />
+      <label xml:lang="x-hosts" text="series standalone" />
+      <label xml:lang="en" text="Book" />
+      <category ID="monograph">
+        <label xml:lang="en" text="Monograph" />
+        <label xml:lang="x-hosts" text="series standalone" />
+        <label xml:lang="de" text="Monographie" />
+      </category>
+    </category>
+    <category ID="collection">
+      <label xml:lang="x-hosts" text="series standalone" />
+      <label xml:lang="de" text="Sammelwerk" />
+      <label xml:lang="en" text="Collection" />
+    </category>
+    <category ID="series">
+      <label xml:lang="x-hosts" text="standalone" />
+      <label xml:lang="en" text="Series" />
+      <label xml:lang="de" text="Serie" />
+    </category>
+    <category ID="journal">
+      <label xml:lang="x-hosts" text="standalone" />
+      <label xml:lang="de" text="Zeitschrift" />
+      <label xml:lang="en" text="Journal" />
+    </category>
+    <category ID="issue">
+      <label xml:lang="en" text="Issue" />
+      <label xml:lang="de" text="Zeitschriftenheft" />
+      <label xml:lang="x-hosts" text="journal standalone" />
+    </category>
+  </categories>
+</mycoreclass>

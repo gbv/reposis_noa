@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
+
+  <xed:template id="noa.access">
+    <xed:bind xpath="mods:accessCondition[@type='restriction on access']" initially="">
+      <div class="form-group {$xed-validation-marker}">
+        <label class="col-md-3 control-label required">
+          <xed:output i18n="noa.access" />
+        </label>
+        <div class="col-md-6">
+          <select  class="form-control form-control-inline">
+            <option value=""><xed:output i18n="noa.select.required" /></option>
+            <xed:include uri="xslStyle:items2options:classification:editor:-1:children:noa_access" />
+          </select>
+        </div>
+        <div class="col-md-1">
+          <span class="btn btn-default info-button" data-original-title="{i18n:noa.help.access}" data-toggle="tooltip" data-placement="right" title=""><i class="fa fa-info"></i></span>
+        </div>
+      </div>
+    </xed:bind>
+  </xed:template>
+
+  <xed:template id="rights">
+    <xed:bind xpath="mods:accessCondition[@type='use and reproduction']" initially="">
+      <div class="form-group {$xed-validation-marker}">
+        <label class="col-md-3 control-label">
+          <xed:output i18n="mir.rights" />
+        </label>
+        <div class="col-md-6">
+          <select  class="form-control form-control-inline">
+            <option value=""><xed:output i18n="mir.select" /></option>
+            <xed:include uri="xslStyle:items2options:classification:editor:-1:children:mir_rights" />
+          </select>
+        </div>
+        <div class="col-md-1">
+          <span class="btn btn-default info-button" data-original-title="{i18n:mir.help.rights}" data-toggle="tooltip" data-placement="right" title=""><i class="fa fa-info"></i></span>
+        </div>
+      </div>
+    </xed:bind>
+  </xed:template>
+
+
+  <xed:template id="noa.publicationType">
+    <div class="form-group">
+      <label class="col-md-3 control-label">
+        <xed:output i18n="noa.publicationType" />
+      </label>
+      <xed:bind xpath="mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']/@valueURIxEditor" initially="">
+        <div class="col-md-6">
+          <div class="controls">
+            <select class="form-control form-control-inline">
+              <option value=""><xed:output i18n="mir.select" /></option>
+              <xed:include uri="xslStyle:items2options:classification:editor:-1:children:noa_pubtype" />
+            </select>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <span class="btn btn-default info-button" data-original-title="{i18n:noa.help.publicationType}" data-toggle="tooltip" data-placement="right" title=""><i class="fa fa-info"></i></span>
+        </div>
+      </xed:bind>
+    </div>
+  </xed:template>
+
+
+  <!-- use external schema copyrightMD, see http://www.cdlib.org/groups/rmg/copyrightMD.html#type_copyright.status -->
+  <!-- TODO: copyright.status and publication.status shouldn't be static -->
+  <xed:template id="copyrightMD">
+    <xed:bind xpath="mods:accessCondition[@type='copyrightMD']/cmd:copyright[@copyright.status='copyrighted'][@publication.status='published'][@xsi:schemaLocation='http://www.cdlib.org/inside/diglib/copyrightMD http://www.cdlib.org/groups/rmg/docs/copyrightMD.xsd']">
+      <mir:textfield xpath="cmd:rights.holder/cmd:name" label="mir.rightsHolder" help-text="{i18n:mir.help.rightsHolder}" class="required" />
+    </xed:bind>
+  </xed:template>
+
+
+  <!-- redefine some input fields with other style definition -->
+  <xed:template id="author.repeated">
+    <mir:role.repeated role="aut" label="mir.role.author" help-text="{i18n:mir.help.role.author}" />
+  </xed:template>
+
+  <xed:template id="place">
+    <mir:textfield xpath="mods:originInfo/mods:place/mods:placeTerm[@type='text']" label="mir.place" help-text="{i18n:mir.help.place}" class="required" />
+  </xed:template>
+
+  <xed:template id="host.volume">
+    <mir:textfield xpath="mods:part/mods:detail[@type='volume']/mods:number" label="mir.volume" help-text="{i18n:mir.help.volume}" class="required" />
+  </xed:template>
+
+  <xed:template id="host.issue">
+    <mir:textfield xpath="mods:part/mods:detail[@type='issue']/mods:number" label="mir.issue" help-text="{i18n:mir.help.issue}" class="required" />
+  </xed:template>
+
+  <xed:template id="language.simple">
+    <div class="form-group">
+      <label class="col-md-3 control-label required">
+        <xed:output i18n="mir.language" />
+      </label>
+      <div class="col-md-6">
+        <xed:bind xpath="mods:language/mods:languageTerm[@authority='rfc4646'][@type='code']" initially="">
+          <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="lang.list" />
+        </xed:bind>
+      </div>
+      <div class="col-md-1">
+        <span class="btn btn-default info-button" data-toggle="popover" data-placement="right" data-content="{i18n:mir.help.language}">
+          <i class="fa fa-info"></i>
+        </span>
+      </div>
+    </div>
+  </xed:template>
+
+  <xed:template id="language.repeated">
+    <xed:repeat xpath="mods:language" max="5" >
+    <div class="form-group">
+      <label class="col-md-3 control-label required">
+        <xed:output i18n="mir.language" />
+      </label>
+        <div class="col-md-6">
+          <xed:bind xpath="mods:languageTerm[@authority='rfc4646'][@type='code']" initially="">
+          <div class="controls">
+            <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="lang.list" />
+          </div>
+          </xed:bind>
+        </div>
+        <div class="col-md-1">
+          <span class="btn btn-default info-button" data-toggle="popover" data-placement="right" data-content="{i18n:mir.help.language}">
+            <i class="fa fa-info"></i>
+          </span>
+        </div>
+        <mir:pmud />
+    </div>
+    </xed:repeat>
+  </xed:template>
+
+  <xed:template id="lang.list">
+    <select class="form-control form-control-inline">
+      <option value=""><xed:output i18n="noa.select.required" /></option>
+      <xed:include uri="xslStyle:items2options:classification:editor:-1:children:rfc4646" />
+    </select>
+  </xed:template>
+
+  <xed:template id="host.pages">
+    <div class="form-group {$xed-validation-marker}">
+      <label class="col-md-3 control-label required">
+        <xed:output i18n="mir.pages.from" />
+      </label>
+      <div class="col-md-6">
+        <div class="form-inline">
+          <xed:bind xpath="mods:part/mods:extent[@unit='pages']">
+            <xed:bind xpath="mods:start">
+              <input type="text" size="10" class="form-control form-control-inline" />
+            </xed:bind>
+            &amp;npsp;<xed:output i18n="mir.pages.to" />&amp;npsp;
+            <xed:bind xpath="mods:end">
+              <input type="text" size="10" class="form-control form-control-inline" />
+            </xed:bind>
+          </xed:bind>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <span class="btn btn-default info-button" data-toggle="popover" data-placement="right" data-content="{i18n:mir.help.host.pages}">
+          <i class="fa fa-info"></i>
+        </span>
+      </div>
+    </div>
+  </xed:template>
+
+  <xed:template id="validation-rules">
+    <xed:validate xpath="//mods:mods/mods:titleInfo/mods:title" required="true" i18n="mir.validation.title" display="global" />
+    <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
+    <xed:validate xpath="//mods:language/mods:languageTerm[@authority='rfc4646']" required="true" i18n="noa.validation.language" display="global" />
+    <xed:validate xpath="//mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
+    <xed:validate xpath="//mods:identifier[@type='isbn']" matches="^((978|979)-?)?([\d -]{12}|\d{9})(\d|X)$" i18n="mir.validation.isbn" display="global" />
+    <xed:validate xpath="//mods:identifier[@type='issn']" matches="[\dX]{4}\-[\dX]{4}" i18n="mir.validation.issn" display="global" />
+    <xed:validate xpath="//mods:identifier[@type='doi']" matches="10\.\d+.*" i18n="mir.validation.doi" display="global" />
+    <xed:validate xpath="//mods:identifier[@type='hdl']" matches="\S+/\S+" i18n="mir.validation.handle" display="global" />
+    <xed:validate xpath="//mods:identifier[@type='urn']" matches="urn:nbn:[a-z]{2}:\S*" i18n="mir.validation.urn" display="global" />
+    <xed:validate xpath="//mods:url|//mods:abstract/@xlink:href" matches="(ftp|http|https)://[\w\d.]+\S*" i18n="mir.validation.url" display="global" />
+    <xed:validate xpath="//mods:*[@encoding='w3cdtf']" matches="\d{4}(\-\d{2}(\-\d{2})?)?" type="datetime" format="yyyy;yyyy-MM;yyyy-MM-dd" i18n="mir.validation.date" display="global" />
+  </xed:template>
+
+  <xed:template id="validation-rules.issue">
+    <xed:validate xpath="//mods:relatedItem/mods:part/mods:detail[@type='volume']/mods:number" required="true" i18n="noa.validation.volume" display="global" />
+    <xed:validate xpath="//mods:relatedItem/mods:part/mods:detail[@type='issue']/mods:number" required="true" i18n="noa.validation.issue" display="global" />
+  </xed:template>
+
+  <xed:template id="validation-rules.article">
+    <xed:validate xpath="//mods:relatedItem/mods:part/mods:detail[@type='volume']/mods:number" required="true" i18n="noa.validation.volume" display="global" />
+    <xed:validate xpath="//mods:relatedItem/mods:part/mods:extent[@unit='pages']/mods:start" required="true" i18n="noa.validation.pages" display="global" />
+  </xed:template>
+
+  <xed:template id="validation-rules.accessAndIssued">
+    <xed:validate xpath="//mods:originInfo/mods:dateIssued[@encoding='w3cdtf']" required="true" i18n="mir.validation.dateIssued" display="global" />
+    <xed:validate xpath="//mods:mods/mods:accessCondition[@type='restriction on access']" required="true" i18n="noa.validation.access" display="global" />
+  </xed:template>
+
+
+</xed:template>

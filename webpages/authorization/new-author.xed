@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="all" i18n="component.user2.admin.create.title">
+
+    <h2>Registrieren</h2>
+    <p>
+      Bitte kontaktieren Sie uns per Mail an <span class="madress">pflichtexemplar [at] gwlb.de</span> um einen Zugang zu erhalten.
+    </p>
+  </section>
+</MyCoReWebPage>

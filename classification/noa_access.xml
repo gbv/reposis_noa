@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="noa_access">
+  <label xml:lang="de" text="Zugriffsberechtigungen auf Volltexte" />
+  <label xml:lang="x-uri" text="http://www.noa-gwlb.de/classifications/noa_access" />
+  <categories>
+    <category ID="unlimited">
+      <label xml:lang="de" text="uneingeschränkt" description="jeder darf auf die angehängten Dateien zugreifen" />
+    </category>
+    <category ID="intern">
+      <label xml:lang="de" text="nur in der GWLB" description="innerhalb des IP-Adressbereiches der GWLB" />
+    </category>
+    <category ID="private">
+      <label xml:lang="de" text="privat" description="darf nur der Autor sehen" />
+    </category>
+  </categories>
+</mycoreclass>

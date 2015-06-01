@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<navigation hrefStartingPage="/content/index.xml" dir="/content" template="undefined">
+    <menu id="brand" dir="/content/brand">
+        <label xml:lang="de">MIR-Menü</label>
+        <label xml:lang="en">MIR menu</label>
+        <item href="/content/index.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Start</label>
+            <label xml:lang="en">Start</label>
+        </item>
+        <item href="/content/brand/impressum.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Impressum</label>
+            <label xml:lang="en">Impressum</label>
+        </item>
+        <item href="/content/brand/contact.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Kontakt</label>
+            <label xml:lang="en">Contact</label>
+        </item>
+    </menu>
+    <menu id="search">
+        <label xml:lang="de">Suche</label>
+        <label xml:lang="en">Search</label>
+        <item href="/search/simple_intern.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Erweiterte Suche</label>
+            <label xml:lang="en">Extended Search</label>
+        </item>
+        <item href="/search/search-expert.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Expertensuche</label>
+            <label xml:lang="en">Expert Search</label>
+        </item>
+    </menu>
+    <menu id="browse">
+        <label xml:lang="de">Blättern</label>
+        <label xml:lang="en">Browse</label>
+        <item href="/content/browse/institutes.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">nach Einrichtung</label>
+            <label xml:lang="en">Institutions</label>
+        </item>
+        <item href="/content/browse/genres.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">nach Dokumenttyp</label>
+            <label xml:lang="en">Genre</label>
+        </item>
+        <item href="/servlets/MCRActionMappingServlet/personindex/browse" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">nach Personen</label>
+            <label xml:lang="en">Persons</label>
+        </item>
+    </menu>
+    <menu id="publish" dir="/content/publish">
+        <label xml:lang="de">Dokumente einreichen</label>
+        <label xml:lang="en">Submit Document</label>
+        <item href="/editor/editor-dynamic.xed?genre=book" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Neuaufnahme: Buch / Broschüre</label>
+            <label xml:lang="en">New book</label>
+        </item>
+        <item href="/servlets/solr/find?qry=%20%2Bmods.type:%22journal%22&amp;amp;XSL.Style=selectIssue&amp;amp;rows=1000" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Neuaufnahme: Zeitschriftenheft</label>
+            <label xml:lang="en">New issue</label>
+        </item>
+        <item href="/editor/editor-dynamic.xed?genre=article" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Neuaufnahme: Artikel</label>
+            <label xml:lang="en">New article</label>
+        </item>
+        <item href="/editor/editor-admins.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Neuaufnahme</label>
+            <label xml:lang="en">Publish</label>
+        </item>
+        <item href="/servlets/solr/select?q=createdby:USERNAME" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Meine Ablieferungen</label>
+            <label xml:lang="en">My Documents</label>
+        </item>
+        <item href="/content/publish/statistic.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Bearbeitungsstatistik</label>
+            <label xml:lang="en">Statistic</label>
+        </item>
+        <item href="/servlets/solr/select?q=state:%22submitted%22" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Liste Neuablieferungen</label>
+            <label xml:lang="en">New Documents</label>
+        </item>
+        <item href="/content/publish/guidelines.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Anmeldeverfahren</label>
+            <label xml:lang="en">Guidelines</label>
+        </item>
+    </menu>
+    <menu id="user">
+        <label xml:lang="de">Nutzermenü</label>
+        <label xml:lang="en">User menu</label>
+        <group id="thisuser">
+            <item href="/authorization/change-password.xed?action=password" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">Passwort ändern</label>
+                <label xml:lang="en">Change Password</label>
+            </item>
+            <item href="/servlets/MCRUserServlet?action=show" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">Benutzerdaten anzeigen</label>
+                <label xml:lang="en">Show User Data</label>
+            </item>
+            <item href="/authorization/change-current-user.xed?action=saveCurrentUser" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">Kontaktdaten ändern</label>
+                <label xml:lang="en">Change user contact</label>
+            </item>
+        </group>
+        <group id="contentadmin">
+            <item href="/modules/classeditor/classificationEditor.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">Klassifikationseditor</label>
+                <label xml:lang="en">Edit Classifications</label>
+            </item>
+            <item href="/rsc/ACLE/start" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">ACL-Editor</label>
+                <label xml:lang="en">ACL Editor</label>
+            </item>
+        </group>
+        <group id="useradmin">
+            <item href="/servlets/MCRUserServlet" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">Nutzerverwaltung</label>
+                <label xml:lang="en">Admin Users</label>
+            </item>
+            <item href="/authorization/new-user.xed?action=save" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">Nutzer anlegen</label>
+                <label xml:lang="en">Create User</label>
+            </item>
+            <item href="/authorization/roles-editor.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">Rollen administrieren</label>
+                <label xml:lang="en">Manage roles</label>
+            </item>
+        </group>
+        <group id="miscadmin">
+            <item href="/modules/webcli/launchpad.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">WebCLI</label>
+                <label xml:lang="en">WebCLI</label>
+            </item>
+            <item href="/servlets/MCRSessionListingServlet" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">Aktive Sitzungen</label>
+                <label xml:lang="en">Session Management</label>
+            </item>
+            <item href="/modules/wcms2/wcms2.xml?XSL.useMT=false" type="intern" replaceMenu="false" constrainPopUp="false">
+                <label xml:lang="de">WCMS</label>
+                <label xml:lang="en">WCMS</label>
+            </item>
+        </group>
+        <item href="/servlets/logout?url=../content/index.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Abmelden</label>
+            <label xml:lang="en">Logout</label>
+        </item>
+    </menu>
+    <menu id="misc" dir="/content/misc">
+        <label xml:lang="de">Direktlinks</label>
+        <label xml:lang="en">Direct Links</label>
+        <item href="http://opac.tib.uni-hannover.de/DB=3/LNG=DU/" type="extern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Katalog der GWLB</label>
+            <label xml:lang="en">OPAC GWLB</label>
+        </item>
+    </menu>
+</navigation>
