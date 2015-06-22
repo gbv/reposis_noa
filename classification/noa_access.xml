@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="noa_access">
+<mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="mir_access">
   <label xml:lang="de" text="Zugriffsberechtigungen auf Volltexte" />
-  <label xml:lang="x-uri" text="http://www.noa-gwlb.de/classifications/noa_access" />
+  <label xml:lang="x-uri" text="http://www.mycore.de/classifications/mir_access" />
+  <label xml:lang="x-auth" text="accessRestriction" />
   <categories>
     <category ID="unlimited">
       <label xml:lang="de" text="uneingeschränkt" description="jeder darf auf die angehängten Dateien zugreifen" />
@@ -10,7 +11,7 @@
       <label xml:lang="de" text="nur in der GWLB" description="innerhalb des IP-Adressbereiches der GWLB" />
     </category>
     <category ID="private">
-      <label xml:lang="de" text="privat" description="darf nur der Autor sehen" />
+      <label xml:lang="de" text="nur für Bibliothekspersonal" description="dürfen nur die Autoren und das Bibliothekspersonal sehen" />
     </category>
   </categories>
 </mycoreclass>
