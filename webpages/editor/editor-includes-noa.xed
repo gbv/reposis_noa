@@ -2,25 +2,6 @@
 
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
 
-  <xed:template id="noa.access">
-    <xed:bind xpath="mods:accessCondition[@type='restriction on access']" initially="">
-      <div class="form-group {$xed-validation-marker}">
-        <label class="col-md-3 control-label required">
-          <xed:output i18n="noa.access" />
-        </label>
-        <div class="col-md-6">
-          <select  class="form-control form-control-inline">
-            <option value=""><xed:output i18n="noa.select.required" /></option>
-            <xed:include uri="xslStyle:items2options:classification:editor:-1:children:noa_access" />
-          </select>
-        </div>
-        <div class="col-md-1">
-          <span class="btn btn-default info-button" data-original-title="{i18n:noa.help.access}" data-toggle="tooltip" data-placement="right" title=""><i class="fa fa-info"></i></span>
-        </div>
-      </div>
-    </xed:bind>
-  </xed:template>
-
   <xed:template id="rights">
     <xed:bind xpath="mods:accessCondition[@type='use and reproduction']" initially="">
       <div class="form-group {$xed-validation-marker}">
@@ -160,6 +141,27 @@
           <i class="fa fa-info"></i>
         </span>
       </div>
+    </div>
+  </xed:template>
+
+  <xed:template id="person.fields">
+    <div class="search-person">
+      <xed:bind xpath="mods:displayForm">
+        <input type="text" size="26" class="form-control form-control-inline"
+          data-search="searchEntity"
+          data-search-type="gnd"
+          data-search-entity-type="person"
+          data-search-output="#valueURIxEditor"
+          data-search-button="{i18n:button.search}"
+          data-search-button-loading="{i18n:button.loading}"
+          data-search-result-empty="{i18n:mir.searchIdentifier.noResult}"
+          data-target=".search-person"
+          placeholder="{i18n:mir.placeholder.name.family}, {i18n:mir.placeholder.name.given}"
+        />
+      </xed:bind>
+      <xed:bind xpath="@valueURIxEditor">
+        <input type="hidden" id="valueURIxEditor" />
+      </xed:bind>
     </div>
   </xed:template>
 
