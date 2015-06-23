@@ -66,10 +66,6 @@
     <mir:textfield xpath="mods:part/mods:detail[@type='volume']/mods:number" label="mir.volume" help-text="{i18n:mir.help.volume}" class="required" />
   </xed:template>
 
-  <xed:template id="host.issue">
-    <mir:textfield xpath="mods:part/mods:detail[@type='issue']/mods:number" label="mir.issue" help-text="{i18n:mir.help.issue}" class="required" />
-  </xed:template>
-
   <xed:template id="language.simple">
     <div class="form-group">
       <label class="col-md-3 control-label required">
