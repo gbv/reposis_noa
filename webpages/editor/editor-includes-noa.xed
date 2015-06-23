@@ -67,7 +67,7 @@
   </xed:template>
 
   <xed:template id="language.simple">
-    <div class="form-group">
+    <div class="form-group {$xed-validation-marker}">
       <label class="col-md-3 control-label required">
         <xed:output i18n="mir.language" />
       </label>
@@ -86,7 +86,7 @@
 
   <xed:template id="language.repeated">
     <xed:repeat xpath="mods:language" max="5" >
-    <div class="form-group">
+    <div class="form-group {$xed-validation-marker}">
       <label class="col-md-3 control-label required">
         <xed:output i18n="mir.language" />
       </label>
