@@ -181,7 +181,6 @@
 
   <xed:template id="validation-rules.issue">
     <xed:validate xpath="//mods:relatedItem/mods:part/mods:detail[@type='volume']/mods:number" required="true" i18n="noa.validation.volume" display="global" />
-    <xed:validate xpath="//mods:relatedItem/mods:part/mods:detail[@type='issue']/mods:number" required="true" i18n="noa.validation.issue" display="global" />
   </xed:template>
 
   <xed:template id="validation-rules.article">
