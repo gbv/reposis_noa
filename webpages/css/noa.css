@@ -197,6 +197,10 @@ footer .container #menu #copyright {
   margin-bottom: 10px;
 }
 
+.mir-fieldset-content > .form-group {
+    margin-bottom: 0px;
+}
+
 #dynamic_editor-large label, #editor-admin-form-large label {
   font-weight: normal;
 }
