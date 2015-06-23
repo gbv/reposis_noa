@@ -136,29 +136,33 @@
   </xed:template>
 
   <xed:template id="host.pages">
-    <div class="form-group required {$xed-validation-marker}">
-      <label class="col-md-3 control-label">
-        <xed:output i18n="mir.pages.from" />
-      </label>
-      <div class="col-md-6">
-        <div class="form-inline">
-          <xed:bind xpath="mods:part/mods:extent[@unit='pages']">
-            <xed:bind xpath="mods:start">
-              <input type="text" size="10" class="form-control form-control-inline" />
-            </xed:bind>
-            &amp;npsp;<xed:output i18n="mir.pages.to" />&amp;npsp;
-            <xed:bind xpath="mods:end">
-              <input type="text" size="10" class="form-control form-control-inline" />
-            </xed:bind>
-          </xed:bind>
-        </div>
+    <xed:bind xpath="mods:part/mods:extent[@unit='pages']/mods:start"> <!-- Move down to get the "required" validation right -->
+      <div class="form-group required {$xed-validation-marker}">
+        <xed:bind xpath=".."> <!-- Move up again after validation marker is set -->
+          <label class="col-md-3 control-label">
+            <xed:output i18n="mir.pages.from" />
+          </label>
+          <div class="col-md-6">
+            <div class="form-inline">
+              <xed:bind xpath="mods:part/mods:extent[@unit='pages']">
+                <xed:bind xpath="mods:start">
+                  <input type="text" size="10" class="form-control form-control-inline" />
+                </xed:bind>
+                &amp;npsp;<xed:output i18n="mir.pages.to" />&amp;npsp;
+                <xed:bind xpath="mods:end">
+                  <input type="text" size="10" class="form-control form-control-inline" />
+                </xed:bind>
+              </xed:bind>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <span class="btn btn-default info-button" data-toggle="popover" data-placement="right" data-content="{i18n:mir.help.host.pages}">
+              <i class="fa fa-info"></i>
+            </span>
+          </div>
+        </xed:bind>
       </div>
-      <div class="col-md-1">
-        <span class="btn btn-default info-button" data-toggle="popover" data-placement="right" data-content="{i18n:mir.help.host.pages}">
-          <i class="fa fa-info"></i>
-        </span>
-      </div>
-    </div>
+    </xed:bind>
   </xed:template>
 
   <xed:template id="person.fields">
