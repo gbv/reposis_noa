@@ -4,12 +4,12 @@
 
   <section title="Publizieren" xml:lang="de">
 
-    <h2>Neuaufnahme mit PPN</h2>
+    <h2>Neuaufnahme mit Import externer Daten</h2>
 
     <div class="row">
-      <div class="col-sm-9 col-sm-offset-3 col-md-7 col-md-offset-3 col-lg-5 col-lg-offset-2">
+      <div class="col-md-10">
         <p>
-          Bitte geben Sie die PPN aus dem GVK des GBV an, dann werden diese Daten in die Erfassungsmaske übernommen.
+          Bitte geben Sie die PPN aus dem GVK des GBV oder eine ZDBID aus der Zeitschriftendatenbank an, dann werden diese Daten in die Erfassungsmaske übernommen.
         </p>
       </div>
     </div>
@@ -23,14 +23,24 @@
 
 <!-- ppn -->
       <div class="row form-group">
-        <label for="genre" class="col-sm-3 col-lg-2 control-label">mit der PPN:</label>
+        <label for="genre" class="col-sm-4 col-lg-3 control-label">mit der PPN:</label>
         <div class="col-sm-7 col-md-5  col-lg-4">
           <input type="text" name="ppn" id="ppn" class="form-control" size="20" placeholder="z.B. 198562268" />
         </div>
       </div>
 
+<!-- zdbid -->
       <div class="row form-group">
-        <div class="col-sm-3 col-md-2"></div>
+        <label for="genre" class="col-sm-4 col-lg-3 control-label">mit der ZDB-ID:</label>
+        <div class="col-sm-7 col-md-5  col-lg-4">
+          <input type="text" name="zdbid" id="zdbid" class="form-control" size="20" placeholder="z.B. 2008548-5" />
+        </div>
+      </div>
+
+      <!-- TODO: add script for "genre=journal" parameter if zdb-id is given -->
+
+      <div class="row form-group">
+        <div class="col-sm-4 col-md-3"></div>
         <div class="col-sm-5 col-md-4">
           <button type="submit" class="btn btn-default">Weiter</button>
         </div>

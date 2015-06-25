@@ -64,8 +64,8 @@
             <label xml:lang="en">Publish</label>
         </item>
         <item href="/content/publish/ppn.xml" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Neuaufnahme mit PPN</label>
-            <label xml:lang="en">Publish using PPN</label>
+            <label xml:lang="de">Datenübernahme</label>
+            <label xml:lang="en">Import data</label>
         </item>
         <item href="/servlets/solr/select?q=createdby:USERNAME" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Meine Ablieferungen</label>
