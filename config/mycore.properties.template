@@ -30,8 +30,6 @@
   MIR.CustomLayout.CSS=noa.css
   MIR.CustomLayout.JS=noa.js
 
-# Subselect for issues
-  MCR.ContentTransformer.response-selectIssue.Stylesheet=xsl/issue-subselect.xsl,%MCR.LayoutTransformerFactory.Default.Stylesheets%
 
 ##############################################################################
 #                                                                            #
@@ -140,5 +138,4 @@ MCR.OAIDataProvider.OAI2.Search.FromUntil=modified
 # Error Page                                                                 #
 ##############################################################################
 # Set mcr_error properties in your mycore.properties.private to show OA error page without StackTrace
-#  MCR.ContentTransformer.mcr_error.Class=org.mycore.common.content.transformer.MCRXSLTransformer
-#  MCR.ContentTransformer.mcr_error.Stylesheet=xsl/errorPage.xsl
+#  MCR.ContentTransformer.mcr_error.Stylesheet=xsl/errorPage.xsl,%MCR.LayoutTransformerFactory.Default.Stylesheets%

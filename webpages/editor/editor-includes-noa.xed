@@ -165,27 +165,6 @@
     </xed:bind>
   </xed:template>
 
-  <xed:template id="person.fields">
-    <div class="search-person">
-      <xed:bind xpath="mods:displayForm">
-        <input type="text" size="26" class="form-control form-control-inline"
-          data-search="searchEntity"
-          data-search-type="gnd"
-          data-search-entity-type="person"
-          data-search-output="#valueURIxEditor"
-          data-search-button="{i18n:button.search}"
-          data-search-button-loading="{i18n:button.loading}"
-          data-search-result-empty="{i18n:mir.searchIdentifier.noResult}"
-          data-target=".search-person"
-          placeholder="{i18n:mir.placeholder.name.family}, {i18n:mir.placeholder.name.given}"
-        />
-      </xed:bind>
-      <xed:bind xpath="@valueURIxEditor">
-        <input type="hidden" id="valueURIxEditor" />
-      </xed:bind>
-    </div>
-  </xed:template>
-
   <xed:template id="validation-rules">
     <xed:validate xpath="//mods:mods/mods:titleInfo/mods:title" required="true" i18n="mir.validation.title" display="global" />
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />

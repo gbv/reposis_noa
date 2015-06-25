@@ -197,8 +197,11 @@ footer .container #menu #copyright {
   margin-bottom: 10px;
 }
 
-.mir-fieldset-content > .form-group {
-    margin-bottom: 0px;
+#dynamic_editor-large .mir-fieldset-content > .form-group,
+#dynamic_editor .mir-fieldset-content > .form-group,
+#editor-admin-form-large .mir-fieldset-content > .form-group,
+#editor-admin-form .mir-fieldset-content > .form-group {
+  margin-bottom: 0px;
 }
 
 #dynamic_editor-large label, #editor-admin-form-large label {
@@ -219,6 +222,7 @@ footer .container #menu #copyright {
 #dynamic_editor .btn, #editor-admin-form .btn {
   padding: 6px 8px;
   font-size: 12px;
+  margin-top: 0px;
 }
 
 #dynamic_editor .form-pmud .btn, #editor-admin-form .form-pmud .btn {
@@ -240,28 +244,28 @@ footer .container #menu #copyright {
 .pagination .disabled > a:hover,
 .pagination .disabled > a:focus,
 .pagination .disabled > span {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .pagination > li > a:hover,
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-    color: white;
-    background-color: #3685D4;
-    border-color: #3685D4;
+  color: white;
+  background-color: #3685D4;
+  border-color: #3685D4;
 }
 
 /* label  ****************************************************************** */
 
 .label-info[href]:hover,
 .label-info[href]:focus {
-    color: #fff;
-    background-color: #3685D4;
+  color: #fff;
+  background-color: #3685D4;
 }
 
 .label-primary {
-    background-color: #369;
+  background-color: #369;
 }
 h3 label {
   font-weight: 300;
@@ -271,40 +275,40 @@ h3 label {
 /* classification  ********************************************************* */
 
 ul.cbList li {
-    background-color: #EDF5FB;
-    border-radius: 0px;
+  background-color: #EDF5FB;
+  border-radius: 0px;
 }
 
 ul.cbList li:nth-child(2n+1) {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 ul.cbList li:last-child {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 ul.cbList li:first-child {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 
 /* name index ***************************************************************** */
 ul.names li a {
-    color: #27568F;
-    background-color: #EDF5FB;
-    border: none;
+  color: #27568F;
+  background-color: #EDF5FB;
+  border: none;
 }
 ul.names li.active a {
-    color: white;
-    background-color: #27568E;
+  color: white;
+  background-color: #27568E;
 }
 
 ul.names li a:hover,
 ul.names li.active a:hover {
-    color: white;
-    background-color: #3685D4;
+  color: white;
+  background-color: #3685D4;
 }
 
 /* navigation ************************************************************** */
@@ -460,11 +464,11 @@ ul.navbar-nav {
 /* bread crumb ************************************************************* */
 
 .breadcrumb {
-    padding: 8px 150px 8px 15px;
-    margin-bottom: 20px;
-    list-style: outside none none;
-    background-color: #F5F5F5;
-    border-radius: 4px;
+  padding: 8px 150px 8px 15px;
+  margin-bottom: 20px;
+  list-style: outside none none;
+  background-color: #F5F5F5;
+  border-radius: 4px;
 }
 
 /* details ***************************************************************** */

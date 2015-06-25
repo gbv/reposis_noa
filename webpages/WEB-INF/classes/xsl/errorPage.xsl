@@ -5,7 +5,6 @@
   <xsl:variable name="PageTitle" select="i18n:translate('titles.pageTitle.error',concat(' ',/mcr_error/@HttpError))" />
 
   <xsl:template match="/mcr_error">
-
     <xsl:choose>
       <xsl:when test="/mcr_error/@HttpError = '500'">
         <div class="blockbox" id="errormessage">
