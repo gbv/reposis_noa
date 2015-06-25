@@ -166,6 +166,13 @@ footer .container #menu #copyright {
   color: white;
 }
 
+.viewer .btn {
+  background-color: #FFF;
+}
+
+.viewer .btn:hover {
+  background-color: #3685D4;
+}
 
 /* forms ******************************************************************* */
 
