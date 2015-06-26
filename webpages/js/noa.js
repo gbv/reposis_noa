@@ -3,7 +3,7 @@ $﻿(document).ready(function() {
 
   // replace placeholder USERNAME with username
   var userID = $("#currentUser strong").html();
-  var newHref = 'http://reposis-test.gbv.de/noa/servlets/solr/select?q=createdby:' + userID;
+  var newHref = 'http://reposis-test.gbv.de/noa/servlets/solr/select?q=createdby:' + userID + '&fq=objectType';
   $("a[href='http://reposis-test.gbv.de/noa/servlets/solr/select?q=createdby:USERNAME']").attr('href', newHref);
 
   // spam protection for mails
