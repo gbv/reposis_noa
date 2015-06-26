@@ -11,10 +11,10 @@
             <br/><br/>
             Vielen Dank!</p>
         <h1>Fehlerfall 404</h1>
-            <h2><xsl:value-of select="." /></h2>
+            <h2>Keine passende Seite verfügbar</h2>
             <p>Die von Ihnen angefordete Seite konnte leider nicht gefunden werden. Eventuell
             haben Sie ein altes Lesezeichen oder einen veralteten Link benutzt. Bitte versuchen
-            Sie mithilfe der <a href="/index.html">Suche</a> die gewünschte Seite zu finden oder
+            Sie mithilfe der Suche die gewünschte Seite zu finden oder
             schreiben Sie eine Mail an <span class="madress">dms-list [at] gbv.de</span> und
             schildern kurz wie es zu diesem Fehler kam.
             <br/><br/>
