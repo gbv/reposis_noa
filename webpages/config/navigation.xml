@@ -51,11 +51,11 @@
             <label xml:lang="de">Neuaufnahme: Buch / Broschüre</label>
             <label xml:lang="en">New book</label>
         </item>
-        <item href="/editor/editor-dynamic.xed?genre=issue" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/editor/editor-dynamic.xed?genre=issue&amp;host=journal" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Neuaufnahme: Zeitschriftenheft</label>
             <label xml:lang="en">New issue</label>
         </item>
-        <item href="/editor/editor-dynamic.xed?genre=article" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/editor/editor-dynamic.xed?genre=article&amp;host=journal" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Neuaufnahme: Artikel</label>
             <label xml:lang="en">New article</label>
         </item>
