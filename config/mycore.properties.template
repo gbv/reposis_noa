@@ -30,6 +30,9 @@
   MIR.CustomLayout.CSS=noa.css
   MIR.CustomLayout.JS=noa.js
 
+# this is a productive environment
+  MIR.testEnvironment=false
+
 
 ##############################################################################
 #                                                                            #
