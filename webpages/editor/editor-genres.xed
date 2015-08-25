@@ -96,7 +96,7 @@
   </xed:template>
 
   <xed:template id="submit">
-    <xed:include uri="webapp:editor/editor-includes.xed" ref="cancel.submit" />
+    <xed:include uri="webapp:editor/editor-includes-noa.xed" ref="cancel.submit" />
     <xed:include uri="webapp:editor/editor-includes.xed" ref="cleanup-rules" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules" />
   </xed:template>

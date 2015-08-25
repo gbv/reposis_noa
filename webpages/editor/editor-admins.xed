@@ -49,7 +49,7 @@
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="related.item" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="comment" />
 
-            <xed:include uri="webapp:editor/editor-includes.xed" ref="cancel.submit" />
+            <xed:include uri="webapp:editor/editor-includes-noa.xed" ref="cancel.submit" />
             <xed:include uri="webapp:editor/editor-includes.xed" ref="cleanup-rules" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules" />
 

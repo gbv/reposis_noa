@@ -186,6 +186,10 @@ footer .container #menu #copyright {
     height: 42px;
 }
 
+.info-button {
+  margin-top: 4px;
+  padding: 6px 14px 5px 14px;
+}
 
 /* forms ******************************************************************* */
 
