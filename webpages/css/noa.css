@@ -438,7 +438,8 @@ ul.navbar-nav {
   background-color: #C8D8E8;
 }
 
-#side_nav_column .mir-side-nav nav .navbar-nav li.dropdown {
+#side_nav_column .mir-side-nav nav .navbar-nav li.dropdown,
+#side_nav_column .mir-side-nav nav .navbar-nav > li.active  {
   border-top: 1px solid #CCC;
   margin-top: 20px;
   padding-top: 10px;
