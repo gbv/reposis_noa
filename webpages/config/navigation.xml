@@ -75,7 +75,7 @@
             <label xml:lang="de">Bearbeitungsstatistik</label>
             <label xml:lang="en">Statistic</label>
         </item>
-        <item href="/servlets/solr/select?q=state:%22submitted%22" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/servlets/solr/select?q=state:%22submitted%22&amp;fq=objectType:mods" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Liste Neuablieferungen</label>
             <label xml:lang="en">New Documents</label>
         </item>
