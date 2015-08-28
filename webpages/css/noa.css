@@ -243,6 +243,10 @@ footer .container #menu #copyright {
   font-size: 12px;
 }
 
+#dynamic_editor textarea.form-control, #editor-admin-form textarea.form-control {
+  height: auto;
+}
+
 #dynamic_editor .btn, #editor-admin-form .btn {
   padding: 6px 8px;
   font-size: 12px;
