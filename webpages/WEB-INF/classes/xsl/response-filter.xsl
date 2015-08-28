@@ -21,10 +21,14 @@
 
   <xsl:template match="/response">
 
+    <xsl:variable name="facet">
+      <xsl:value-of select="lst[@name='responseHeader']/lst[@name='params']/arr[@name='facet.field']/str" />
+    </xsl:variable>
+
     <div class="row">
       <div id="main_content" class="col-md-12">
 
-        <h2><xsl:value-of select="i18n:translate('noa.filter.organizations')" /></h2>
+        <h2><xsl:value-of select="i18n:translate(concat('noa.filter.', $facet))" /></h2>
 
         <xsl:if test="lst[@name='facet_counts']/lst[@name='facet_fields']/lst[@name='mods.nameByRole.corporate.pbl']/int">
           <ul class="cbList">
