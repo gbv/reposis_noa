@@ -33,9 +33,25 @@
         <xsl:if test="lst[@name='facet_counts']/lst[@name='facet_fields']/lst[@name='mods.nameByRole.corporate.pbl']/int">
           <ul class="cbList">
             <xsl:for-each select="lst[@name='facet_counts']/lst[@name='facet_fields']/lst[@name='mods.nameByRole.corporate.pbl']/int">
+              <xsl:variable name="gnd" select="substring-after(@name, ':')" />
+              <xsl:variable name="instName">
+                <xsl:choose>
+                  <xsl:when test="contains(@name, ':')">
+                    <xsl:value-of select="substring-before(@name, ':')" />
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="@name" />
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:variable>
               <li>
                 <span class="cbNum">[<xsl:value-of select="." />]</span>
-                <a href="{$linkTo}+mods.nameByRole.corporate.pbl:%22{@name}%22"><xsl:value-of select="@name" /></a>
+                <a href="{$linkTo}+mods.nameByRole.corporate.pbl:%22{@name}%22"><xsl:value-of select="$instName" /></a>
+                <xsl:if test="string-length($gnd)>0">
+                  <a title="http://d-nb.info/gnd/{$gnd}" href="http://d-nb.info/gnd/{$gnd}">
+                    <sup>GND</sup>
+                  </a>
+                </xsl:if>
               </li>
             </xsl:for-each>
           </ul>
