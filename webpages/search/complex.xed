@@ -22,7 +22,7 @@
               </h3>
             </div>
             <div class="panel-body">
-              <div class="well col-md-10">
+              <div class="col-md-10">
                 <xed:repeat xpath="condition[contains(',mods.title,mods.author,mods.name,allMeta,', concat(',',@field,','))]" method="clone">
           <!-- Title -->
                   <div class="form-group">
