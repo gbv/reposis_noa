@@ -19,7 +19,7 @@
     <menu id="search">
         <label xml:lang="de">Suche</label>
         <label xml:lang="en">Search</label>
-        <item href="/search/simple_intern.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/search/complex.xed" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Erweiterte Suche</label>
             <label xml:lang="en">Extended Search</label>
         </item>
