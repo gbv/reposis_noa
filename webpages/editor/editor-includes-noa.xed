@@ -3,18 +3,21 @@
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
 
   <xed:template id="access">
-    <xed:bind xpath="mods:accessCondition[@type='restriction on access']" initially="">
+    <xed:bind xpath="mods:accessCondition[@type='restriction on access'][@xlink:href='http://www.mycore.org/classifications/mir_access']" initially="">
       <div class="form-group required {$xed-validation-marker}">
         <label class="col-md-3 control-label">
           <xed:output i18n="mir.access" />
+          :
         </label>
         <div class="col-md-6">
-          <select  class="form-control form-control-inline">
-            <option value=""><xed:output i18n="mir.select" /></option>
+          <select class="form-control form-control-inline">
+            <option value="">
+              <xed:output i18n="mir.select" />
+            </option>
             <xed:include uri="xslStyle:items2options:classification:editor:-1:children:mir_access" />
           </select>
         </div>
-        <mir:help-pmud help-text="{i18n:mir.help.access}" pmud="false" />
+        <mir:help-pmud help-text="{i18n:mir.help.access}" />
       </div>
     </xed:bind>
   </xed:template>
