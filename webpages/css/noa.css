@@ -232,28 +232,28 @@ footer .container #menu #copyright {
   font-weight: normal;
 }
 
-#dynamic_editor label, #editor-admin-form label {
+#dynamic_editor label, #editor-admin-form label, #complexSearch label {
   font-weight: normal;
   font-size: 12px;
 }
 
-#dynamic_editor .form-control, #editor-admin-form .form-control {
+#dynamic_editor .form-control, #editor-admin-form .form-control, #complexSearch .form-control, #complexSearch .input-group-addon {
   padding: 6px 8px;
   height: 31px;
   font-size: 12px;
 }
 
-#dynamic_editor textarea.form-control, #editor-admin-form textarea.form-control {
+#dynamic_editor textarea.form-control, #editor-admin-form textarea.form-control, #complexSearch textarea.form-control {
   height: auto;
 }
 
-#dynamic_editor .btn, #editor-admin-form .btn {
+#dynamic_editor .btn, #editor-admin-form .btn, #complexSearch .btn {
   padding: 6px 8px;
   font-size: 12px;
   margin-top: 0px;
 }
 
-#dynamic_editor .form-pmud .btn, #editor-admin-form .form-pmud .btn {
+#dynamic_editor .form-pmud .btn, #editor-admin-form .form-pmud .btn, #complexSearch .form-pmud .btn {
   margin-right: -1px;
 }
 
