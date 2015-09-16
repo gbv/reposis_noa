@@ -164,7 +164,7 @@
             <!-- submit -->
             <div class="panel-footer clearfix">
               <div class="pull-right">
-                <button type="submit" class="btn btn-default" xed:target="debug">Debug</button>
+                <!-- button type="submit" class="btn btn-default" xed:target="debug">Debug</button -->
                 <mir:template name="submitButton" i18n="editor.search.search" target="servlet_MCRQLSearchServlet" />
               </div>
             </div>
