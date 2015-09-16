@@ -14,7 +14,6 @@
       <xed:source uri="webapp:search/complex.xml" />
       <xed:bind xpath="query">
         <xed:bind xpath="@mask" default="content/search/complex.xed" />
-        <xed:bind xpath="conditions/boolean/boolean">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">
@@ -23,6 +22,7 @@
             </div>
             <div class="panel-body">
               <div class="col-md-10">
+                <xed:bind xpath="conditions/boolean/boolean">
                 <xed:repeat xpath="condition[contains(',mods.title,mods.author,mods.name,allMeta,', concat(',',@field,','))]" method="clone">
           <!-- Title -->
                   <div class="form-group">
@@ -126,16 +126,49 @@
                     </xed:bind>
                   </div>
                 </div>
+              </xed:bind>
+            <!-- sort -->
+              <xed:bind xpath="sortBy/field">
+                <div class="form-group" style="padding-top:10px;">
+                  <label for="inputSortBy" class="col-md-3 control-label">
+                    <xed:output i18n="editor.search.sortby" />
+                  </label>
+                  <div class="col-md-5">
+                    <xed:bind xpath="@name">
+                      <select class="form-control">
+                        <option value="mods.dateIssued">
+                          <xed:output i18n="component.mods.metaData.dictionary.dateIssued" />
+                        </option>
+                        <option value="score">
+                          <xed:output i18n="editor.search.score" />
+                        </option>
+                      </select>
+                    </xed:bind>
+                  </div>
+                  <div class="col-md-3">
+                    <xed:bind xpath="@order">
+                      <select class="form-control">
+                        <option value="descending">
+                          <xed:output i18n="editor.search.descending" />
+                        </option>
+                        <option value="ascending">
+                          <xed:output i18n="editor.search.ascending" />
+                        </option>
+                      </select>
+                    </xed:bind>
+                  </div>
+                </div>
+              </xed:bind>
               </div>
             </div>
             <!-- submit -->
             <div class="panel-footer clearfix">
               <div class="pull-right">
+                <button type="submit" class="btn btn-default" xed:target="debug">Debug</button>
                 <mir:template name="submitButton" i18n="editor.search.search" target="servlet_MCRQLSearchServlet" />
               </div>
             </div>
           </div>
-        </xed:bind>
       </xed:bind>
     </xed:form>
     </div>
