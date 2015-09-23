@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="all" i18n="component.user2.admin.create.title">
+  <section xml:lang="all" i18n="component.user2.admin.change.title">
     <xed:form class="userEditor form-horizontal" role="form"
       xmlns:xed="http://www.mycore.de/xeditor" xmlns:mcruser="http://www.mycore.de/components/mcruser">
-      <xed:cancel url="{$ServletsBaseURL}MCRUserServlet" />
+      <xed:source uri="user:{$id}" />
+      <xed:cancel url="{$ServletsBaseURL}MCRUserServlet?action=show&amp;id={$id}" />
 
       <xed:bind xpath="user">
         <xed:bind xpath="owner[@realm='local']/@name" initially="{$CurrentUser}" />
@@ -12,13 +13,12 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              <xed:output i18n="component.user2.admin.create.title" />
+              <xed:output i18n="component.user2.admin.change.title" />
             </h3>
           </div>
           <div class="panel-body">
             <xed:include uri="xslStyle:user-xeditor-templates:webapp:authorization/user-editor.xed"   ref="failed-validation-messages" />
             <xed:include uri="xslStyle:user-xeditor-templates:webapp:authorization/user-editor.xed"   ref="userAccount" />
-            <xed:include uri="xslStyle:user-xeditor-templates:webapp:authorization/user-editor.xed"   ref="passwords" />
             <xed:include uri="xslStyle:user-xeditor-templates:webapp:authorization/user-editor.xed"   ref="passwordHint" />
             <xed:include uri="xslStyle:user-xeditor-templates:webapp:authorization/user-editor.xed"   ref="realName" />
             <xed:include uri="xslStyle:user-xeditor-templates:webapp:authorization/user-editor.xed"   ref="email" />
@@ -29,7 +29,6 @@
           </div>
           <div class="panel-footer clearfix">
             <div class="pull-right">
-              <xed:validate xpath="/user[@realm = 'local']/@name" display="global" class="org.mycore.user2.MCRUserServlet" method="checkUserName" i18n="component.user2.admin.inputhints.sameUsername" />
               <xed:include uri="xslStyle:user-xeditor-templates:webapp:authorization/user-editor.xed" ref="buttons" />
               <!-- input type="submit" class="roundedButton" xed:target="debug" value="Debug" / -->
             </div>

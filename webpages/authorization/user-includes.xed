@@ -10,6 +10,27 @@
      <xed:include uri="xslStyle:user-xeditor-templates:webapp:authorization/user-includes.xed" ref="tel" />
   </xed:template>
 
+  <xed:template id="editor4admins">
+    <mcruser:template name="checkboxList" inline="true" xpath="@locked" id="locked">
+      <option value="true" i18n="component.user2.admin.user.locked.true" />
+    </mcruser:template>
+    <mcruser:template name="checkboxList" inline="true" xpath="@disabled" id="disabled">
+      <option value="true" i18n="component.user2.admin.user.disabled" />
+    </mcruser:template>
+    <mcruser:template name="textInput" xpath="validUntil" id="validUntil" i18n="component.user2.admin.user.validUntil" i18n.error="component.user2.admin.inputhints.date"
+      validate="true" type="datetime" format="yyyy-MM-dd;yyyy-MM-dd'T'HH:mm:ss'Z'" maxlength="20" />
+  </xed:template>
+
+  <xed:template id="roles">
+    <xed:choose>
+      <xed:when test="xed:call-java('org.mycore.common.xml.MCRXMLFunctions','isCurrentUserInRole','admin')">
+        <mcruser:template name="selectInput" xpath="roles/role/@name" uri="webapp:authorization/roles_admin.xml" id="roleSelect" i18n="component.user2.admin.roles" />
+      </xed:when>
+      <xed:otherwise>
+        <mcruser:template name="selectInput" xpath="roles/role/@name" uri="webapp:authorization/roles_editor.xml" id="roleSelect" i18n="component.user2.admin.roles" />
+      </xed:otherwise>
+    </xed:choose>
+  </xed:template>
 
   <xed:template id="institution">
     <mcruser:template name="textInput" xpath="attributes/attribute[@name='institution']/@value" id="institution" i18n="noa.user2.admin.institution" maxlength="64" />
