@@ -68,6 +68,17 @@
           </ul>
         </xsl:if>
 
+        <xsl:if test="lst[@name='facet_counts']/lst[@name='facet_fields']/lst[@name='mods.keyword']/int">
+          <ul class="cbList">
+            <xsl:for-each select="lst[@name='facet_counts']/lst[@name='facet_fields']/lst[@name='mods.keyword']/int">
+              <li>
+                <span class="cbNum">[<xsl:value-of select="." />]</span>
+                <a href="{$linkTo}+mods.keyword:%22{@name}%22"><xsl:value-of select="@name" /></a>
+              </li>
+            </xsl:for-each>
+          </ul>
+        </xsl:if>
+
       </div>
     </div>
 

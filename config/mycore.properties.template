@@ -136,6 +136,8 @@ MCR.OAIDataProvider.OAI2.Search.FromUntil=modified
   MCR.URN.SubNamespace.Default.NISSBuilder=org.mycore.urn.services.MCRNISSBuilderDateCounter
   MCR.URN.SubNamespace.Default.NISSPattern=yyyyMMdd-HHmmss
 
+  MCR.Persistence.URN.XPath.mods=
+
 
 ##############################################################################
 # Error Page                                                                 #

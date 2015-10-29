@@ -35,7 +35,7 @@
             <label xml:lang="de">nach Einrichtung</label>
             <label xml:lang="en">Institutions</label>
         </item>
-        <item href="/servlets/solr/find?qry=*&amp;rows=0&amp;facet.field=topic&amp;facet.sort=index&amp;XSL.Style=filter" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/servlets/solr/find?qry=*&amp;rows=0&amp;facet.field=mods.keyword&amp;facet.sort=index&amp;XSL.Style=filter" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">nach Stichworten</label>
             <label xml:lang="en">Subjects</label>
         </item>

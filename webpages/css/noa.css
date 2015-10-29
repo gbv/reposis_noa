@@ -18,6 +18,18 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: inherit;
 }
 
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
 a, a:hover, a:focus {
   color: #27568F;
 }
@@ -488,6 +500,10 @@ ul.navbar-nav {
 .result_body .result_list #hit_list .hit_item .hit_options .btn:hover,
 .result_body .result_list #hit_list .hit_item .hit_options .open .btn:hover {
   color: #27568F;
+}
+
+.result_body .result_list #hit_list .hit_item .hit_author {
+  font-size: 14px;
 }
 
 /* bread crumb ************************************************************* */
