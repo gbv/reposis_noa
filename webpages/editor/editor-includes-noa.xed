@@ -2,6 +2,10 @@
 
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
 
+  <xed:template id="title">
+    <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" class="required" />
+  </xed:template>
+
   <xed:template id="access">
     <xed:bind xpath="mods:accessCondition[@type='restriction on access'][@xlink:href='http://www.mycore.org/classifications/mir_access']" initially="">
       <div class="form-group required {$xed-validation-marker}">
@@ -38,7 +42,6 @@
     </xed:bind>
   </xed:template>
 
-
   <xed:template id="noa.publicationType">
     <div class="form-group">
       <label class="col-md-3 control-label">
@@ -58,19 +61,21 @@
     </div>
   </xed:template>
 
-
   <!-- use external schema copyrightMD, see http://www.cdlib.org/groups/rmg/copyrightMD.html#type_copyright.status -->
   <!-- TODO: copyright.status and publication.status shouldn't be static -->
   <xed:template id="copyrightMD">
     <xed:bind xpath="mods:accessCondition[@type='copyrightMD']/cmd:copyright[@copyright.status='copyrighted'][@publication.status='published'][@xsi:schemaLocation='http://www.cdlib.org/inside/diglib/copyrightMD http://www.cdlib.org/groups/rmg/docs/copyrightMD.xsd']">
-      <mir:textfield xpath="cmd:rights.holder/cmd:name" label="mir.rightsHolder" help-text="{i18n:mir.help.rightsHolder}" class="required" />
+      <mir:textarea xpath="cmd:rights.holder/cmd:name" label="mir.rightsHolder" rows="2" repeat="true" min="1" max="10" help-text="{i18n:mir.help.rightsHolder}" class="required" />
     </xed:bind>
   </xed:template>
-
 
   <!-- redefine some input fields with other style definition -->
   <xed:template id="author.repeated">
     <mir:role.repeated role="aut" label="mir.role.author" help-text="{i18n:mir.help.role.author}" />
+  </xed:template>
+
+  <xed:template id="publisher">
+    <mir:textarea xpath="mods:originInfo[@eventType='publication']/mods:publisher" rows="2" label="mir.publisher" help-text="{i18n:mir.help.publisher}" />
   </xed:template>
 
   <xed:template id="place">
@@ -149,7 +154,7 @@
   <xed:template id="cancel.submit">
     <div class="form-group" id="editor-buttons">
       <div class="col-md-offset-2 col-md-6">
-        <!-- button type="submit" class="btn btn-default" xed:target="debug">Debug</button -->
+        <button type="submit" class="btn btn-default" xed:target="debug">Debug</button>
         <button type="submit" class="btn btn-default" xed:target="cancel">
           <xed:output i18n="button.cancel" />
         </button>
