@@ -506,6 +506,10 @@ ul.navbar-nav {
   font-size: 14px;
 }
 
+.hit_date {
+  display: none;
+}
+
 /* bread crumb ************************************************************* */
 
 .breadcrumb {
