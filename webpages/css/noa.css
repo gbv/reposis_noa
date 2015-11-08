@@ -203,6 +203,10 @@ footer .container #menu #copyright {
   padding: 6px 14px 5px 14px;
 }
 
+.file_box .header .headline .title .file_toggle {
+  font-size: 12px;
+}
+
 /* forms ******************************************************************* */
 
 .form-control {
