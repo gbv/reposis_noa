@@ -15,7 +15,7 @@
   MCR.NameOfProject=NOA
 
 # application base URL
-# MCR.baseurl=http://www.noa-gwlb.de
+# MCR.baseurl=https://noa.gwlb.de
 
 # SOLR-URL
 # MCR.Module-solr.ServerURL=http\://esx-127.gbv.de:8081/solr/noa/
