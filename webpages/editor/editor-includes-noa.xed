@@ -6,6 +6,10 @@
     <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" class="required" />
   </xed:template>
 
+  <xed:template id="title.optional">
+    <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" />
+  </xed:template>
+
   <xed:template id="access">
     <xed:bind xpath="mods:accessCondition[@type='restriction on access'][@xlink:href='http://www.mycore.org/classifications/mir_access']" initially="">
       <div class="form-group required {$xed-validation-marker}">
@@ -176,7 +180,6 @@
   </xed:template>
 
   <xed:template id="validation-rules">
-    <xed:validate xpath="//mods:mods/mods:titleInfo/mods:title" required="true" i18n="mir.validation.title" display="global" />
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
     <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc4646']" required="true" i18n="noa.validation.language" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
@@ -197,6 +200,10 @@
   <xed:template id="validation-rules.article">
     <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:detail[@type='volume']/mods:number" required="true" i18n="noa.validation.volume" display="global" />
     <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:extent[@unit='pages']/mods:start" required="true" i18n="noa.validation.pages" display="global" />
+  </xed:template>
+
+  <xed:template id="validation-rules.title">
+    <xed:validate xpath="//mods:mods/mods:titleInfo/mods:title" required="true" i18n="mir.validation.title" display="global" />
   </xed:template>
 
   <xed:template id="validation-rules.accessAndIssued">
