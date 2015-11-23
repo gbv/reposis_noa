@@ -22,7 +22,7 @@
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.publicationType" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="access" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="embargo" />
-            <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="title.complex.repeated" />
+            <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="title.complex.repeated" />
             <fieldset>
               <legend class="mir-fieldset-legend">Personen</legend><!-- TODO: i18n -->
               <div class="mir-fieldset-content">
@@ -39,7 +39,7 @@
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="extent" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="identifier.repeated" />
             <xed:bind xpath="mods:relatedItem[@type='series']">
-              <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="series.title" />
+              <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="series.title.optional" />
             </xed:bind>
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="language.repeated" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="sdnb" />

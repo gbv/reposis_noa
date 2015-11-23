@@ -20,7 +20,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="extent" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="identifier.isbn" />
     <xed:bind xpath="mods:relatedItem[@type='series']">
-      <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="series.title" />
+      <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="series.title.optional" />
     </xed:bind>
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="language.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="sdnb" />

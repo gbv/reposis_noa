@@ -10,6 +10,59 @@
     <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" />
   </xed:template>
 
+  <xed:template id="title.complex.repeated">
+    <fieldset>
+      <legend class="mir-fieldset-legend">
+        <xed:output i18n="mir.title.type" />
+      </legend>
+      <xed:repeat xpath="mods:titleInfo" min="1" max="6">
+        <div class="mir-fieldset-content">
+          <div class="form-group">
+            <label class="col-md-3 control-label">
+              <xed:output i18n="mir.title.nonSort" />
+            </label>
+            <div class="col-md-6">
+              <div class="form-inline controls">
+                <xed:bind xpath="mods:nonSort">
+                  <input type="text" size="9" class="form-control form-control-inline" placeholder="Der/Die/Das" />
+                </xed:bind>
+                <xed:bind xpath="@xml:lang" initially="de">
+                  <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="lang.list" />
+                </xed:bind>
+                <xed:bind xpath="@type">
+                  <select class="form-control form-control-inline">
+                    <option value="">
+                      <xed:output i18n="mir.title.type.main" />
+                    </option>
+                    <option value="translated">
+                      <xed:output i18n="mir.title.type.translated" />
+                    </option>
+                    <option value="alternative">
+                      <xed:output i18n="mir.title.type.alternative" />
+                    </option>
+                    <option value="abbreviated">
+                      <xed:output i18n="mir.title.type.abbreviated" />
+                    </option>
+                    <option value="uniform">
+                      <xed:output i18n="mir.title.type.uniform" />
+                    </option>
+                  </select>
+                </xed:bind>
+              </div>
+            </div>
+            <mir:help-pmud help-text="{i18n:mir.help.title.complex}" pmud="true" />
+          </div>
+          <mir:textarea xpath="mods:title" rows="2" label="mir.title" help-text="{i18n:mir.help.title}" />
+          <mir:textarea xpath="mods:subTitle" rows="2" label="mir.title.subTitle" help-text="{i18n:mir.help.title.subTitle}" />
+        </div>
+      </xed:repeat>
+    </fieldset>
+  </xed:template>
+
+  <xed:template id="series.title.optional">
+    <mir:textfield xpath="mods:titleInfo/mods:title" label="mir.series.title" placeholder="{i18n:mir.placeholder.series.title}" id="series-title" />
+  </xed:template>
+
   <xed:template id="access">
     <xed:bind xpath="mods:accessCondition[@type='restriction on access'][@xlink:href='http://www.mycore.org/classifications/mir_access']" initially="">
       <div class="form-group required {$xed-validation-marker}">
