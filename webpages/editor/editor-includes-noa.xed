@@ -2,6 +2,24 @@
 
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
 
+  <xed:template id="genre.simple">
+    <div class="form-group" id="genre">
+      <label class="col-md-3 control-label">
+        <xed:output i18n="component.mods.genre" />
+      </label>
+      <div class="col-md-6">
+        <div class="controls">
+          <xed:bind xpath="mods:genre[@type='intern'][@authorityURI='http://www.mycore.org/classifications/mir_genres']/@valueURIxEditor" initially="{$genre}">
+            <select class="form-control form-control-inline">
+              <xed:include uri="xslStyle:items2options:classification:editor:-1:children:mir_genres" />
+            </select>
+          </xed:bind>
+        </div>
+      </div>
+      <mir:help-pmud help-text="{i18n:mir.help.genre}" />
+    </div>
+  </xed:template>
+
   <xed:template id="title">
     <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" class="required" />
   </xed:template>
@@ -141,6 +159,18 @@
 
   <xed:template id="host.volume">
     <mir:textfield xpath="mods:part/mods:detail[@type='volume']/mods:number" label="mir.volume" help-text="{i18n:mir.help.volume}" class="required" />
+  </xed:template>
+
+<xed:template id="date.issued">
+    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']" label="mir.date.issued.10" help-text="{i18n:mir.help.date.issued.10}"
+      class="date_issued" placeholder="{i18n:mir.placeholder.date}" />
+  </xed:template>
+
+  <xed:template id="date.range.issued">
+    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf'][@point='start']" label="mir.date.issued.4.start"
+      class="daterange_issued" help-text="{i18n:mir.help.date.issued.4.start}" placeholder="{i18n:mir.placeholder.date}" />
+    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf'][@point='end']" label="mir.date.issued.4.end"
+      class="daterange_issued" help-text="{i18n:mir.help.date.issued.4.end}" placeholder="{i18n:mir.placeholder.date}" />
   </xed:template>
 
   <xed:template id="language.simple">
