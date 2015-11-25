@@ -3,8 +3,8 @@ $﻿(document).ready(function() {
 
   // replace placeholder USERNAME with username
   var userID = $("#currentUser strong").html();
-  var newHref = 'http://reposis-test.gbv.de/noa/servlets/solr/select?q=createdby:' + userID + '&fq=objectType:mods';
-  $("a[href='http://reposis-test.gbv.de/noa/servlets/solr/select?q=createdby:USERNAME']").attr('href', newHref);
+  var newHref = 'http://noa.gwlb.de/servlets/solr/select?q=createdby:' + userID + '&fq=objectType:mods';
+  $("a[href='http://noa.gwlb.de/servlets/solr/select?q=createdby:USERNAME']").attr('href', newHref);
 
   // spam protection for mails
   $('span.madress').each(function(i) {
@@ -14,7 +14,7 @@ $﻿(document).ready(function() {
       $(this).remove();
   });
 
-  $("a[href='http://reposis-test.gbv.de/noa/servlets/solr/find?qry=%20%2Bmods.type:%22journal%22&amp;XSL.Style=selectIssue&amp;rows=1000']").attr('href', 'http://reposis-test.gbv.de/noa/servlets/solr/find?qry=%20%2Bmods.type:%22journal%22&XSL.Style=selectIssue&rows=1000');
+  $("a[href='http://noa.gwlb.de/servlets/solr/find?qry=%20%2Bmods.type:%22journal%22&amp;XSL.Style=selectIssue&amp;rows=1000']").attr('href', 'http://noa.gwlb.de/servlets/solr/find?qry=%20%2Bmods.type:%22journal%22&XSL.Style=selectIssue&rows=1000');
 
   // adjust editor from id
   setEditorID();
@@ -40,7 +40,7 @@ $﻿(document).ready(function() {
 
   // adjust pub date imput on select box changes
   genreSelector.change(function(){
-	  ajustInputBlock( genreSelector, genreValue, defaultObject, triggeredObject );
+    ajustInputBlock( genreSelector, genreValue, defaultObject, triggeredObject );
   });
 
   /* -------------------------------------------- */
@@ -80,13 +80,13 @@ function ajustInputBlock ( genreSelector, genreValue, defaultObject, triggeredOb
   // for journals
   if ( genreSelector.val() == genreValue )
   {
-	  // show range
-	  defaultObject.hide();
-	  triggeredObject.show();
+    // show range
+    defaultObject.hide();
+    triggeredObject.show();
   // for all other
   } else {
-	  // hide range
-	  triggeredObject.hide();
-	  defaultObject.show();
+    // hide range
+    triggeredObject.hide();
+    defaultObject.show();
   }
 }
