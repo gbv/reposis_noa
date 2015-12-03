@@ -1,5 +1,5 @@
 
-$﻿(document).ready(function() {
+$(document).ready(function() {
 
   // replace placeholder USERNAME with username
   var userID = $("#currentUser strong").html();
