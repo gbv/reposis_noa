@@ -2,24 +2,6 @@
 
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
 
-  <xed:template id="genre.simple">
-    <div class="form-group" id="genre">
-      <label class="col-md-3 control-label">
-        <xed:output i18n="component.mods.genre" />
-      </label>
-      <div class="col-md-6">
-        <div class="controls">
-          <xed:bind xpath="mods:genre[@type='intern'][@authorityURI='http://www.mycore.org/classifications/mir_genres']/@valueURIxEditor" initially="{$genre}">
-            <select class="form-control form-control-inline">
-              <xed:include uri="xslStyle:items2options:classification:editor:-1:children:mir_genres" />
-            </select>
-          </xed:bind>
-        </div>
-      </div>
-      <mir:help-pmud help-text="{i18n:mir.help.genre}" />
-    </div>
-  </xed:template>
-
   <xed:template id="title">
     <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" class="required" />
   </xed:template>
@@ -90,7 +72,7 @@
         <div class="col-md-6">
           <select class="form-control form-control-inline">
             <option value="">
-              <xed:output i18n="noa.select.required" />
+              <xed:output i18n="mir.select" />
             </option>
             <xed:include uri="xslStyle:items2options:classification:editor:-1:children:mir_access" />
           </select>
@@ -108,7 +90,7 @@
         </label>
         <div class="col-md-6">
           <select  class="form-control form-control-inline">
-            <option value=""><xed:output i18n="mir.select" /></option>
+            <option value=""><xed:output i18n="mir.select.optional" /></option>
             <xed:include uri="xslStyle:items2options:classification:editor:-1:children:mir_rights" />
           </select>
         </div>
@@ -126,7 +108,7 @@
         <div class="col-md-6">
           <div class="controls">
             <select class="form-control form-control-inline">
-              <option value=""><xed:output i18n="mir.select" /></option>
+              <option value=""><xed:output i18n="mir.select.optional" /></option>
               <xed:include uri="xslStyle:items2options:classification:editor:-1:children:noa_pubtype" />
             </select>
           </div>
@@ -207,7 +189,7 @@
 
   <xed:template id="lang.list">
     <select class="form-control form-control-inline">
-      <option value=""><xed:output i18n="noa.select.required" /></option>
+      <option value=""><xed:output i18n="mir.select" /></option>
       <xed:include uri="xslStyle:items2options:classification:editor:-1:children:rfc4646" />
     </select>
   </xed:template>
@@ -263,6 +245,8 @@
   </xed:template>
 
   <xed:template id="validation-rules">
+    <xed:validate xpath="//mods:mods/mods:genre[@authorityURI='http://www.mycore.org/classifications/mir_genres']" required="true" i18n="mir.validation.genre" display="global" />
+    <xed:validate xpath="//mods:mods/mods:classification[@authority='sdnb'][@displayLabel='sdnb']" required="true" i18n="mir.validation.sdnb" display="global" />
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
     <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc4646']" required="true" i18n="noa.validation.language" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
