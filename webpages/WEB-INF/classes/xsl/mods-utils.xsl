@@ -131,10 +131,11 @@
       <xsl:when test="mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume']">
         <xsl:choose>
           <xsl:when test="mods:relatedItem[@type='host']/mods:part/mods:detail[@type='issue']">
-            <xsl:value-of select="concat(mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume'],
+            <xsl:value-of select="concat(normalize-space(mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume']),
                                          ', ',
                                          i18n:translate('component.mods.metaData.dictionary.issue'),
-                                         mods:relatedItem[@type='host']/mods:part/mods:detail[@type='issue'])" />
+                                         ' ',
+                                         normalize-space(mods:relatedItem[@type='host']/mods:part/mods:detail[@type='issue']))" />
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume']" />
