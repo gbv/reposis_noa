@@ -129,6 +129,8 @@
         </xsl:apply-templates>
       </xsl:when>
       <xsl:when test="mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume']">
+        <xsl:apply-templates select="mods:relatedItem[@type='host']/mods:titleInfo[not(@type='uniform' or @type='abbreviated' or @type='alternative' or @type='translated')]" mode="mods.printTitle" />
+        <xsl:text>, </xsl:text>
         <xsl:choose>
           <xsl:when test="mods:relatedItem[@type='host']/mods:part/mods:detail[@type='issue']">
             <xsl:value-of select="concat(normalize-space(mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume']),
