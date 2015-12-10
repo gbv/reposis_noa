@@ -9,6 +9,7 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xmlns:exslt="http://exslt.org/common"
      xmlns:mods="http://www.loc.gov/mods/v3"
+     xmlns:mcrurn="xalan://org.mycore.urn.MCRXMLFunctions"
 
      xmlns:xMetaDiss="http://www.d-nb.de/standards/xmetadissplus/"
      xmlns:cc="http://www.d-nb.de/standards/cc/"
@@ -21,7 +22,6 @@
      xmlns:ddb="http://www.d-nb.de/standards/ddb/"
      xmlns:dini="http://www.d-nb.de/standards/xmetadissplus/type/"
      xmlns="http://www.d-nb.de/standards/subject/"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.d-nb.de/standards/xmetadissplus/  http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd">
 
   <xsl:include href="mods2dc.xsl" />
@@ -59,7 +59,6 @@
     <xsl:text disable-output-escaping="yes">
       &#60;/xMetaDiss:xMetaDiss&#62;
       </xsl:text>
-    </xsl:element> <!--  </metadata>  -->
     </xsl:template>
 
     <xsl:template name="linkQueryURL">
@@ -237,12 +236,12 @@
             <xsl:element name="cc:name">
                 <xsl:value-of select="mods:publisher" />
             </xsl:element>
+            <xsl:if test="mods:place">
+              <xsl:element name="cc:place">
+                <xsl:value-of select="mods:place/mods:placeTerm" />
+              </xsl:element>
+            </xsl:if>
           </xsl:element>
-          <xsl:if test="mods:place">
-            <xsl:element name="cc:address">
-              <xsl:value-of select="mods:place/mods:placeTerm" />
-            </xsl:element>
-          </xsl:if>
         </xsl:element>
       </xsl:for-each>
     </xsl:template>
