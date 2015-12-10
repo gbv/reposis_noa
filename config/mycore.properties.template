@@ -114,9 +114,10 @@ MCR.OAIDataProvider.OAI2.Search.Restriction=objectType\:mods
 MCR.OAIDataProvider.OAI2.Search.SortBy=modified desc, id desc
 MCR.OAIDataProvider.OAI2.Search.FromUntil=modified
 
-# xMetaDiss
-MCR.OAIDataProvider.MetadataFormat.xmetadiss.Schema=http://www.ddb.de/standards/xmetadiss/xmetadiss.xsd
-MCR.OAIDataProvider.MetadataFormat.xmetadiss.Namespace=http://www.ddb.de/standards/xMetaDiss/
+# xMetaDissPlus
+MCR.OAIDataProvider.MetadataFormat.xmetadiss.Schema=http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd
+MCR.OAIDataProvider.MetadataFormat.xmetadiss.Namespace=http://www.d-nb.de/standards/xmetadissplus/
+
 
 ##############################################################################
 #                                                                            #

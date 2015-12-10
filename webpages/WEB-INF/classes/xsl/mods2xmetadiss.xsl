@@ -10,41 +10,34 @@
      xmlns:exslt="http://exslt.org/common"
      xmlns:mods="http://www.loc.gov/mods/v3"
 
-     xmlns:xMetaDiss="http://www.d-nb.de/standards/xMetaDiss/"
+     xmlns:xMetaDiss="http://www.d-nb.de/standards/xmetadissplus/"
      xmlns:cc="http://www.d-nb.de/standards/cc/"
-     xmlns:ddb="http://www.d-nb.de/standards/ddb/"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:dcmitype="http://purl.org/dc/dcmitype/"
      xmlns:dcterms="http://purl.org/dc/terms/"
      xmlns:pc="http://www.d-nb.de/standards/pc/"
      xmlns:urn="http://www.d-nb.de/standards/urn/"
      xmlns:thesis="http://www.ndltd.org/standards/metadata/etdms/1.0/"
+     xmlns:ddb="http://www.d-nb.de/standards/ddb/"
+     xmlns:dini="http://www.d-nb.de/standards/xmetadissplus/type/"
      xmlns="http://www.d-nb.de/standards/subject/"
-
-     xsi:schemaLocation="http://www.d-nb.de/standards/xMetaDiss/  http://www.d-nb.de/standards/xmetadiss/xmetadiss.xsd">
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.d-nb.de/standards/xmetadissplus/  http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd">
 
   <xsl:include href="mods2dc.xsl" />
   <xsl:include href="mods2record.xsl" />
   <xsl:include href="mods-utils.xsl" />
 
+  <xsl:param name="ServletsBaseURL" select="''" />
+  <xsl:param name="JSessionID" select="''" />
+  <xsl:param name="WebApplicationBaseURL" select="''" />
+  <xsl:param name="MCR.URN.SubNamespace.Default.Prefix" select="''" />
 
-
-    <xsl:param name="ServletsBaseURL" select="''" />
-    <xsl:param name="JSessionID" select="''" />
-    <xsl:param name="WebApplicationBaseURL" select="''" />
-
-    <xsl:template match="mycoreobject" mode="metadata">
-        <xsl:element name="metadata" namespace="http://www.openarchives.org/OAI/2.0/">
-    <!-- DNB needs the the attribute "xmlns:xsi" definied here in the xMetaDiss-Element
-         XSLT puts definition into the root element and won't repeat it here
-         WORKAROUND: Write the elements open and closing tags as text
-    <xMetaDiss:xMetaDiss>
-                  <xsl:attribute name="xsi:schemaLocation">http://www.d-nb.de/standards/xMetaDiss/ http://atlibri.uni-rostock.de:8080/test/dnb-schemas/xmetadiss.xsd</xsl:attribute>
-     -->
+  <xsl:template match="mycoreobject" mode="metadata">
 
     <xsl:text disable-output-escaping="yes">
-    &#60;xMetaDiss:xMetaDiss xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xMetaDiss=&quot;http://www.d-nb.de/standards/xMetaDiss/&quot;
-                              xsi:schemaLocation=&quot;http://www.d-nb.de/standards/xMetaDiss/  http://www.d-nb.de/standards/xmetadiss/xmetadiss.xsd&quot;&#62;
+    &#60;xMetaDiss:xMetaDiss xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xMetaDiss=&quot;http://www.d-nb.de/standards/xmetadissplus/&quot;
+                              xsi:schemaLocation=&quot;http://www.d-nb.de/standards/xmetadissplus/  http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd&quot;&#62;
     </xsl:text>
 
              <xsl:call-template name="title"/>
@@ -182,7 +175,7 @@
         <xsl:element name="dc:creator">
           <xsl:attribute name="xsi:type">pc:MetaPers</xsl:attribute>
           <xsl:element name="pc:person">
-            <xsl:if test="mods:nameIdentifier/@type = 'gnd'">
+            <xsl:if test="mods:nameIdentifier[@type='gnd']">
               <xsl:attribute name="PND-Nr">
                 <xsl:value-of select="mods:nameIdentifier[@type='gnd']" />
               </xsl:attribute>
@@ -199,150 +192,83 @@
     </xsl:template>
 
     <xsl:template name="subject">
-<!--      <xsl:for-each select="./metadata/subjects/subject[@classid='docportal_class_000000000000013']">
-           <xsl:element name="dc:subject">
-              <xsl:attribute name="xsi:type">xMetaDiss:DDC-SG</xsl:attribute>
-              <xsl:value-of select="@categid" />
-           </xsl:element>   -->
-    <xsl:variable name="x">
-       <xsl:for-each select="./metadata/subjects/subject">
-        <xsl:variable name="classid" select="./@classid" />
-              <xsl:variable name="categid" select="./@categid" />
+      <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:classification[@authority='sdnb']">
+        <xsl:element name="dc:subject">
+          <xsl:attribute name="xsi:type">xMetaDiss:DDC-SG</xsl:attribute>
+          <xsl:value-of select="." />
+        </xsl:element>
+      </xsl:for-each>
 
-              <!-- MyCoRe Classification URI Resolver: classification:{editor['['formatAlias']']|metadata}:{Levels}:{parents|children}:{ClassID}[:CategID]
-
-                             classification:metadata:-1:children:{ClassID} -->
-
-        <!-- <xsl:variable name="classification" select="concat('classification:metadata:-1:children:',$classid)" />
-           <xsl:variable name="subject-nodes" select="document($classification)/mycoreclass//category[@ID=$categid]" /> -->
-           <xsl:variable name="classification" select="concat('classification:metadata:0:children:',$classid,':',$categid)" />
-
-           <xsl:for-each select="document($classification)//category">
-          <xsl:element name="dc:subject">
-            <xsl:attribute name="xsi:type">dcterms:DDC</xsl:attribute>
-            <xsl:value-of select="@ID" />
-          </xsl:element>
-                 <xsl:element name="dc:subject">
-                  <xsl:attribute name="xsi:type">xMetaDiss:DDC-SG</xsl:attribute>
-                    <xsl:value-of select="substring-after(./label[@xml:lang='x-dini']/@text,':')" />
-               </xsl:element>
-        </xsl:for-each>
-         </xsl:for-each>
-       </xsl:variable>
-       <!-- remove duplicate entries -->
-       <xsl:for-each select="exslt:node-set($x)">
-      <xsl:copy-of select="dc:subject[not(.=following::dc:subject)]" />
-       </xsl:for-each>
-
-       <xsl:for-each select="./metadata/keywords/keyword[@type='SWD']">
+       <!-- xsl:for-each select="./metadata/keywords/keyword[@type='SWD']">
            <xsl:element name="dc:subject">
                <xsl:attribute name="xsi:type">xMetaDiss:SWD</xsl:attribute>
                <xsl:value-of select="." />
            </xsl:element>
-       </xsl:for-each>
-        <xsl:for-each select="./metadata/keywords/keyword[@type='freetext']">
+       </xsl:for-each -->
+        <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:subject">
            <xsl:element name="dc:subject">
                <xsl:attribute name="xsi:type">xMetaDiss:noScheme</xsl:attribute>
-               <xsl:value-of select="." />
+               <xsl:value-of select="mods:topic" />
            </xsl:element>
        </xsl:for-each>
-
-
     </xsl:template>
 
 
 
     <xsl:template name="abstract">
-        <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:abstract">
-            <xsl:element name="dcterms:abstract">
-                <xsl:attribute name="lang"><xsl:call-template name="lang" /></xsl:attribute>
-                <xsl:attribute name="xsi:type">ddb:contentISO639-2</xsl:attribute>
-                <xsl:call-template name="replaceSubSupTags">
-                    <xsl:with-param name="content" select="." />
-                </xsl:call-template>
-            </xsl:element>
-        </xsl:for-each>
+      <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:abstract">
+          <xsl:element name="dcterms:abstract">
+              <xsl:attribute name="lang"><xsl:call-template name="lang" /></xsl:attribute>
+              <xsl:attribute name="xsi:type">ddb:contentISO639-2</xsl:attribute>
+              <xsl:call-template name="replaceSubSupTags">
+                  <xsl:with-param name="content" select="." />
+              </xsl:call-template>
+          </xsl:element>
+      </xsl:for-each>
     </xsl:template>
 
-  <xsl:template name="publisher">
-    <xsl:for-each select="./metadata/publishlinks/publishlink">
-      <xsl:variable name="publishlinkURL">
-        <xsl:call-template name="linkQueryURL">
-           <xsl:with-param name="id" select="./@xlink:href" />
-           <xsl:with-param name="type" select="'institution'" />
-         </xsl:call-template>
-           </xsl:variable>
-           <xsl:for-each select="document($publishlinkURL)/mycoreobject/metadata">
-               <xsl:element name="dc:publisher">
-                  <xsl:attribute name="xsi:type">cc:Publisher</xsl:attribute>
-                  <xsl:element name="cc:universityOrInstitution">
-                      <xsl:element name="cc:name">
-                          <xsl:value-of select="./names/name[@xml:lang='de']/fullname" />
-                      </xsl:element>
-                      <xsl:for-each select="./addresses/address[@xml:lang='de' and @inherited='0']/city">
-                          <xsl:element name="cc:place">
-                                  <xsl:value-of select="." />
-                          </xsl:element>
-                      </xsl:for-each>
-                  </xsl:element>
-                  <xsl:element name="cc:address">
-                       <xsl:value-of select="./addresses/address[@xml:lang='de']/street" />
-                      <xsl:if test="./addresses/address[@xml:lang='de']/street" >
-                        <xsl:text> </xsl:text>
-                      </xsl:if>
-                      <xsl:value-of select="./addresses/address[@xml:lang='de']/number" />
-                      <xsl:if test="./addresses/address[@xml:lang='de']/street or ./addresses/address[@xml:lang='de']/number">
-                        <xsl:text>, </xsl:text>
-                    </xsl:if>
-                      <xsl:value-of select="./addresses/address[@xml:lang='de']/zipcode" />
-                      <xsl:text> </xsl:text>
-                      <xsl:value-of select="./addresses/address[@xml:lang='de']/city" />
-                  </xsl:element>
-              </xsl:element>
-           </xsl:for-each>
-        </xsl:for-each>
-
-
-        <!-- WORKAROUND -->
-       <!--  <xsl:element name="dc:publisher">
+    <xsl:template name="publisher">
+      <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]">
+        <xsl:element name="dc:publisher">
           <xsl:attribute name="xsi:type">cc:Publisher</xsl:attribute>
+          <xsl:attribute name="type">dcterms:ISO3166</xsl:attribute>
+          <xsl:attribute name="countryCode">DE</xsl:attribute>
           <xsl:element name="cc:universityOrInstitution">
             <xsl:element name="cc:name">
-              <xsl:value-of select="'Universität Rostock'" />
-            </xsl:element>
-            <xsl:element name="cc:place">
-              <xsl:value-of select="'18051 Rostock'" />
+                <xsl:value-of select="mods:publisher" />
             </xsl:element>
           </xsl:element>
-          <xsl:element name="cc:address">
-            <xsl:value-of select="'Postfach, 18051 Rostock'" />
-          </xsl:element>
-        </xsl:element> -->
-        <!-- WORKAROUND ENDE -->
+          <xsl:if test="mods:place">
+            <xsl:element name="cc:address">
+              <xsl:value-of select="mods:place/mods:placeTerm" />
+            </xsl:element>
+          </xsl:if>
+        </xsl:element>
+      </xsl:for-each>
     </xsl:template>
 
     <xsl:template name="contributor">
-        <xsl:for-each select="./metadata/contributors/contributor[@type='advisor' or @type='referee']">
+        <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:name[mods:role/mods:roleTerm/text()='ctb']">
             <xsl:element name="dc:contributor">
                 <xsl:attribute name="xsi:type">pc:Contributor</xsl:attribute>
-                <xsl:attribute name="thesis:role"><xsl:value-of select="./@type" /></xsl:attribute>
+                <!-- xsl:attribute name="thesis:role"><xsl:value-of select="./@type" /></xsl:attribute -->
                 <xsl:element name="pc:person">
                   <xsl:element name="pc:name">
                     <xsl:attribute name="type">nameUsedByThePerson</xsl:attribute>
-                    <xsl:element name="pc:foreName"><xsl:value-of select="./firstname" /></xsl:element>
-                    <xsl:element name="pc:surName"><xsl:value-of select="./surname" /></xsl:element>
+                    <xsl:element name="pc:personEnteredUnderGivenName">
+                      <xsl:value-of select="mods:displayForm" />
+                    </xsl:element>
                   </xsl:element>
-                  <xsl:element name="pc:academicTitle"><xsl:value-of select="./academic" /></xsl:element>
                 </xsl:element>
             </xsl:element>
         </xsl:for-each>
     </xsl:template>
 
     <xsl:template name="date">
-        <xsl:if test="./metadata/dates/date[@type='accepted']">
-            <xsl:element name="dcterms:dateAccepted">
+        <xsl:if test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']">
+            <xsl:element name="dcterms:issued">
                 <xsl:attribute name="xsi:type">dcterms:W3CDTF</xsl:attribute>
-                <xsl:value-of select="substring(./metadata/dates/date[@type='accepted'],1,4)" />
+                <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']" />
             </xsl:element>
         </xsl:if>
          <xsl:for-each select="./service/servdates/servdate[@type='modifydate']">
@@ -354,45 +280,53 @@
     </xsl:template>
 
     <xsl:template name="type">
-    <!--
-        <xsl:for-each select="./metadata/types/type">
-            <xsl:choose>
-                <xsl:when test="contains(./@categid,'TYPE0005')">
-                    <xsl:element name="dc:type">
-                        <xsl:attribute name="xsi:type">ddb:PublType</xsl:attribute>
-                        <xsl:text>ElectronicThesisandDissertation</xsl:text>
-                    </xsl:element>
-                </xsl:when>
-            </xsl:choose>
-        </xsl:for-each>  -->
-
-        <xsl:for-each select="./metadata/types/type">
-      <xsl:variable name="classid" select="./@classid" />
-            <xsl:variable name="categid" select="./@categid" />
-         <xsl:variable name="classification" select="concat('classification:metadata:-1:children:',$classid,':',$categid)" />
-
-         <xsl:for-each select="document($classification)//category">
-        <xsl:for-each select="./label[@xml:lang='x-dini']">
-        <xsl:if test="contains(./@text,'dissertation')" >
-                    <xsl:element name="dc:type">
-                        <xsl:attribute name="xsi:type">ddb:PublType</xsl:attribute>
-                        <xsl:text>ElectronicThesisandDissertation</xsl:text>
-                    </xsl:element>
-            </xsl:if>
-      </xsl:for-each>
-       </xsl:for-each>
-  </xsl:for-each>
+      <xsl:element name="dc:type">
+        <xsl:attribute name="xsi:type">dini:PublType</xsl:attribute>
+        <xsl:choose>
+          <xsl:when test="contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre/@valueURI, 'article')">
+            <xsl:text>contributionToPeriodical</xsl:text>
+          </xsl:when>
+          <xsl:when test="contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre/@valueURI, 'issue')">
+            <xsl:text>Periodical</xsl:text>
+          </xsl:when>
+          <xsl:when test="contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre/@valueURI, 'journal')">
+            <xsl:text>PeriodicalPart</xsl:text>
+          </xsl:when>
+          <xsl:when test="contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre/@valueURI, 'book')">
+            <xsl:text>book</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>Other</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:element>
+      <xsl:element name="dc:type">
+        <xsl:attribute name="xsi:type">dcterms:DCMIType</xsl:attribute>
+        <xsl:text>Text</xsl:text>
+      </xsl:element>
+      <xsl:element name="dini:version_driver">
+        <xsl:text>publishedVersion</xsl:text>
+      </xsl:element>
     </xsl:template>
 
     <xsl:template name="identifier">
-        <xsl:for-each select="./metadata/urns/urn">
-           <xsl:if test="@type='url_update_general' or @type='urn_new' or @type='urn_new_version'">
-              <xsl:element name="dc:identifier">
-                 <xsl:attribute name="xsi:type">urn:nbn</xsl:attribute>
-                 <xsl:value-of select="." />
-              </xsl:element>
-           </xsl:if>
-        </xsl:for-each>
+      <xsl:if test="./structure/derobjects/derobject or contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn'], $MCR.URN.SubNamespace.Default.Prefix)">
+        <xsl:variable name="deriv" select="./structure/derobjects/derobject/@xlink:href" />
+        <xsl:variable name="derivlink" select="concat('mcrobject:',$deriv)" />
+        <xsl:variable name="derivate" select="document($derivlink)" />
+
+        <xsl:element name="dc:identifier">
+           <xsl:attribute name="xsi:type">urn:nbn</xsl:attribute>
+           <xsl:choose>
+             <xsl:when test="mcrurn:hasURNDefined($deriv)">
+               <xsl:value-of select="$derivate/mycorederivate/derivate/fileset/@urn" />
+             </xsl:when>
+             <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn'] and contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn'], $MCR.URN.SubNamespace.Default.Prefix)">
+               <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn']" />
+             </xsl:when>
+           </xsl:choose>
+        </xsl:element>
+      </xsl:if>
     </xsl:template>
 
     <xsl:template name="format">
@@ -497,74 +431,6 @@
            </xsl:for-each>
         </xsl:for-each>
 
-
-
-
-
-
-
-
-
-              <!--        <xsl:element name="thesis:grantor">
-                      <xsl:attribute name="xsi:type">cc:Corporate</xsl:attribute>
-                      <xsl:attribute name="type">dcterms:ISO3166</xsl:attribute>
-
-                   <xsl:variable name="institutionClasslinkURL">
-                          <xsl:call-template name="linkClassQueryURL">
-                              <xsl:with-param name="classid" select="$institutionClassid" />
-                              <xsl:with-param name="categid" select="$institutionCategid" />
-                          </xsl:call-template>
-                      </xsl:variable>
-                      <xsl:for-each select="document($institutionClasslinkURL)/mcr_results/mcr_result/mycoreclass/categories/category/url"> ->
-
-
-      <xsl:variable name="classid" select="./@classid" />
-            <xsl:variable name="categid" select="./@categid" />
-                  <xsl:variable name="classification" select="concat('classification:metadata:-1:children:',$classid,':',$categid)" />
-
-         <xsl:for-each select="document($classification)//category[@ID=$institutionCategid]/url">
-
-            <!- TODO Check again after integration of institutions
-                          <xsl:variable name="institutionlinkURL">
-                              <xsl:call-template name="linkQueryURL">
-                                  <xsl:with-param name="id" select="./@xlink:href" />
-                                 <xsl:with-param name="type" select="'institution'" />
-                              </xsl:call-template>
-                          </xsl:variable>
-                          <xsl:for-each select="document($institutionlinkURL)/mcr_results/mcr_result/mycoreobject">
-                              <xsl:element name="cc:universityOrInstitution">
-                                  <xsl:element name="cc:name">
-                                      <xsl:value-of select="./metadata/names/name[@xml:lang='de' and @inherited='1']/fullname" />
-                                  </xsl:element>
-                                  <xsl:element name="cc:place">
-                                      <xsl:value-of select="./metadata/addresses/address[@xml:lang='de' and @inherited='1']/city" />
-                                  </xsl:element>
-                                  <xsl:element name="cc:department">
-                                    <xsl:element name="cc:name">
-                                        <xsl:value-of select="./metadata/names/name[@xml:lang='de' and @inherited='0']/fullname" />
-                                    </xsl:element>
-                                    <xsl:element name="cc:place">
-                                        <xsl:value-of select="./metadata/addresses/address[@xml:lang='de' and @inherited='0']/city" />
-                                    </xsl:element>
-                                    </xsl:element>
-                              </xsl:element>
-                          </xsl:for-each>
-        <!- WORKAROUND ->
-
-          <xsl:element name="cc:universityOrInstitution">
-            <xsl:element name="cc:name">
-              <xsl:value-of select="'Universität Rostock'" />
-            </xsl:element>
-            <xsl:element name="cc:place">
-              <xsl:value-of select="'18051 Rostock'" />
-            </xsl:element>
-          </xsl:element>
-
-
-        <!- WORKAROUND ENDE    ->
-
-                      </xsl:for-each>
-                   </xsl:element> -->
                </xsl:element>
            </xsl:if>
        </xsl:for-each>
@@ -645,17 +511,17 @@
     </xsl:template>
 
     <xsl:template name="rights">
-        <xsl:element name="ddb:rights">
-            <xsl:attribute name="ddb:kind">free</xsl:attribute>
-        </xsl:element>
+      <xsl:element name="ddb:rights">
+       <xsl:attribute name="ddb:kind">free</xsl:attribute>
+      </xsl:element>
     </xsl:template>
 
     <xsl:template match="*">
-        <xsl:copy>
-            <xsl:for-each select="@*">
-                <xsl:copy/>
-           </xsl:for-each>
-                <xsl:apply-templates/>
+      <xsl:copy>
+        <xsl:for-each select="@*">
+          <xsl:copy/>
+        </xsl:for-each>
+        <xsl:apply-templates/>
       </xsl:copy>
     </xsl:template>
 
