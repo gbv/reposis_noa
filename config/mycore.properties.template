@@ -98,7 +98,7 @@ MCR.OAIDataProvider.OAI2.RecordSampleID=mir_mods_00000002
 
 MCR.OAIDataProvider.OAI2.MetadataFormats=oai_dc,epicur,xmetadiss
 
-MCR.OAIDataProvider.OAI2.Sets=open_access,GENRE
+MCR.OAIDataProvider.OAI2.Sets=open_access,GENRE,xmetadissplus
 MCR.OAIDataProvider.OAI2.Sets.open_access=webapp:oai/set_open_access.xml
 MCR.OAIDataProvider.OAI2.Sets.GENRE=xslStyle:classification2sets:classification:metadata:10:children:mir_genres
 MCR.OAIDataProvider.OAI2.FilterEmptySets=false
@@ -117,6 +117,8 @@ MCR.OAIDataProvider.OAI2.Search.FromUntil=modified
 # xMetaDissPlus
 MCR.OAIDataProvider.MetadataFormat.xmetadiss.Schema=http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd
 MCR.OAIDataProvider.MetadataFormat.xmetadiss.Namespace=http://www.d-nb.de/standards/xmetadissplus/
+MCR.OAIDataProvider.OAI2.MapSetToQuery.xmetadissplus=category.top:"noa_pubtype\:amtsdruckschrift"
+MCR.OAIDataProvider.OAI2.Sets.xmetadissplus=webapp:oai/xmetadissplus.xml
 
 
 ##############################################################################
