@@ -110,7 +110,7 @@ MCR.OAIDataProvider.OAI2.Adapter.RecordURIPattern=xslStyle:mods2{format}:mcrobje
 
 MCR.OAIDataProvider.OAI2.Search.RequestHandler=/oai_search
 # added Restriction as workaround, without we get no results
-MCR.OAIDataProvider.OAI2.Search.Restriction={!join from=returnId to=id}derivateURN:* OR identifier.type.urn:*
+MCR.OAIDataProvider.OAI2.Search.Restriction=*:*
 MCR.OAIDataProvider.OAI2.Search.SortBy=modified desc, id desc
 MCR.OAIDataProvider.OAI2.Search.FromUntil=modified
 

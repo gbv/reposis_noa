@@ -54,7 +54,7 @@
              <xsl:call-template name="language"/>
              <xsl:call-template name="degree"/>
              <xsl:call-template name="contact"/>
-             <!-- xsl:call-template name="file"/ -->
+             <xsl:call-template name="file"/>
              <xsl:call-template name="rights"/>
     <xsl:text disable-output-escaping="yes">
       &#60;/xMetaDiss:xMetaDiss&#62;
@@ -68,13 +68,6 @@
         <!-- <xsl:value-of select="concat($ServletsBaseURL,'MCRQueryServlet',$JSessionID,'?XSL.Style=xml&amp;type=',$type,'&amp;hosts=',$host,'&amp;query=%2Fmycoreobject%5B%40ID%3D%27',$id,'%27%5D')" /> -->
         <!-- <xsl:value-of select="concat($WebApplicationBaseURL,'content/xmloutput.jsp?id=',$id,'&amp;type=object')" />   -->
            <xsl:value-of select="concat('mcrobject:',$id)" />
-    </xsl:template>
-
-    <xsl:template name="linkDerDetailsURL">
-        <xsl:param name="host" select="'local'"/>
-        <xsl:param name="id"/>
-        <xsl:variable name="derivbase" select="concat($ServletsBaseURL,'MCRFileNodeServlet/',$id,'/')" />
-        <xsl:value-of select="concat($derivbase,'?MCRSessionID=',$JSessionID,'&amp;hosts=',$host,'&amp;XSL.Style=xml')" />
     </xsl:template>
 
 <!--  <xsl:template name="linkClassQueryURL">
@@ -330,29 +323,24 @@
 
     <xsl:template name="format">
         <xsl:for-each select="./structure/derobjects/derobject[1]">
-            <xsl:variable name="detailsURL">
-                 <xsl:call-template name="linkDerDetailsURL">
-                     <xsl:with-param name="id" select="./@xlink:href" />
-                 </xsl:call-template>
-            </xsl:variable>
 
-           <xsl:for-each select="document($detailsURL)/mcr_directory/children/child">
-<!-- 				<xsl:for-each select="document($detailsURL)/mcr_results/mcr_result/mycorederivate/derivate"> -->
+           <xsl:for-each select="document(concat('ifs:',./@xlink:href,'/'))/mcr_directory/children/child">
+<!--        <xsl:for-each select="document($detailsURL)/mcr_results/mcr_result/mycorederivate/derivate"> -->
                     <xsl:choose>
-                       <xsl:when test="./contentType='ps'">
-<!--				 	<xsl:when test="contains(./internals/internal/@maindoc, '.ps')"> -->
+                       <xsl:when test="contains(./contentType,'ps')">
+<!--          <xsl:when test="contains(./internals/internal/@maindoc, '.ps')"> -->
                        <xsl:element name="dcterms:medium">
                             <xsl:attribute name="xsi:type">dcterms:IMT</xsl:attribute>
                               <xsl:text>application/postscript</xsl:text>
                        </xsl:element>
                         </xsl:when>
-                       <xsl:when test="./contentType='pdf'">
+                       <xsl:when test="contains(./contentType,'pdf')">
                        <xsl:element name="dcterms:medium">
                             <xsl:attribute name="xsi:type">dcterms:IMT</xsl:attribute>
                             <xsl:text>application/pdf</xsl:text>
                        </xsl:element>
                         </xsl:when>
-            <xsl:when test="./contentType='zip'">
+            <xsl:when test="contains(./contentType,'zip')">
              <xsl:element name="dcterms:medium">
                             <xsl:attribute name="xsi:type">dcterms:IMT</xsl:attribute>
                             <xsl:text>application/zip</xsl:text>
@@ -451,58 +439,53 @@
     </xsl:template>
 
     <xsl:template name="fileproperties">
-      <xsl:param name="detailsURL" select="''" />
-      <xsl:param name="derpath" select="''" />
+      <xsl:param name="derId" select="''" />
       <xsl:param name="filenumber" select="1" />
-      <xsl:variable name="filelink" select="concat($detailsURL,$derpath,
-         '?hosts=local&amp;XSL.Style=xml')" />
-      <xsl:variable name="details" select="document($filelink)" />
+
+      <xsl:variable name="details" select="document(concat('ifs:',$derId,'/'))" />
       <xsl:for-each select="$details/mcr_directory/children/child[@type='file']">
          <xsl:element name="ddb:fileProperties">
              <xsl:attribute name="ddb:fileName"><xsl:value-of select="./name" /></xsl:attribute>
-             <xsl:attribute name="ddb:fileID"><xsl:value-of select="./@ID" /></xsl:attribute>
+             <xsl:attribute name="ddb:fileID"><xsl:value-of select="./uri" /></xsl:attribute>
              <xsl:attribute name="ddb:fileSize"><xsl:value-of select="./size" /></xsl:attribute>
              <xsl:if test="$filenumber &gt; 1">
-                <xsl:attribute name="ddb:fileDirectory"><xsl:value-of select="$details/mcr_results/path" /></xsl:attribute>
+                <xsl:attribute name="ddb:fileDirectory"><xsl:value-of select="$details/mcr_directory/path" /></xsl:attribute><!-- TODO: check! -->
              </xsl:if>
          </xsl:element>
       </xsl:for-each>
-      <xsl:for-each select="$details/mcr_directory/children/child[@type='directory']">
+      <!-- xsl:for-each select="$details/mcr_directory/children/child[@type='directory']">
         <xsl:call-template name="fileproperties">
            <xsl:with-param name="detailsURL" select="$detailsURL" />
            <xsl:with-param name="derpath" select="concat($details/mcr_directory/path,'/',name)" />
            <xsl:with-param name="filenumber" select="$filenumber" />
         </xsl:call-template>
-      </xsl:for-each>
+      </xsl:for-each -->
     </xsl:template>
 
     <xsl:template name="file">
         <xsl:for-each select="./structure/derobjects/derobject[1]">
-            <xsl:variable name="detailsURL" select="concat($ServletsBaseURL,'MCRFileNodeServlet/')" />
-            <xsl:variable name="filelink" select="concat($detailsURL,./@xlink:href,'/',
-               '?hosts=local&amp;XSL.Style=xml')" />
-            <xsl:variable name="details" select="document($filelink)" />
+            <xsl:variable name="derId" select="@xlink:href" />
+            <xsl:variable name="ifsDirectory" select="document(concat('ifs:',$derId,'/'))" />
             <xsl:variable name="isPdfDerivate">
-              <xsl:for-each select="$details/mcr_directory/children/child[@type='file']">
-                    <xsl:if test="./contentType='pdf'">
-                       <xsl:value-of select="'true'" />
-                    </xsl:if>
+              <xsl:for-each select="$ifsDirectory/mcr_directory/children/child[@type='file']">
+                <xsl:if test="contains(./contentType,'pdf')">
+                  <xsl:value-of select="'true'" />
+                </xsl:if>
               </xsl:for-each>
             </xsl:variable>
             <xsl:if test="contains($isPdfDerivate,'true')">
-               <xsl:variable name="ddbfilenumber" select="$details/mcr_directory/numChildren/total/files" />
+              <xsl:variable name="ddbfilenumber" select="$ifsDirectory/mcr_directory/numChildren/here/files" />
               <xsl:element name="ddb:fileNumber">
                   <xsl:value-of select="$ddbfilenumber" />
               </xsl:element>
                <xsl:call-template name="fileproperties">
-                  <xsl:with-param name="detailsURL" select="$detailsURL" />
-                  <xsl:with-param name="derpath" select="concat(./@xlink:href,'/')" />
+                  <xsl:with-param name="derId" select="./@xlink:href" />
                   <xsl:with-param name="filenumber" select="number($ddbfilenumber)" />
                </xsl:call-template>
                <xsl:if test="number($ddbfilenumber) &gt; 1">
                   <xsl:element name="ddb:transfer">
                      <xsl:attribute name="ddb:type">dcterms:URI</xsl:attribute>
-                     <xsl:value-of select="concat($ServletsBaseURL,'MCRZipServlet?id=',./@xlink:href)" />
+                     <xsl:value-of select="concat($ServletsBaseURL,'MCRZipServlet/',./@xlink:href)" />
                   </xsl:element>
                </xsl:if>
             </xsl:if>
