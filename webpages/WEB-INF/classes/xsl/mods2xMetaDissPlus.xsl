@@ -38,7 +38,7 @@
   <xsl:variable name="language">
     <xsl:for-each select="//metadata/def.modsContainer/modsContainer/mods:mods/mods:language[mods:languageTerm/@authority='rfc4646']">
       <xsl:variable name="myURI" select="concat('classification:metadata:0:children:rfc4646:',child::*)" />
-      <xsl:value-of select="document($myURI)//label[@xml:lang='x-term']/@text"/>
+      <xsl:value-of select="document($myURI)//label[@xml:lang='x-bibl']/@text"/>
     </xsl:for-each>
   </xsl:variable>
 
@@ -415,6 +415,7 @@
     <xsl:template name="language">
       <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:language[mods:languageTerm/@authority='rfc4646']">
         <xsl:element name="dc:language">
+          <xsl:attribute name="xsi:type">dcterms:ISO639-2</xsl:attribute>
           <xsl:value-of select="$language" />
         </xsl:element>
       </xsl:for-each>
