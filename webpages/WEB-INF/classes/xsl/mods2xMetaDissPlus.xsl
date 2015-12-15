@@ -247,23 +247,36 @@
     </xsl:template>
 
     <xsl:template name="publisher">
-      <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]">
+      <xsl:if test="//mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher] or //mods:name[mods:role/mods:roleTerm/text()='pbl']">
         <xsl:element name="dc:publisher">
           <xsl:attribute name="xsi:type">cc:Publisher</xsl:attribute>
           <xsl:attribute name="type">dcterms:ISO3166</xsl:attribute>
           <xsl:attribute name="countryCode">DE</xsl:attribute>
           <xsl:element name="cc:universityOrInstitution">
             <xsl:element name="cc:name">
-                <xsl:value-of select="mods:publisher" />
+              <xsl:choose>
+                <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]">
+                  <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]/mods:publisher" />
+                </xsl:when>
+                <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]">
+                  <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]/mods:publisher" />
+                </xsl:when>
+                <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:name[mods:role/mods:roleTerm/text()='pbl']">
+                  <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:name[mods:role/mods:roleTerm/text()='pbl']/mods:displayForm" />
+                </xsl:when>
+                <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:name[mods:role/mods:roleTerm/text()='pbl']">
+                  <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:name[mods:role/mods:roleTerm/text()='pbl']/mods:displayForm" />
+                </xsl:when>
+              </xsl:choose>
             </xsl:element>
             <xsl:if test="mods:place">
               <xsl:element name="cc:place">
-                <xsl:value-of select="mods:place/mods:placeTerm" />
+                <xsl:value-of select="//mods:place/mods:placeTerm" />
               </xsl:element>
             </xsl:if>
           </xsl:element>
         </xsl:element>
-      </xsl:for-each>
+      </xsl:if>
     </xsl:template>
 
     <xsl:template name="contributor">
@@ -400,15 +413,15 @@
           <xsl:element name="dcterms:isPartOf">
             <xsl:attribute name="xsi:type">ddb:ZS-Ausgabe</xsl:attribute>
             <xsl:choose>
-              <xsl:when test="mods:part/mods:detail[@type='issue']">
-                <xsl:value-of select="concat(normalize-space(mods:part/mods:detail[@type='volume']),
+              <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:part/mods:detail[@type='issue']">
+                <xsl:value-of select="concat(normalize-space(./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume']),
                                             ', ',
                                             i18n:translate('component.mods.metaData.dictionary.issue'),
                                             ' ',
-                                            normalize-space(mods:part/mods:detail[@type='issue']))" />
+                                            normalize-space(./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:part/mods:detail[@type='issue']))" />
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:value-of select="normalize-space(mods:part/mods:detail[@type='volume'])" />
+                  <xsl:value-of select="normalize-space(./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume'])" />
                 </xsl:otherwise>
               </xsl:choose>
           </xsl:element>
