@@ -22,62 +22,64 @@
      xmlns:ddb="http://www.d-nb.de/standards/ddb/"
      xmlns:dini="http://www.d-nb.de/standards/xmetadissplus/type/"
      xmlns="http://www.d-nb.de/standards/subject/"
+
      xsi:schemaLocation="http://www.d-nb.de/standards/xmetadissplus/  http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd">
 
-  <xsl:include href="mods2dc.xsl" />
+  <xsl:output method="xml" encoding="UTF-8" />
+
   <xsl:include href="mods2record.xsl" />
   <xsl:include href="mods-utils.xsl" />
 
   <xsl:param name="ServletsBaseURL" select="''" />
-  <xsl:param name="JSessionID" select="''" />
   <xsl:param name="WebApplicationBaseURL" select="''" />
   <xsl:param name="MCR.URN.SubNamespace.Default.Prefix" select="''" />
 
   <xsl:template match="mycoreobject" mode="metadata">
 
     <xsl:text disable-output-escaping="yes">
-    &#60;xMetaDiss:xMetaDiss xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xMetaDiss=&quot;http://www.d-nb.de/standards/xmetadissplus/&quot;
-                              xsi:schemaLocation=&quot;http://www.d-nb.de/standards/xmetadissplus/  http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd&quot;&#62;
+      &#60;xMetaDiss:xMetaDiss xmlns:xMetaDiss=&quot;http://www.d-nb.de/standards/xmetadissplus/&quot;
+                               xmlns:cc=&quot;http://www.d-nb.de/standards/cc/&quot;
+                               xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                               xmlns:dcmitype=&quot;http://purl.org/dc/dcmitype/&quot;
+                               xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot;
+                               xmlns:pc=&quot;http://www.d-nb.de/standards/pc/&quot;
+                               xmlns:urn=&quot;http://www.d-nb.de/standards/urn/&quot;
+                               xmlns:thesis=&quot;http://www.ndltd.org/standards/metadata/etdms/1.0/&quot;
+                               xmlns:ddb=&quot;http://www.d-nb.de/standards/ddb/&quot;
+                               xmlns:dini=&quot;http://www.d-nb.de/standards/xmetadissplus/type/&quot;
+                               xmlns=&quot;http://www.d-nb.de/standards/subject/&quot;
+                               xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+                               xsi:schemaLocation=&quot;http://www.d-nb.de/standards/xmetadissplus/
+                               http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd&quot;&#62;
     </xsl:text>
 
-             <xsl:call-template name="title"/>
-             <xsl:call-template name="alternative"/>
-             <xsl:call-template name="creator"/>
-             <xsl:call-template name="subject"/>
-             <xsl:call-template name="abstract"/>
-             <xsl:call-template name="publisher"/>
-             <xsl:call-template name="contributor"/>
-             <xsl:call-template name="date"/>
-             <xsl:call-template name="type"/>
-             <xsl:call-template name="identifier"/>
-             <xsl:call-template name="format"/>
-             <xsl:call-template name="language"/>
-             <xsl:call-template name="degree"/>
-             <xsl:call-template name="contact"/>
-             <xsl:call-template name="file"/>
-             <xsl:call-template name="rights"/>
+
+             <xsl:call-template name="title" />
+             <xsl:call-template name="alternative" />
+             <xsl:call-template name="creator" />
+             <xsl:call-template name="subject" />
+             <xsl:call-template name="abstract" />
+             <xsl:call-template name="publisher" />
+             <xsl:call-template name="contributor" />
+             <xsl:call-template name="date" />
+             <xsl:call-template name="type" />
+             <xsl:call-template name="identifier" />
+             <xsl:call-template name="format" />
+             <xsl:call-template name="language" />
+             <xsl:call-template name="ispartof" />
+             <xsl:call-template name="degree" />
+             <xsl:call-template name="contact" />
+             <xsl:call-template name="file" />
+             <xsl:call-template name="rights" />
     <xsl:text disable-output-escaping="yes">
       &#60;/xMetaDiss:xMetaDiss&#62;
       </xsl:text>
     </xsl:template>
 
     <xsl:template name="linkQueryURL">
-        <!-- <xsl:param name="type" select="'alldocs'"/>
-        <xsl:param name="host" select="'local'"/> -->
         <xsl:param name="id"/>
-        <!-- <xsl:value-of select="concat($ServletsBaseURL,'MCRQueryServlet',$JSessionID,'?XSL.Style=xml&amp;type=',$type,'&amp;hosts=',$host,'&amp;query=%2Fmycoreobject%5B%40ID%3D%27',$id,'%27%5D')" /> -->
-        <!-- <xsl:value-of select="concat($WebApplicationBaseURL,'content/xmloutput.jsp?id=',$id,'&amp;type=object')" />   -->
-           <xsl:value-of select="concat('mcrobject:',$id)" />
+        <xsl:value-of select="concat('mcrobject:',$id)" />
     </xsl:template>
-
-<!--  <xsl:template name="linkClassQueryURL">
-        <xsl:param name="type" select="'class'"/>
-        <xsl:param name="host" select="'local'"/>
-        <xsl:param name="classid" select="''" />
-        <xsl:param name="categid" select="''" /> -->
-        <!-- xsl:value-of select="concat($WebApplicationBaseURL,'content/xmloutput.jsp?id=',$classid,'&amp;categid=',$categid,'&amp;type=classification')" />  -->
- <!--      <xsl:value-of select="concat('mcrobject:',$classid)" />
-     </xsl:template> -->
 
     <xsl:template name="lang">
         <xsl:choose>
@@ -85,6 +87,16 @@
             <xsl:when test="./@xml:lang='en'">eng</xsl:when>
             <xsl:when test="./@xml:lang='fr'">fre</xsl:when>
             <xsl:when test="./@xml:lang='es'">spa</xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="translate_Lang">
+      <xsl:param name="lang_code" />
+        <xsl:choose>
+            <xsl:when test="$lang_code='de'">ger</xsl:when>
+            <xsl:when test="$lang_code='en'">eng</xsl:when>
+            <xsl:when test="$lang_code='fr'">fre</xsl:when>
+            <xsl:when test="$lang_code='es'">spa</xsl:when>
         </xsl:choose>
     </xsl:template>
 
@@ -132,26 +144,40 @@
     </xsl:template>
 
     <xsl:template name="title">
-        <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:titleInfo/mods:title[not(@type='uniform' or @type='abbreviated' or @type='alternative')]">
-            <xsl:element name="dc:title">
-               <xsl:attribute name="lang"><xsl:call-template name="lang" /></xsl:attribute>
-               <xsl:attribute name="xsi:type">ddb:titleISO639-2</xsl:attribute>
-               <xsl:if test="contains(./@type,'translated')">
-                  <xsl:attribute name="ddb:type">translated</xsl:attribute>
-               </xsl:if>
-               <xsl:value-of select="." />
-               <xsl:if test="../mods.subtitle">
-                 <xsl:text> : </xsl:text>
-                 <xsl:value-of select="../mods.subtitle" />
-               </xsl:if>
-            </xsl:element>
-        </xsl:for-each>
+      <xsl:element name="dc:title">
+         <xsl:attribute name="lang">
+           <xsl:call-template name="translate_Lang">
+             <xsl:with-param name="lang_code" select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:titleInfo[not(@type='uniform' or @type='abbreviated' or @type='alternative' or @type='translated')]/@xml:lang" />
+           </xsl:call-template>
+         </xsl:attribute>
+         <xsl:attribute name="xsi:type">ddb:titleISO639-2</xsl:attribute>
+         <xsl:apply-templates mode="mods.title" select="./metadata/def.modsContainer/modsContainer/mods:mods" />
+      </xsl:element>
+
+      <xsl:if test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:titleInfo[@type='translated']">
+        <xsl:element name="dc:title">
+           <xsl:attribute name="lang">
+             <xsl:call-template name="translate_Lang">
+               <xsl:with-param name="lang_code" select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:titleInfo[@type='translated']/@xml:lang" />
+             </xsl:call-template>
+           </xsl:attribute>
+           <xsl:attribute name="ddb:type">translated</xsl:attribute>
+           <xsl:attribute name="xsi:type">ddb:titleISO639-2</xsl:attribute>
+           <xsl:apply-templates mode="mods.title" select="./metadata/def.modsContainer/modsContainer/mods:mods">
+             <xsl:with-param name="type" select="'translated'" />
+           </xsl:apply-templates>
+        </xsl:element>
+      </xsl:if>
     </xsl:template>
 
     <xsl:template name="alternative">
        <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:titleInfo/mods:title[@type='uniform' or @type='abbreviated' or @type='alternative']">
            <xsl:element name="dcterms:alternative">
-               <xsl:attribute name="lang"><xsl:call-template name="lang" /></xsl:attribute>
+               <xsl:attribute name="lang">
+                 <xsl:call-template name="translate_Lang">
+                   <xsl:with-param name="lang_code" select="../@xml:lang" />
+                 </xsl:call-template>
+               </xsl:attribute>
                <xsl:attribute name="xsi:type">ddb:talternativeISO639-2</xsl:attribute>
                <xsl:value-of select="." />
                <xsl:if test="../mods.subtitle">
@@ -240,7 +266,7 @@
     </xsl:template>
 
     <xsl:template name="contributor">
-        <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:name[mods:role/mods:roleTerm/text()='ctb']">
+        <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:name[mods:role/mods:roleTerm/text()='ctb']"><!-- check subroles -->
             <xsl:element name="dc:contributor">
                 <xsl:attribute name="xsi:type">pc:Contributor</xsl:attribute>
                 <!-- xsl:attribute name="thesis:role"><xsl:value-of select="./@type" /></xsl:attribute -->
@@ -279,10 +305,10 @@
             <xsl:text>contributionToPeriodical</xsl:text>
           </xsl:when>
           <xsl:when test="contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre/@valueURI, 'issue')">
-            <xsl:text>Periodical</xsl:text>
+            <xsl:text>PeriodicalPart</xsl:text>
           </xsl:when>
           <xsl:when test="contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre/@valueURI, 'journal')">
-            <xsl:text>PeriodicalPart</xsl:text>
+            <xsl:text>Periodical</xsl:text>
           </xsl:when>
           <xsl:when test="contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre/@valueURI, 'book')">
             <xsl:text>book</xsl:text>
@@ -352,22 +378,43 @@
     </xsl:template>
 
     <xsl:template name="language">
-        <xsl:for-each select="./metadata/languages/language">
-      <xsl:variable name="classid" select="./@classid" />
-            <xsl:variable name="categid" select="./@categid" />
-         <xsl:variable name="classification" select="concat('classification:metadata:-1:children:',$classid,':',$categid)" />
-
-         <xsl:for-each select="document($classification)//category">
-
-        <xsl:for-each select="./label[@xml:lang='en']">
-                <xsl:element name="dc:language">
-                   <xsl:attribute name="xsi:type">dcterms:ISO639-2</xsl:attribute>
-                   <xsl:value-of select="substring-before(./@description,'#')" />
-                </xsl:element>
-            </xsl:for-each>
-            </xsl:for-each>
-        </xsl:for-each>
+      <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:language[mods:languageTerm/@authority='rfc4646']">
+        <xsl:element name="dc:language">
+          <xsl:attribute name="xsi:type">dcterms:ISO639-2</xsl:attribute>
+          <xsl:variable name="myURI" select="concat('classification:metadata:0:children:rfc4646:',child::*)" />
+          <xsl:value-of select="document($myURI)//label[@xml:lang='x-term']/@text"/>
+        </xsl:element>
+      </xsl:for-each>
     </xsl:template>
+
+<!-- dcterms:isPartOf xsi:type="ddb:Erstkat-ID" >2049984-X</dcterms:isPartOf>
+<dcterms:isPartOf xsi:type="ddb:ZS-Ausgabe" >2004</dcterms:isPartOf -->
+    <xsl:template name="ispartof">
+      <xsl:if test="contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre/@valueURI, 'issue')">
+        <xsl:element name="dcterms:isPartOf">
+          <xsl:attribute name="xsi:type">ddb:ZSTitelID</xsl:attribute>
+          <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/@xlink:href" />
+        </xsl:element>
+        <xsl:if test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:part/mods:detail[@type='volume']">
+          <xsl:element name="dcterms:isPartOf">
+            <xsl:attribute name="xsi:type">ddb:ZS-Ausgabe</xsl:attribute>
+            <xsl:choose>
+              <xsl:when test="mods:part/mods:detail[@type='issue']">
+                <xsl:value-of select="concat(normalize-space(mods:part/mods:detail[@type='volume']),
+                                            ', ',
+                                            i18n:translate('component.mods.metaData.dictionary.issue'),
+                                            ' ',
+                                            normalize-space(mods:part/mods:detail[@type='issue']))" />
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="normalize-space(mods:part/mods:detail[@type='volume'])" />
+                </xsl:otherwise>
+              </xsl:choose>
+          </xsl:element>
+        </xsl:if>
+      </xsl:if>
+    </xsl:template>
+
 
     <xsl:template name="degree">
       <xsl:for-each select="./metadata/types/type">
@@ -496,15 +543,6 @@
       <xsl:element name="ddb:rights">
        <xsl:attribute name="ddb:kind">free</xsl:attribute>
       </xsl:element>
-    </xsl:template>
-
-    <xsl:template match="*">
-      <xsl:copy>
-        <xsl:for-each select="@*">
-          <xsl:copy/>
-        </xsl:for-each>
-        <xsl:apply-templates/>
-      </xsl:copy>
     </xsl:template>
 
 </xsl:stylesheet>
