@@ -247,7 +247,7 @@
     </xsl:template>
 
     <xsl:template name="publisher">
-      <xsl:if test="//mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher] or //mods:name[mods:role/mods:roleTerm/text()='pbl']">
+      <xsl:if test="//mods:originInfo[not(@eventType) or @eventType='publication']/mods:publisher or //mods:name[mods:role/mods:roleTerm/text()='pbl']">
         <xsl:element name="dc:publisher">
           <xsl:attribute name="xsi:type">cc:Publisher</xsl:attribute>
           <xsl:attribute name="type">dcterms:ISO3166</xsl:attribute>
@@ -255,11 +255,11 @@
           <xsl:element name="cc:universityOrInstitution">
             <xsl:element name="cc:name">
               <xsl:choose>
-                <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]">
-                  <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]/mods:publisher" />
+                <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication']/mods:publisher">
+                  <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication']/mods:publisher" />
                 </xsl:when>
-                <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]">
-                  <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:originInfo[not(@eventType) or @eventType='publication'][mods:publisher]/mods:publisher" />
+                <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:originInfo[not(@eventType) or @eventType='publication']/mods:publisher">
+                  <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:originInfo[not(@eventType) or @eventType='publication']/mods:publisher" />
                 </xsl:when>
                 <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:name[mods:role/mods:roleTerm/text()='pbl']">
                   <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:name[mods:role/mods:roleTerm/text()='pbl']/mods:displayForm" />
@@ -269,9 +269,16 @@
                 </xsl:when>
               </xsl:choose>
             </xsl:element>
-            <xsl:if test="mods:place">
+            <xsl:if test="//mods:place">
               <xsl:element name="cc:place">
-                <xsl:value-of select="//mods:place/mods:placeTerm" />
+                <xsl:choose>
+                  <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication']/mods:place/mods:placeTerm">
+                    <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:originInfo[not(@eventType) or @eventType='publication']/mods:place/mods:placeTerm" />
+                  </xsl:when>
+                  <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:originInfo[not(@eventType) or @eventType='publication']/mods:place/mods:placeTerm">
+                    <xsl:value-of select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:relatedItem[@type='host']/mods:originInfo[not(@eventType) or @eventType='publication']/mods:place/mods:placeTerm" />
+                  </xsl:when>
+                </xsl:choose>
               </xsl:element>
             </xsl:if>
           </xsl:element>
