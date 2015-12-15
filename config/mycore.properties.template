@@ -91,10 +91,10 @@
 ##############################################################################
 
 MCR.OAIDataProvider.OAI2.RepositoryName=NOA
-MCR.OAIDataProvider.OAI2.RepositoryIdentifier=reposis.gbv.de/noa
-MCR.OAIDataProvider.OAI2.AdminEmail=noa@gbv.de
+MCR.OAIDataProvider.OAI2.RepositoryIdentifier=noa.gwlb.de
+MCR.OAIDataProvider.OAI2.AdminEmail=dms-list@gbv.de
 
-MCR.OAIDataProvider.OAI2.RecordSampleID=mir_mods_00000002
+MCR.OAIDataProvider.OAI2.RecordSampleID=mir_mods_00000479
 
 MCR.OAIDataProvider.OAI2.MetadataFormats=oai_dc,epicur,xMetaDissPlus
 

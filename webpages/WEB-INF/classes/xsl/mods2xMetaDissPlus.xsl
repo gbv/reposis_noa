@@ -35,6 +35,13 @@
   <xsl:param name="WebApplicationBaseURL" select="''" />
   <xsl:param name="MCR.URN.SubNamespace.Default.Prefix" select="''" />
 
+  <xsl:variable name="language">
+    <xsl:for-each select="//metadata/def.modsContainer/modsContainer/mods:mods/mods:language[mods:languageTerm/@authority='rfc4646']">
+      <xsl:variable name="myURI" select="concat('classification:metadata:0:children:rfc4646:',child::*)" />
+      <xsl:value-of select="document($myURI)//label[@xml:lang='x-term']/@text"/>
+    </xsl:for-each>
+  </xsl:variable>
+
   <xsl:template match="mycoreobject" mode="metadata">
 
     <xsl:text disable-output-escaping="yes">
@@ -147,9 +154,16 @@
     <xsl:template name="title">
       <xsl:element name="dc:title">
          <xsl:attribute name="lang">
-           <xsl:call-template name="translate_Lang">
-             <xsl:with-param name="lang_code" select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:titleInfo[not(@type='uniform' or @type='abbreviated' or @type='alternative' or @type='translated')]/@xml:lang" />
-           </xsl:call-template>
+           <xsl:choose>
+             <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:titleInfo[not(@type='uniform' or @type='abbreviated' or @type='alternative' or @type='translated')]/@xml:lang">
+               <xsl:call-template name="translate_Lang">
+                 <xsl:with-param name="lang_code" select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:titleInfo[not(@type='uniform' or @type='abbreviated' or @type='alternative' or @type='translated')]/@xml:lang" />
+               </xsl:call-template>
+             </xsl:when>
+             <xsl:otherwise>
+               <xsl:value-of select="$language" />
+             </xsl:otherwise>
+           </xsl:choose>
          </xsl:attribute>
          <xsl:attribute name="xsi:type">ddb:titleISO639-2</xsl:attribute>
          <xsl:apply-templates mode="mods.title" select="./metadata/def.modsContainer/modsContainer/mods:mods" />
@@ -401,9 +415,7 @@
     <xsl:template name="language">
       <xsl:for-each select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:language[mods:languageTerm/@authority='rfc4646']">
         <xsl:element name="dc:language">
-          <xsl:attribute name="xsi:type">dcterms:ISO639-2</xsl:attribute>
-          <xsl:variable name="myURI" select="concat('classification:metadata:0:children:rfc4646:',child::*)" />
-          <xsl:value-of select="document($myURI)//label[@xml:lang='x-term']/@text"/>
+          <xsl:value-of select="$language" />
         </xsl:element>
       </xsl:for-each>
     </xsl:template>
