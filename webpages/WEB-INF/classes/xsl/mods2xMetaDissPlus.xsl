@@ -24,6 +24,7 @@
      xmlns:dini="http://www.d-nb.de/standards/xmetadissplus/type/"
      xmlns="http://www.d-nb.de/standards/subject/"
 
+     exclude-result-prefixes="cc dc dcmitype dcterms pc urn thesis ddb dini xlink exslt mods mcrurn i18n xsl"
      xsi:schemaLocation="http://www.d-nb.de/standards/xmetadissplus/  http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd">
 
   <xsl:output method="xml" encoding="UTF-8" />
