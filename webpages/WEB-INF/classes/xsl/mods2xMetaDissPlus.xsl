@@ -296,6 +296,7 @@
               </xsl:element>
             </xsl:if>
           </xsl:element>
+          <cc:address cc:Scheme="DIN5008"/>
         </xsl:element>
       </xsl:if>
     </xsl:template>
@@ -563,7 +564,7 @@
                   <xsl:with-param name="derId" select="./@xlink:href" />
                   <xsl:with-param name="filenumber" select="number($ddbfilenumber)" />
                </xsl:call-template>
-               <xsl:if test="number($ddbfilenumber) &gt; 1">
+               <xsl:if test="number($ddbfilenumber) &gt; 0">
                   <xsl:element name="ddb:transfer">
                      <xsl:attribute name="ddb:type">dcterms:URI</xsl:attribute>
                      <xsl:value-of select="concat($ServletsBaseURL,'MCRZipServlet/',./@xlink:href)" />
@@ -574,9 +575,11 @@
     </xsl:template>
 
     <xsl:template name="rights">
-      <xsl:element name="ddb:rights">
+      <!-- TODO: check access permission -->
+      <!-- xsl:element name="ddb:rights">
        <xsl:attribute name="ddb:kind">free</xsl:attribute>
-      </xsl:element>
+      </xsl:element -->
+      <ddb:rights ddb:kind="free" />
     </xsl:template>
 
 </xsl:stylesheet>
