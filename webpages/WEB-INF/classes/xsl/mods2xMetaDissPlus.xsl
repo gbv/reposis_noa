@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- ============================================== -->
 <!-- $Revision: 1.8 $ $Date: 2007-04-20 15:18:23 $ -->
 <!-- ============================================== -->
@@ -367,13 +367,13 @@
     <xsl:template name="identifier">
       <xsl:if test="./structure/derobjects/derobject or contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn'], $MCR.URN.SubNamespace.Default.Prefix)">
         <xsl:variable name="deriv" select="./structure/derobjects/derobject/@xlink:href" />
-        <xsl:variable name="derivlink" select="concat('mcrobject:',$deriv)" />
-        <xsl:variable name="derivate" select="document($derivlink)" />
 
         <xsl:element name="dc:identifier">
            <xsl:attribute name="xsi:type">urn:nbn</xsl:attribute>
            <xsl:choose>
              <xsl:when test="mcrurn:hasURNDefined($deriv)">
+               <xsl:variable name="derivlink" select="concat('mcrobject:',$deriv)" />
+               <xsl:variable name="derivate" select="document($derivlink)" />
                <xsl:value-of select="$derivate/mycorederivate/derivate/fileset/@urn" />
              </xsl:when>
              <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn'] and contains(./metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn'], $MCR.URN.SubNamespace.Default.Prefix)">
