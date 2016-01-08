@@ -1,26 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Willkommen bei NOA!">
-    <div class="row">
-      <div class="col-md-12" lang="de">
-        <h1>
-          Willkommen auf dem Archivserver der GWLB
-        </h1>
-        <p>
-          Das Niedersächsische Online-Archiv NOA dient der Aufbewahrung und
-          Bereitstellung von Online-Publikationen aus und über Niedersachsen.
-        </p>
-        <p>
-          Die <a href="http://www.gwlb.de/pflichtexemplare/">Pflichtabgabe</a>
-          von elektronischen amtlichen Veröffentlichungen durch die herausgebenden Behörden, Dienststellen und Einrichtungen
-          des Landes Niedersachsen ist durch einen <a href="http://www.gwlb.de/pflichtexemplare/AbgabeErl-amtlVeroeffentl">Runderlass</a>
-          vom 11.12.2012 gesetzlich geregelt. Die rechtliche Grundlage für die Ablieferung nichtamtlicher elektronischer
-          Publikationen ist in Vorbereitung.
-        </p>
-      </div>
-    </div>
-  </section>
-  <meta>
-    <log lastEditor="otteta" date="2015-12-10" time="19:05" />
-  </meta>
-</MyCoReWebPage>
+<MyCoReWebPage><section xml:lang="de" title="Willkommen bei NOA!"><div class="row"><div class="col-md-12" lang="de"><p> </p><p>Das Niedersächsische Online-Archiv NOA dient der Aufbewahrung und Bereitstellung von Online-Publikationen aus und über Niedersachsen.</p><p>Dieses Angebot befindet sich derzeit noch im Aufbau. Bereitgestellt werden bislang insbesondere amtliche Publikationen.</p><p>Die <a href="http://www.gwlb.de/pflichtexemplare/">Pflichtabgabe</a> von elektronischen amtlichen Veröffentlichungen durch die herausgebenden Behörden, Dienststellen und Einrichtungen des Landes Niedersachsen ist durch einen <a href="http://www.gwlb.de/pflichtexemplare/AbgabeErl-amtlVeroeffentl">Runderlass</a> vom 11.12.2012 gesetzlich geregelt.</p></div></div></section><meta><log lastEditor="adminNOA" date="2015-12-22" time="09:52" /></meta></MyCoReWebPage>
