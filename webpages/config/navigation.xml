@@ -83,6 +83,10 @@
             <label xml:lang="de">Anmeldeverfahren</label>
             <label xml:lang="en">Guidelines</label>
         </item>
+        <item href="/content/publish/policies.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Publikationsrichtlinien</label>
+            <label xml:lang="en">Publication policies</label>
+        </item>
     </menu>
     <menu id="user">
         <label xml:lang="de">Nutzermenü</label>
