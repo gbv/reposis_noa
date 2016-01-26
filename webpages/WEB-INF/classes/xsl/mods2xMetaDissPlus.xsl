@@ -94,8 +94,15 @@
     </xsl:template>
 
     <xsl:template name="lang">
-      <xsl:variable name="myURI" select="concat('classification:metadata:0:children:rfc4646:',./@xml:lang)" />
-      <xsl:value-of select="document($myURI)//label[@xml:lang='x-bibl']/@text"/>
+      <xsl:choose>
+        <xsl:when test="./@xml:lang or string-length(./@xml:lang) &gt; 0">
+          <xsl:variable name="myURI" select="concat('classification:metadata:0:children:rfc4646:',./@xml:lang)" />
+          <xsl:value-of select="document($myURI)//label[@xml:lang='x-bibl']/@text" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$language" />
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:template>
 
     <xsl:template name="translate_Lang">
