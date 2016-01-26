@@ -140,10 +140,14 @@
   </xed:template>
 
   <xed:template id="host.volume">
-    <mir:textfield xpath="mods:part/mods:detail[@type='volume']/mods:number" label="mir.volume" help-text="{i18n:mir.help.volume}" class="required" />
+    <mir:textfield xpath="mods:part/mods:detail[@type='volume']/mods:number" label="mir.volume" class="required" />
   </xed:template>
 
-<xed:template id="date.issued">
+  <xed:template id="host.issue">
+    <mir:textfield xpath="mods:part/mods:detail[@type='issue']/mods:number" label="mir.issue" class="mir-modspart" />
+  </xed:template>
+
+  <xed:template id="date.issued">
     <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']" label="mir.date.issued.10" help-text="{i18n:mir.help.date.issued.10}"
       class="date_issued" placeholder="{i18n:mir.placeholder.date}" />
   </xed:template>
@@ -164,7 +168,6 @@
         <div class="col-md-6">
           <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="lang.list" />
         </div>
-        <mir:help-pmud help-text="{i18n:mir.help.language}" pmud="false" />
       </div>
     </xed:bind>
   </xed:template>
@@ -220,6 +223,38 @@
     </xed:bind>
   </xed:template>
 
+  <xed:template id="sdnb.optional">
+    <xed:bind xpath="mods:classification[@authority='sdnb'][@displayLabel='sdnb']">
+      <div class="form-group {$xed-validation-marker}">
+        <label class="col-md-3 control-label">
+          <xed:output i18n="editor.search.mir.sdnb" />
+          :
+        </label>
+        <div class="col-md-6">
+          <select class="form-control form-control-inline">
+            <option value="">
+              <xed:output i18n="mir.select" />
+            </option>
+            <xed:include uri="xslStyle:items2options:classification:editor:-1:children:SDNB" />
+          </select>
+        </div>
+        <mir:help-pmud help-text="{i18n:mir.help.sdnb}" />
+      </div>
+    </xed:bind>
+  </xed:template>
+
+  <xed:template id="comment">
+    <mir:textarea xpath="mods:note" label="mir.comment" rows="2" />
+  </xed:template>
+
+  <xed:template id="title.journal.relItemsearch">
+    <mir:relItemsearch searchengine="title" genre="journal" responsefield="mods.title" xpath="mods:titleInfo/mods:title" label="mir.title.journal" class="required" />
+  </xed:template>
+
+  <xed:template id="identifier.issn.journal.relItemsearch">
+    <mir:relItemsearch searchengine="issn" genre="journal" responsefield="identifier.type.issn" xpath="mods:identifier[@type='issn']" label="mir.identifier.issn" />
+  </xed:template>
+
   <xed:template id="cancel.submit">
     <div class="form-group" id="editor-buttons">
       <div class="col-md-offset-2 col-md-6">
@@ -246,7 +281,6 @@
 
   <xed:template id="validation-rules">
     <xed:validate xpath="//mods:mods/mods:genre[@authorityURI='http://www.mycore.org/classifications/mir_genres']/@valueURIxEditor" required="true" i18n="mir.validation.genre" display="global" />
-    <xed:validate xpath="//mods:mods/mods:classification[@authority='sdnb'][@displayLabel='sdnb']" required="true" i18n="mir.validation.sdnb" display="global" />
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
     <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc4646']" required="true" i18n="noa.validation.language" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
