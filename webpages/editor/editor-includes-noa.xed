@@ -311,5 +311,9 @@
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:dateIssued[@encoding='w3cdtf']" required="true" i18n="mir.validation.dateIssued" display="global" />
   </xed:template>
 
+  <xed:template id="validation-rules.sdnb">
+    <xed:validate xpath="//mods:mods/mods:classification[@authority='sdnb'][@displayLabel='sdnb']" required="true" i18n="mir.validation.sdnb" display="global" />
+  </xed:template>
+
 
 </xed:template>
