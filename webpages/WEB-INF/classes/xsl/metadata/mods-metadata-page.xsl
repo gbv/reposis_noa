@@ -4,6 +4,19 @@
 >
   <xsl:include href="layout-utils.xsl" />
 
+  <xsl:variable name="XSL.Status.Message">
+    <xsl:call-template name="UrlGetParam">
+      <xsl:with-param name="url" select="$RequestURL" />
+      <xsl:with-param name="par" select="'XSL.Status.Message'" />
+    </xsl:call-template>
+  </xsl:variable>
+  <xsl:variable name="XSL.Status.Style">
+    <xsl:call-template name="UrlGetParam">
+      <xsl:with-param name="url" select="$RequestURL" />
+      <xsl:with-param name="par" select="'XSL.Status.Style'" />
+    </xsl:call-template>
+  </xsl:variable>
+
   <xsl:template match="/site">
     <xsl:copy>
       <head>
@@ -11,6 +24,25 @@
         <link href="{$WebApplicationBaseURL}assets/jquery/plugins/shariff/shariff.min.css" rel="stylesheet" />
         <script type="text/javascript" src="{$WebApplicationBaseURL}assets/jquery/plugins/dotdotdot/jquery.dotdotdot.min.js" />
       </head>
+
+      <xsl:if test="string-length($XSL.Status.Message) &gt; 0">
+        <div class="row">
+          <div class="col-md-12">
+            <div role="alert">
+              <xsl:attribute name="class">
+                <xsl:choose>
+                  <xsl:when test="string-length($XSL.Status.Style) &gt; 0"><xsl:value-of select="concat('alert-', $XSL.Status.Style)" /></xsl:when>
+                  <xsl:otherwise>alert-info</xsl:otherwise>
+                </xsl:choose>
+                alert alert-dismissible fade in
+              </xsl:attribute>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span></button>
+              <span aria-hidden="true"><xsl:value-of select="i18n:translate($XSL.Status.Message)" /></span>
+            </div>
+        </div>
+        </div>
+      </xsl:if>
 
       <xsl:if test="div[@id='mir-breadcrumb']">
         <breadcrumb>
@@ -20,7 +52,7 @@
 
       <xsl:if test="div[@id='search_browsing']">
         <div class="row detail_row">
-          <div class="col-md-12">
+          <div class="col-md-8">
             <div class="detail_block text-center">
               <span id="pagination_label">gefundende Dokumente</span>
               <br />
@@ -46,14 +78,14 @@
 
         <div id="head_col" class="col-xs-12">
           <div class="row">
-            <div class="col-md-4 col-md-push-8">
+            <div id="aux_col_actions" class="col-xs-12 col-sm-4 col-sm-push-8 col-md-4 col-md-push-8">
               <div class="pull-right">
                 <!-- Start: EDIT -->
                 <xsl:apply-templates select="div[@id='mir-edit']" mode="copyContent" />
                 <!-- End: EDIT -->
               </div>
             </div>
-            <div class="col-md-8 col-md-pull-4">
+            <div class="col-xs-12 col-sm-8 col-sm-pull-4 col-md-8 col-md-pull-4">
               <xsl:apply-templates select="div[@id='mir-abstract-badges']" mode="copyContent" />
             </div>
           </div>
@@ -78,18 +110,15 @@
             <!-- Start: METADATA -->
               <xsl:apply-templates select="div[@id='mir-metadata']" mode="newMetadata" />
             <!-- End: METADATA -->
+              <xsl:if test="contains(div[@id='mir-metadata'], '°, ')">
+                <script type="text/javascript" src="//www.openstreetmap.org/openlayers/OpenLayers.js"></script>
+                <script type="text/javascript" src="//www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+                <script type="text/javascript" src="{$WebApplicationBaseURL}js/mir/geo-coords.js"></script>
+              </xsl:if>
             </div>
           </xsl:if>
 
 <!-- derivate -->
-          <!-- files -->
-          <xsl:if test="div[contains(@id,'mir-collapse-')]">
-            <div class="detail_block">
-              <div class="" id="record_detail">
-                <xsl:apply-templates select="div[@id='mir-collapse-files']" mode="copyContent" />
-              </div>
-            </div>
-          </xsl:if>
           <!-- viewer -->
           <xsl:if test="div[@id = 'mir-viewer']">
             <xsl:apply-templates select="div[@id='mir-viewer']" mode="copyContent" />
@@ -97,6 +126,14 @@
           <!-- player -->
           <xsl:if test="div[@id = 'mir-player']">
             <xsl:apply-templates select="div[@id='mir-player']" mode="copyContent" />
+          </xsl:if>
+          <!-- files -->
+          <xsl:if test="div[contains(@id,'mir-collapse-')]">
+            <div class="detail_block">
+              <div class="" id="record_detail">
+                <xsl:apply-templates select="div[@id='mir-collapse-files']" mode="copyContent" />
+              </div>
+            </div>
           </xsl:if>
 
 <!-- end: left column -->
@@ -154,6 +191,28 @@
                 <!-- Start: ADMINMETADATA -->
                 <xsl:apply-templates select="div[@id='mir-admindata']" mode="newMetadata" />
                 <!-- End: ADMINMETADATA -->
+              </div>
+              <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modal frame" aria-hidden="true">
+                <div class="modal-dialog" style="width: 930px">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close modalFrame-cancel" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                      </button>
+                      <h4 class="modal-title" id="modalFrame-title">
+                        <xsl:value-of select="i18n:translate('metadata.versionInfo.label')" />
+                      </h4>
+                    </div>
+                    <div id="modalFrame-body" class="modal-body" style="max-height: 560px; overflow: auto">
+                      <xsl:apply-templates select="div[@id='mir-historydata']" mode="copyContent" />
+                    </div>
+                    <div class="modal-footer" style="clear: both">
+                      <button id="modalFrame-cancel" type="button" class="btn btn-danger" data-dismiss="modal">
+                        <xsl:value-of select="i18n:translate('button.cancel')" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </xsl:if>

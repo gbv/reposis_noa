@@ -504,7 +504,7 @@
                <xsl:variable name="packageRequiredIdentifier" select="$MIR.ImageWare.requiredIdentifier" />
                <xsl:if test="/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type=$packageRequiredIdentifier]">
                  <li>
-                   <a href="{$ServletsBaseURL}MCRPackerServlet?packer=ImageWare&amp;objectId={/mycoreobject/@ID}&amp;redirect={encoder:encode(concat($WebApplicationBaseURL,'receive/',/mycoreobject/@ID,'XSL.Status.Message=mir.iwstatus.success&XSL.Status.Style=success'))}">
+                   <a href="{$ServletsBaseURL}MCRPackerServlet?packer=ImageWare&amp;objectId={/mycoreobject/@ID}&amp;redirect={encoder:encode(concat($WebApplicationBaseURL,'receive/',/mycoreobject/@ID,'?XSL.Status.Message=mir.iwstatus.success&amp;XSL.Status.Style=success'))}">
                      <xsl:value-of select="i18n:translate('object.createImagewareZipPackage')" />
                    </a>
                  </li>
