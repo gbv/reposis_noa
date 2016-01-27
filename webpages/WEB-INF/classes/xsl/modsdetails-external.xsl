@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xalan" xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation"
-  xmlns:mcrmods="xalan://org.mycore.mods.classification.MCRMODSClassificationSupport" xmlns:basket="xalan://org.mycore.frontend.basket.MCRBasketManager"
-  xmlns:mcr="http://www.mycore.org/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
-  xmlns:mcrurn="xalan://org.mycore.urn.MCRXMLFunctions" xmlns:str="http://exslt.org/strings" xmlns:encoder="xalan://java.net.URLEncoder"
-  exclude-result-prefixes="basket xalan xlink mcr i18n mods mcrmods mcrxsl mcrurn str encoder" version="1.0" xmlns:ex="http://exslt.org/dates-and-times"
+                xmlns:mcrmods="xalan://org.mycore.mods.classification.MCRMODSClassificationSupport"
+                xmlns:basket="xalan://org.mycore.frontend.basket.MCRBasketManager"
+                xmlns:mcr="http://www.mycore.org/" xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns:mods="http://www.loc.gov/mods/v3" xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
+                xmlns:mcrurn="xalan://org.mycore.urn.MCRXMLFunctions" xmlns:str="http://exslt.org/strings"
+                xmlns:encoder="xalan://java.net.URLEncoder" xmlns:acl="xalan://org.mycore.access.MCRAccessManager"
+                exclude-result-prefixes="basket xalan xlink mcr i18n mods mcrmods mcrxsl mcrurn str encoder acl"
+                version="1.0" xmlns:ex="http://exslt.org/dates-and-times"
   xmlns:exslt="http://exslt.org/common" extension-element-prefixes="ex exslt"
 >
 
   <xsl:param name="MIR.registerDOI" select="''" />
   <xsl:param name="template" select="'fixme'" />
+
+  <xsl:param name="MCR.Packaging.Packer.ImageWare.flagType" />
+  <xsl:param name="MIR.ImageWare.enabled" />
+  <xsl:param name="MIR.ImageWare.requiredIdentifier" />
 
   <!-- do nothing for display parent -->
   <xsl:template match="/mycoreobject" mode="parent" priority="1">
@@ -386,7 +394,7 @@
       <xsl:value-of select="actionmapping:getURLforID('create-copy',$id,true())" xmlns:actionmapping="xalan://org.mycore.wfc.actionmapping.MCRURLRetriever" />
     </xsl:variable>
     <xsl:variable name="basketType" select="'objects'" />
-    <div class="btn-group">
+    <div class="btn-group btn-group-justified">
       <xsl:choose>
         <xsl:when test="basket:contains($basketType, /mycoreobject/@ID)">
           <a class="btn btn-primary btn-sm" href="{$ServletsBaseURL}MCRBasketServlet{$HttpSession}?type={$basketType}&amp;action=remove&amp;redirect=referer&amp;id={/mycoreobject/@ID}">
@@ -407,17 +415,23 @@
           </a>
         </xsl:otherwise>
       </xsl:choose>
-      <xsl:if test="$accessedit or $accessdelete">
-        <div class="btn-group pull-right">
+      <div class="btn-group">
           <a href="#" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-cog">
               <xsl:value-of select="' '" />
             </i>
-            <xsl:value-of select="' Aktionen'" />
+          <xsl:value-of select="concat(' ',i18n:translate('mir.actions'))" />
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu">
+        <ul class="dropdown-menu dropdown-menu-right">
             <xsl:variable name="type" select="substring-before(substring-after($id,'_'),'_')" />
+          <xsl:if test="not($accessedit or $accessdelete)">
+            <li>
+              <a href="{$ServletsBaseURL}MCRLoginServlet?action=login">
+                <xsl:value-of select="i18n:translate('mir.actions.noaccess')"/>
+              </a>
+            </li>
+          </xsl:if>
             <xsl:if test="$accessedit">
               <xsl:choose>
                 <xsl:when test="string-length($editURL) &gt; 0">
@@ -454,7 +468,7 @@
               </xsl:choose>
               <xsl:if test="$displayAddDerivate='true'">
                 <li>
-                  <a href="{$ServletsBaseURL}derivate/create{$HttpSession}?id={$id}">
+                <a href="{$WebApplicationBaseURL}fileupload.xml{$HttpSession}?XSL.parentObjectID={$id}">
                     <xsl:value-of select="i18n:translate('derivate.addDerivate')" />
                   </a>
                 </li>
@@ -483,7 +497,21 @@
                </li>
              </xsl:if>
 
+             <!-- Packing with ImageWare Packer -->
+             <xsl:variable name="packageEnabled" select="$MIR.ImageWare.enabled" />
+             <xsl:variable name="packageFlagType" select="$MCR.Packaging.Packer.ImageWare.flagType" />
+             <xsl:if test="$packageEnabled and $packageFlagType and acl:checkPermission('packer-ImageWare')">
+               <xsl:variable name="packageRequiredIdentifier" select="$MIR.ImageWare.requiredIdentifier" />
+               <xsl:if test="/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type=$packageRequiredIdentifier]">
+                 <li>
+                   <a href="{$ServletsBaseURL}MCRPackerServlet?packer=ImageWare&amp;objectId={/mycoreobject/@ID}&amp;redirect={encoder:encode(concat($WebApplicationBaseURL,'receive/',/mycoreobject/@ID,'XSL.Status.Message=mir.iwstatus.success&XSL.Status.Style=success'))}">
+                     <xsl:value-of select="i18n:translate('object.createImagewareZipPackage')" />
+                   </a>
+                 </li>
+               </xsl:if>
+             </xsl:if>
             </xsl:if>
+
             <xsl:if test="$accessdelete and (not(mcrurn:hasURNDefined($id)) or (mcrurn:hasURNDefined($id) and $CurrentUser=$MCR.Users.Superuser.UserName))">
               <li>
                 <xsl:choose>
@@ -591,7 +619,6 @@
             </xsl:if>
           </ul>
         </div>
-      </xsl:if>
     </div>
     <xsl:if test="key('rights', @ID)/@accKeyEnabled and key('rights', @ID)/@readKey and not(mcrxsl:isCurrentUserGuestUser() or $accessedit or $accessdelete)">
       <div class="btn-group pull-right">
@@ -662,7 +689,7 @@
             <xsl:choose>
               <xsl:when test="$derivateWithURN=false()">
                 <li>
-                  <a href="{$ServletsBaseURL}derivate/update{$HttpSession}?objectid={../../../@ID}&amp;id={$deriv}{$suffix}" class="option">
+                  <a href="{$WebApplicationBaseURL}fileupload.xml{$HttpSession}?XSL.parentObjectID={../../../@ID}&amp;XSL.derivateID={$deriv}{$suffix}" class="option">
                     <xsl:value-of select="i18n:translate('component.swf.derivate.addFile')" />
                   </a>
                 </li>
