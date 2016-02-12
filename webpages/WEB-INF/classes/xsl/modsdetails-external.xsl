@@ -6,7 +6,8 @@
                 xmlns:mods="http://www.loc.gov/mods/v3" xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
                 xmlns:mcrurn="xalan://org.mycore.urn.MCRXMLFunctions" xmlns:str="http://exslt.org/strings"
                 xmlns:encoder="xalan://java.net.URLEncoder" xmlns:acl="xalan://org.mycore.access.MCRAccessManager"
-                exclude-result-prefixes="basket xalan xlink mcr i18n mods mcrmods mcrxsl mcrurn str encoder acl"
+                xmlns:imageware="org.mycore.mir.imageware.MIRImageWarePacker"
+                exclude-result-prefixes="basket xalan xlink mcr i18n mods mcrmods mcrxsl mcrurn str encoder acl imageware"
                 version="1.0" xmlns:ex="http://exslt.org/dates-and-times"
   xmlns:exslt="http://exslt.org/common" extension-element-prefixes="ex exslt"
 >
@@ -473,41 +474,29 @@
                 </li>
               </xsl:if>
 
-              <!-- ToDo: Fix URN/Handle Generator, xpath is not mods valid -->
-              <!-- xsl:if test="mcrxsl:isAllowedObjectForURNAssignment($id) and not(mcrurn:hasURNDefined($id))">
-              <a
-                href="{$ServletsBaseURL}MCRAddURNToObjectServlet{$HttpSession}?object={$id}&amp;xpath=.mycoreobject/metadata/def.modsContainer[@class='MCRMetaXML' and @heritable='false' and @notinherit='true']/modsContainer/mods:mods/mods:identifier[@type='hdl']">
-                <img src="{$WebApplicationBaseURL}images/workflow_addnbn.gif" title="{i18n:translate('derivate.urn.addURN')}" />
-              </a>
-             </xsl:if -->
+              <xsl:if test="mcrxsl:isAllowedObjectForURNAssignment($id) and not(mcrurn:hasURNDefined($id)) and $mods-type='journal'">
+                <xsl:variable name="apos">
+                  <xsl:text>'</xsl:text>
+                </xsl:variable>
+                <li>
+                  <a
+                    href="{$ServletsBaseURL}MCRAddURNToObjectServlet{$HttpSession}?object={$id}&amp;xpath=/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn']"
+                    onclick="{concat('return confirm(',$apos, i18n:translate('component.mods.metaData.options.urn.confirm'), $apos, ');')}"
+                    class="option"
+                   >
+                    <xsl:value-of select="i18n:translate('derivate.urn.addURN')" />
+                  </a>
+                </li>
+              </xsl:if>
 
-             <xsl:if test="mcrxsl:isAllowedObjectForURNAssignment($id) and not(mcrurn:hasURNDefined($id)) and $mods-type='journal'">
-               <xsl:variable name="apos">
-                 <xsl:text>'</xsl:text>
-               </xsl:variable>
-               <li>
-                 <a
-                   href="{$ServletsBaseURL}MCRAddURNToObjectServlet{$HttpSession}?object={$id}"
-                   onclick="{concat('return confirm(',$apos, i18n:translate('component.mods.metaData.options.urn.confirm'), $apos, ');')}"
-                   class="option"
-                  >
-                   <xsl:value-of select="i18n:translate('derivate.urn.addURN')" />
-                 </a>
-               </li>
-             </xsl:if>
-
-             <!-- Packing with ImageWare Packer -->
-             <xsl:variable name="packageEnabled" select="$MIR.ImageWare.Enabled" />
-             <xsl:variable name="packageFlagType" select="$MCR.Packaging.Packer.ImageWare.FlagType" />
-             <xsl:if test="$packageEnabled and $packageFlagType and acl:checkPermission('packer-ImageWare')">
-               <xsl:if test="/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='uri' or @type='ppn']">
-                 <li>
-                   <a href="{$ServletsBaseURL}MCRPackerServlet?packer=ImageWare&amp;objectId={/mycoreobject/@ID}&amp;redirect={encoder:encode(concat($WebApplicationBaseURL,'receive/',/mycoreobject/@ID,'?XSL.Status.Message=mir.iwstatus.success&amp;XSL.Status.Style=success'))}">
-                     <xsl:value-of select="i18n:translate('object.createImagewareZipPackage')" />
-                   </a>
-                 </li>
-               </xsl:if>
-             </xsl:if>
+              <!-- Packing with ImageWare Packer -->
+              <xsl:if test="imageware:displayPackerButton($id, 'ImageWare')">
+                <li>
+                  <a href="{$ServletsBaseURL}MCRPackerServlet?packer=ImageWare&amp;objectId={/mycoreobject/@ID}&amp;redirect={encoder:encode(concat($WebApplicationBaseURL,'receive/',/mycoreobject/@ID,'?XSL.Status.Message=mir.iwstatus.success&amp;XSL.Status.Style=success'))}">
+                    <xsl:value-of select="i18n:translate('object.createImagewareZipPackage')" />
+                  </a>
+                </li>
+              </xsl:if>
             </xsl:if>
 
             <xsl:if test="$accessdelete and (not(mcrurn:hasURNDefined($id)) or (mcrurn:hasURNDefined($id) and $CurrentUser=$MCR.Users.Superuser.UserName))">
