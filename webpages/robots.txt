@@ -13,3 +13,4 @@ Disallow: /servlets/MCRTileCombineServlet
 Disallow: /servlets/MCRTarServlet
 Disallow: /servlets/MCRBasketServlet
 Disallow: /servlets/solr
+Disallow: /servlets/solr2
