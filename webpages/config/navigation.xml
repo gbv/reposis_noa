@@ -23,6 +23,10 @@
             <label xml:lang="de">Erweiterte Suche</label>
             <label xml:lang="en">Extended Search</label>
         </item>
+        <item href="/search/complex_intern.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Erweiterte Suche</label>
+            <label xml:lang="en">Extended Search</label>
+        </item>
         <item href="/search/search-expert.xed" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Expertensuche</label>
             <label xml:lang="en">Expert Search</label>
@@ -84,7 +88,7 @@
             <label xml:lang="en">Guidelines</label>
         </item>
         <item href="/content/publish/policies.xml" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Publikationsrichtlinien</label>
+            <label xml:lang="de">Ablieferungshinweise</label>
             <label xml:lang="en">Publication policies</label>
         </item>
     </menu>

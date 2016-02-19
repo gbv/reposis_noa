@@ -9,6 +9,7 @@
           <condition field="category.top" operator="=" />
           <condition field="state" operator="=" />
           <condition field="mods.dateIssued" operator="=" />
+          <condition field="created" operator="=" />
       </boolean>
       <condition field="objectType" operator="=" value="mods" />
     </boolean>

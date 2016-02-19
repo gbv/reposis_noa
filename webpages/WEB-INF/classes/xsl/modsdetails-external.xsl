@@ -480,7 +480,7 @@
                 </xsl:variable>
                 <li>
                   <a
-                    href="{$ServletsBaseURL}MCRAddURNToObjectServlet{$HttpSession}?object={$id}&amp;xpath=/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:identifier[@type='urn']"
+                    href="{$ServletsBaseURL}MCRAddURNToObjectServlet{$HttpSession}?object={$id}"
                     onclick="{concat('return confirm(',$apos, i18n:translate('component.mods.metaData.options.urn.confirm'), $apos, ');')}"
                     class="option"
                    >
@@ -827,8 +827,8 @@
 
 <!-- hit abstract -->
       <div class="hit_abstract">
-        <xsl:if test="mods:abstract">
-          <xsl:value-of select="mcrxsl:shortenText(mods:abstract,300)" />
+        <xsl:if test="mods:abstract[not(@altFormat)]">
+          <xsl:value-of select="mcrxsl:shortenText(mods:abstract[not(@altFormat)],300)" />
         </xsl:if>
       </div>
 

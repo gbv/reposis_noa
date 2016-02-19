@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyCoReWebPage>
+  <section title="Bearbeitungsstatistik" xml:lang="de" />
+
+  <section title="Statistic" xml:lang="en" />
+
+  <section xml:lang="all" xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
+
+    <div id="complexSearch">
+    <xed:form class="form-horizontal" role="form">
+      <xed:cleanup-rule xpath="//condition" relevant-if="string-length(@value)&gt;0" />
+      <xed:cleanup-rule xpath="//boolean" relevant-if="boolean|condition" />
+      <xed:source uri="searchInput:{id}" />
+      <xed:source uri="webapp:search/complex.xml" />
+      <xed:bind xpath="query">
+        <xed:bind xpath="@mask" default="content/search/complex.xed" />
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <xed:output i18n="component.mods.editor.search.label" />
+              </h3>
+            </div>
+            <div class="panel-body">
+              <div class="col-md-10">
+                <xed:bind xpath="conditions/boolean/boolean">
+
+          <!-- Genre -->
+                <mir:template name="selectInput" xpath="condition[@field='category.top'][2]/@value" id="inputGenre1" i18n="editor.search.mir.genre"
+                  tooltip="editor.search.genre.tooltip" uri="xslStyle:items2options:classification:editorComplete:-1:children:mir_genres" />
+
+          <!-- Datum -->
+                <div class="form-group">
+                  <xed:bind xpath="condition[@field='created']">
+                    <label for="inputDate1" class="col-md-3 control-label">
+                      <xed:output i18n="component.mods.metaData.dictionary.dateCreated" />
+                    </label>
+                    <div class="col-md-2">
+                      <xed:bind xpath="@operator">
+                        <select class="form-control">
+                          <option value="=">=</option>
+                          <option value="&gt;">&gt;</option>
+                          <option value="&gt;=">&gt;=</option>
+                          <option value="&lt;">&lt;</option>
+                          <option value="&lt;=">&lt;=</option>
+                        </select>
+                      </xed:bind>
+                    </div>
+                    <div class="col-md-7">
+                      <xed:bind xpath="@value">
+                        <input type="text" class="form-control" id="inputDate1" placeholder="YYYY-MM-DD" />
+                      </xed:bind>
+                    </div>
+                  </xed:bind>
+                </div>
+              </xed:bind>
+              </div>
+            </div>
+            <!-- submit -->
+            <div class="panel-footer clearfix">
+              <div class="pull-right">
+                <!-- button type="submit" class="btn btn-default" xed:target="debug">Debug</button -->
+                <mir:template name="submitButton" i18n="editor.search.search" target="servlet_MCRQLSearchServlet" />
+              </div>
+            </div>
+          </div>
+      </xed:bind>
+    </xed:form>
+    </div>
+  </section>
+</MyCoReWebPage>
