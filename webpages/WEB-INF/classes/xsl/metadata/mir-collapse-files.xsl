@@ -83,13 +83,17 @@
               </div>
             </div>
           </xsl:for-each>
-          <xsl:if test="not(mycoreobject/structure/derobjects/derobject[key('rights', @xlink:href)/@read or key('rights', @xlink:href)/@readKey or key('rights', @xlink:href)/@writeKey])" >
+          <xsl:if test="mycoreobject/structure/derobjects/derobject and
+                        not(mycoreobject/structure/derobjects/derobject[key('rights', @xlink:href)/@read or
+                            key('rights', @xlink:href)/@readKey or
+                            key('rights', @xlink:href)/@writeKey])" >
             <div id="mir-access-restricted">
-              <h3>Dateien</h3>
-              <p>
-              <xsl:apply-templates select="mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:accessCondition[@type='restriction on access']"
-                                     mode="printModsClassInfo" />
-              </p>
+              <h3><xsl:value-of select="i18n:translate('metadata.files.file')" /></h3>
+              <div class="alert alert-warning" role="alert">
+                <xsl:value-of select="i18n:translate('mir.access')" />
+                <xsl:apply-templates select="mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:accessCondition[@type='restriction on access']"
+                                       mode="printModsClassInfo" />
+              </div>
             </div>
           </xsl:if>
         </div>
