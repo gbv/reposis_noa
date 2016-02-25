@@ -543,3 +543,14 @@ ul.navbar-nav {
   height: 150px;
   margin-bottom: 20px;
 }
+
+
+/* TODO: fix style ********************************************************* */
+#aux_col_actions {
+  padding-left: 0px;
+}
+
+.modal-body > textarea {
+  width: 560px;
+  height: 215px;
+}

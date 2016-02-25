@@ -90,7 +90,7 @@
             <div id="mir-access-restricted">
               <h3><xsl:value-of select="i18n:translate('metadata.files.file')" /></h3>
               <div class="alert alert-warning" role="alert">
-                <xsl:value-of select="i18n:translate('mir.access')" />
+                <strong><xsl:value-of select="i18n:translate('mir.access')" /></strong>
                 <xsl:apply-templates select="mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:accessCondition[@type='restriction on access']"
                                        mode="printModsClassInfo" />
               </div>
