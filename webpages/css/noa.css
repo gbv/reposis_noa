@@ -538,3 +538,8 @@ ul.navbar-nav {
 .has-error .form-control:focus {
   box-shadow: 0px 1px 1px rgba(185, 74, 72, 0.38) inset, 0px 0px 8px rgba(185, 74, 72, 0.39);
 }
+
+.detail_block .ellipsis {
+  height: 150px;
+  margin-bottom: 20px;
+}
