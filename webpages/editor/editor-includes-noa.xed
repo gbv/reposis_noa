@@ -152,6 +152,11 @@
       class="date_issued" placeholder="{i18n:mir.placeholder.date}" />
   </xed:template>
 
+  <xed:template id="year.issued">
+    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']" label="mir.date.issued.4" help-text="{i18n:mir.help.date.issued.4}"
+      placeholder="{i18n:mir.placeholder.year}" class="required" />
+  </xed:template>
+
   <xed:template id="date.range.issued">
     <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf'][@point='start']" label="mir.date.issued.4.start"
       class="daterange_issued" help-text="{i18n:mir.help.date.issued.4.start}" placeholder="{i18n:mir.placeholder.date}" />
