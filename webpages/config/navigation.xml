@@ -75,7 +75,7 @@
             <label xml:lang="de">Meine Ablieferungen</label>
             <label xml:lang="en">My Documents</label>
         </item>
-        <item href="/content/publish/statistic.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/content/publish/statistic.xed" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Bearbeitungsstatistik</label>
             <label xml:lang="en">Statistic</label>
         </item>
