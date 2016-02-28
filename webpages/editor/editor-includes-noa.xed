@@ -158,9 +158,9 @@
   </xed:template>
 
   <xed:template id="date.range.issued">
-    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf'][@point='start']" label="mir.date.issued.4.start"
+    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf' and @point='start']" label="mir.date.issued.4.start"
       class="daterange_issued" help-text="{i18n:mir.help.date.issued.4.start}" placeholder="{i18n:mir.placeholder.date}" />
-    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf'][@point='end']" label="mir.date.issued.4.end"
+    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf' and @point='end']" label="mir.date.issued.4.end"
       class="daterange_issued" help-text="{i18n:mir.help.date.issued.4.end}" placeholder="{i18n:mir.placeholder.date}" />
   </xed:template>
 
