@@ -2,7 +2,7 @@
 <MyCoReWebPage>
   <section xml:lang="de" title="Willkommen bei NOA!">
     <div class="row">
-      <div class="col-md-12" lang="de">
+      <div class="col-md-10" lang="de">
         <p>
           Das Niedersächsische Online-Archiv NOA dient der Aufbewahrung und
           Bereitstellung von Online-Publikationen aus und über Niedersachsen.
@@ -15,9 +15,8 @@
           Die <a href="http://www.gwlb.de/pflichtexemplare/">Pflichtabgabe</a>
           von elektronischen amtlichen Veröffentlichungen durch die
           herausgebenden Behörden, Dienststellen und Einrichtungen des Landes
-          Niedersachsen ist durch einen 
-          <a href="http://www.gwlb.de/pflichtexemplare/AbgabeErl-amtlVeroeffentl">Runderlass</a>
-          vom 11.12.2012 gesetzlich geregelt.
+          Niedersachsen ist durch einen <a href="http://www.gwlb.de/pflichtexemplare/AbgabeErl-amtlVeroeffentl"
+          >Runderlass</a> vom 11.12.2012 gesetzlich geregelt.
         </p>
       </div>
     </div>
