@@ -1,4 +1,4 @@
-http://noa.gwlb.de/sitemap_google.xml
+https://noa.gwlb.de/sitemap_google.xml
 User-agent: *
 Disallow: /servlets/MCRLoginServlet
 Disallow: /servlets/MCRNBNResolver
