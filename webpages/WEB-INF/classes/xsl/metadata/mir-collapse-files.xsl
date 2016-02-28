@@ -91,7 +91,7 @@
               <h3><xsl:value-of select="i18n:translate('metadata.files.file')" /></h3>
               <div class="alert alert-warning" role="alert">
                 <strong><xsl:value-of select="i18n:translate('mir.access')" /></strong>
-                &nbsp;
+                &#160;
                 <xsl:apply-templates select="mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:accessCondition[@type='restriction on access']"
                                        mode="printModsClassInfo" />
               </div>
