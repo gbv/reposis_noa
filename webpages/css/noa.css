@@ -539,12 +539,6 @@ ul.navbar-nav {
   box-shadow: 0px 1px 1px rgba(185, 74, 72, 0.38) inset, 0px 0px 8px rgba(185, 74, 72, 0.39);
 }
 
-.detail_block .ellipsis {
-  height: 150px;
-  margin-bottom: 20px;
-}
-
-
 /* TODO: fix style ********************************************************* */
 #aux_col_actions {
   padding-left: 0px;
@@ -553,4 +547,13 @@ ul.navbar-nav {
 .modal-body > textarea {
   width: 560px;
   height: 215px;
+}
+
+
+/* print media ************************************************************* */
+
+@media print {
+  .ellipsis {
+    display: none;
+  }
 }

@@ -18,6 +18,9 @@
 # application base URL
 # MCR.baseurl=https://noa.gwlb.de
 
+# supported languages
+MCR.Metadata.Languages=de
+
 # SOLR-URL
 # MCR.Module-solr.ServerURL=http\://esx-127.gbv.de:8081/solr/noa/
   MCR.Module-solr.ServerURL=http\://esx-91.gbv.de:8081/solr/noa/
