@@ -7,7 +7,8 @@
                 xmlns:mcrurn="xalan://org.mycore.urn.MCRXMLFunctions" xmlns:str="http://exslt.org/strings"
                 xmlns:encoder="xalan://java.net.URLEncoder" xmlns:acl="xalan://org.mycore.access.MCRAccessManager"
                 xmlns:imageware="org.mycore.mir.imageware.MIRImageWarePacker"
-                exclude-result-prefixes="basket xalan xlink mcr i18n mods mcrmods mcrxsl mcrurn str encoder acl imageware"
+                xmlns:pi="xalan://org.mycore.pi.frontend.MCRIdentifierXSLUtils"
+                exclude-result-prefixes="basket xalan xlink mcr i18n mods mcrmods mcrxsl mcrurn str encoder acl imageware pi"
                 version="1.0" xmlns:ex="http://exslt.org/dates-and-times"
   xmlns:exslt="http://exslt.org/common" extension-element-prefixes="ex exslt"
 >
@@ -445,13 +446,6 @@
                       <xsl:value-of select="i18n:translate('object.editGenre')" />
                     </a>
                   </li -->
-                  <xsl:if test="not(//mods:mods/mods:identifier[@type='doi']) and $MIR.registerDOI='true'">
-                    <li>
-                      <a href="{$WebApplicationBaseURL}receive/{/mycoreobject/@ID}?XSL.Transformer=datacite">
-                        <xsl:value-of select="i18n:translate('mir.registerDOI')" />
-                      </a>
-                    </li>
-                  </xsl:if>
                   <xsl:if test="string-length($copyURL) &gt; 0">
                     <li>
                       <a href="{$copyURL}?copyofid={$id}">
@@ -488,7 +482,15 @@
                   </a>
                 </li>
               </xsl:if>
-
+              
+              <!-- Register DOI -->
+              <xsl:if test="$MIR.registerDOI='true' and $accessedit and not(pi:hasIdentifierRegistered('Datacite', /mycoreobject/@ID, '')) and not(.//mods:identifier[@type='doi'])">
+                <li>
+                  <a href="#" id="registerDOI" data-mycoreID="{/mycoreobject/@ID}" data-baseURL="{$WebApplicationBaseURL}">
+                    <xsl:value-of select="i18n:translate('component.pi.register.doi')" />
+                  </a>
+                </li>
+              </xsl:if>
               <!-- Packing with ImageWare Packer -->
               <xsl:if test="imageware:displayPackerButton($id, 'ImageWare')">
                 <li>
