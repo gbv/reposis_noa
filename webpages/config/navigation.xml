@@ -16,25 +16,9 @@
             <label xml:lang="en">Contact</label>
         </item>
     </menu>
-    <menu id="search">
-        <label xml:lang="de">Suche</label>
-        <label xml:lang="en">Search</label>
-        <item href="/search/complex.xed" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Erweiterte Suche</label>
-            <label xml:lang="en">Extended Search</label>
-        </item>
-        <item href="/search/complex_intern.xed" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Erweiterte Suche</label>
-            <label xml:lang="en">Extended Search</label>
-        </item>
-        <item href="/search/search-expert.xed" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Expertensuche</label>
-            <label xml:lang="en">Expert Search</label>
-        </item>
-    </menu>
     <menu id="browse">
-        <label xml:lang="de">Blättern</label>
-        <label xml:lang="en">Browse</label>
+        <label xml:lang="de">Recherche</label>
+        <label xml:lang="en">Investigate</label>
         <item href="/servlets/solr/find?qry=*&amp;rows=0&amp;facet.field=mods.nameByRole.corporate.pbl&amp;facet.sort=index&amp;XSL.Style=filter" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">nach Einrichtung</label>
             <label xml:lang="en">Institutions</label>
@@ -46,6 +30,18 @@
         <item href="/servlets/MCRActionMappingServlet/personindex/browse" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">nach Personen</label>
             <label xml:lang="en">Persons</label>
+        </item>
+        <item href="/search/complex.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Erweiterte Suche</label>
+            <label xml:lang="en">Extended Search</label>
+        </item>
+        <item href="/search/complex_intern.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Erweiterte Suche</label>
+            <label xml:lang="en">Extended Search</label>
+        </item>
+        <item href="/search/search-expert.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Expertensuche</label>
+            <label xml:lang="en">Expert Search</label>
         </item>
     </menu>
     <menu id="publish" dir="/content/publish">
