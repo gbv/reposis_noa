@@ -1,15 +1,8 @@
 https://noa.gwlb.de/sitemap_google.xml
 User-agent: *
-Disallow: /servlets/MCRLoginServlet
-Disallow: /servlets/MCRNBNResolver
-Disallow: /servlets/MCROAIDataProvider
-Disallow: /servlets/MCRQueryServlet
-Disallow: /servlets/MCRSearchMaskServlet
-Disallow: /servlets/MCRUserServlet
-Disallow: /servlets/XMLEditor
-Disallow: /servlets/MCRUploadServlet
-Disallow: /servlets/MCRZipServlet
-Disallow: /servlets/MCRTileCombineServlet
-Disallow: /servlets/MCRTarServlet
-Disallow: /servlets/MCRBasketServlet
-Disallow: /servlets/solr
+Disallow: /*?
+Crawl-delay: 10
+Disallow: /servlets/
+Disallow: /browse/
+Disallow: /rsc/
+Disallow: /api/
