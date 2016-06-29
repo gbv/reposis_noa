@@ -1,7 +1,7 @@
-https://noa.gwlb.de/sitemap_google.xml
+Sitemap: https://noa.gwlb.de/sitemap_google.xml
 User-agent: *
+Allow: /servlets/MCRFileNodeServlet/
 Disallow: /*?
-Crawl-delay: 10
 Disallow: /servlets/
 Disallow: /browse/
 Disallow: /rsc/
