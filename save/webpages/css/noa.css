@@ -549,6 +549,15 @@ ul.navbar-nav {
   height: 215px;
 }
 
+#solr-browse {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.search-organization input, search-person input {
+  padding-right: 70px;
+  text-overflow: ellipsis;
+}
 
 /* print media ************************************************************* */
 
