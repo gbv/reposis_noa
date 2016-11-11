@@ -3,6 +3,7 @@
   <label xml:lang="en" text="Type of publication" />
   <label xml:lang="de" text="Publikationsart" />
   <label xml:lang="x-uri" text="http://www.noa-gwlb.de/classifications/noa_pubtype" />
+  <label xml:lang="x-access" text="editor admin" />
   <categories>
     <category ID="amtsdruckschrift" counter="1">
       <label xml:lang="de" text="Amtsdruckschrift" />

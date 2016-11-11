@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
-  xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation" exclude-result-prefixes="mods mcrxsl i18n"
+  xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation" xmlns:ex="http://exslt.org/dates-and-times" exclude-result-prefixes="mods mcrxsl i18n ex"
 >
   <xsl:include href="layout-utils.xsl" />
 
+  <xsl:param name="MIR.OAS" select="'hide'" />
 
   <xsl:template match="/site">
     <xsl:copy>
+      <xsl:copy-of select="@*" />
       <head>
         <xsl:apply-templates select="citation_meta" mode="copyContent" />
         <link href="{$WebApplicationBaseURL}assets/jquery/plugins/shariff/shariff.min.css" rel="stylesheet" />
@@ -23,7 +25,7 @@
         <div class="row detail_row" id="mir-search_browsing">
           <div class="col-md-8">
             <div class="detail_block text-center">
-              <span id="pagination_label">gefundende Dokumente</span>
+              <!-- span id="pagination_label">gefundende Dokumente</span -->
               <br />
               <!-- Start: PAGINATION -->
               <xsl:apply-templates select="div[@id='search_browsing']" mode="copyContent" />
@@ -70,6 +72,7 @@
           <!-- End: ABSTRACT -->
           </div>
 
+<!-- NOA specific changes: changed order of viewer and metadata -->
 <!-- metadata -->
           <xsl:if test="div[contains(@id,'mir-metadata')]/table[@class='mir-metadata']/tr">
             <div class="mir_metadata">
@@ -87,15 +90,14 @@
             </div>
           </xsl:if>
 
-<!-- derivate -->
           <!-- viewer -->
           <xsl:if test="div[@id = 'mir-viewer']">
             <xsl:apply-templates select="div[@id='mir-viewer']" mode="copyContent" />
           </xsl:if>
-          <!-- player
+          <!-- player -->
           <xsl:if test="div[@id = 'mir-player']">
             <xsl:apply-templates select="div[@id='mir-player']" mode="copyContent" />
-          </xsl:if> -->
+          </xsl:if>
           <!-- files -->
           <xsl:if test="div[contains(@id,'mir-collapse-')]">
             <div class="detail_block">
@@ -121,6 +123,19 @@
                 <!-- Start: CITATION -->
                 <xsl:apply-templates select="div[@id='mir-citation']" mode="copyContent" />
                 <!-- End: CITATION -->
+              </div>
+            </div>
+          </xsl:if>
+<!-- OAS statistics -->
+          <xsl:if test="$MIR.OAS = 'show'">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <xsl:value-of select="i18n:translate('mir.oas.panelheading')" />
+                </h3>
+              </div>
+              <div class="panel-body" id="mir_oas">
+                <xsl:apply-templates select="div[@id='mir-oastatistics']" mode="copyContent" />
               </div>
             </div>
           </xsl:if>
@@ -151,7 +166,7 @@
             </div>
           </xsl:if>
 <!-- system -->
-          <xsl:if test="not(mcrxsl:isCurrentUserGuestUser())">
+          <xsl:if test="not(mcrxsl:isCurrentUserGuestUser()) and @read">
             <div id="mir_admindata_panel" class="panel panel-default system">
               <div class="panel-heading">
                 <h3 class="panel-title">
@@ -168,7 +183,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close modalFrame-cancel" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
+                        <i class="fa fa-times" aria-hidden="true"></i>
                       </button>
                       <h4 class="modal-title" id="modalFrame-title">
                         <xsl:value-of select="i18n:translate('metadata.versionInfo.label')" />
@@ -197,6 +212,7 @@
       <script src="{$WebApplicationBaseURL}assets/moment/moment.js"></script>
       <script src="{$WebApplicationBaseURL}assets/handlebars/handlebars.min.js"></script>
       <script src="{$WebApplicationBaseURL}js/mir/derivate-fileList.js"></script>
+      <link rel="stylesheet" href="{$WebApplicationBaseURL}rsc/stat/{@ID}.css"/>
     </xsl:copy>
   </xsl:template>
 

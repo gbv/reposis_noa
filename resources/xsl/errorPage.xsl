@@ -11,7 +11,7 @@
           <xsl:when test="/mcr_error/@HttpError = '500'">
               <h2>Interner Serverfehler</h2>
               <p>Es ist leider ein Serverfehler aufgetreten. Wir arbeiten an dessen Beseitigung!
-              Gern können Sie uns eine Mail an <span class="madress">dms-list [at] gbv.de</span>
+              Gern können Sie uns eine Mail an <span class="madress">dms-list [at] lists.gbv.de</span>
               schicken und kurz schildern wie es zu diesem Fehler kam.
               <br/><br/>
               Vielen Dank!</p>
@@ -21,7 +21,7 @@
               <p>Die von Ihnen angefordete Seite konnte leider nicht gefunden werden. Eventuell
               haben Sie ein altes Lesezeichen oder einen veralteten Link benutzt. Bitte versuchen
               Sie mithilfe der <a href="/index.html">Suche</a> die gewünschte Seite zu finden oder
-              schreiben Sie eine Mail an <span class="madress">dms-list [at] gbv.de</span> und
+              schreiben Sie eine Mail an <span class="madress">dms-list [at] lists.gbv.de</span> und
               schildern kurz wie es zu diesem Fehler kam.
               <br/><br/>
               Vielen Dank!</p>
@@ -31,14 +31,14 @@
               <p>Sie haben keine Berechtigung diese Seite zu sehen. Melden Sie sich bitte am System an.
               Sollten Sie trotz Anmeldung nicht die nötigen Rechte haben um diese Seite zu sehen, wenden
               Sie sich ggf. an Ihren Administrator oder
-              schreiben Sie eine Mail an <span class="madress">dms-list [at] gbv.de</span>.
+              schreiben Sie eine Mail an <span class="madress">dms-list [at] lists.gbv.de</span>.
               <br/><br/>
               Vielen Dank!</p>
           </xsl:when>
           <xsl:otherwise>
               <h2><xsl:value-of select="."></xsl:value-of></h2>
               <p>Es ist leider ein Fehler aufgetreten. Sollte dies wiederholt der Fall sein,
-              schreiben Sie bitte eine Mail an <span class="madress">dms-list [at] gbv.de</span> und
+              schreiben Sie bitte eine Mail an <span class="madress">dms-list [at] lists.gbv.de</span> und
               schildern kurz wie es dazu kam.
               <br/><br/>
               Vielen Dank!</p>
@@ -46,6 +46,22 @@
         </xsl:choose>
       </div>
     </div>
+    <xsl:if test="exception">
+      <div class="hidden">
+        <div class="panel panel-warning">
+          <div class="panel-heading">
+            <xsl:value-of select="concat(i18n:translate('error.stackTrace'),' :')" />
+          </div>
+          <div class="panel-body">
+            <xsl:for-each select="exception/trace">
+              <pre style="font-size:0.8em;">
+                <xsl:value-of select="." />
+              </pre>
+            </xsl:for-each>
+          </div>
+        </div>
+      </div>
+      </xsl:if>
   </xsl:template>
   <xsl:include href="MyCoReLayout.xsl" />
 </xsl:stylesheet>
