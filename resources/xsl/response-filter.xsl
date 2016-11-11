@@ -22,7 +22,7 @@
   <xsl:template match="/response">
 
     <xsl:variable name="facet">
-      <xsl:value-of select="lst[@name='responseHeader']/lst[@name='params']/arr[@name='facet.field']/str" />
+      <xsl:value-of select="lst[@name='responseHeader']/lst[@name='params']/str[@name='facet.field']" />
     </xsl:variable>
 
     <div class="row">
