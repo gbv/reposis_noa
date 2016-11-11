@@ -4,7 +4,7 @@
     <RollingFile name="RollingFile" fileName="/mcr/noa/logs/mycore-app.log"
       filePattern="/mcr/noa/logs/$${date:yyyy-MM}/mycore-app-%d{MM-dd-yyyy}-%i.log.gz">
       <PatternLayout>
-        <Pattern>%d{ISO8601} %-5p %X{loginId} %c{1}: %m%n%ex</Pattern>
+        <Pattern>%highlight{%d{ISO8601} %-5p %X{loginId} %c{1}: %m%n%ex}</Pattern>
       </PatternLayout>
       <Policies>
         <TimeBasedTriggeringPolicy />
