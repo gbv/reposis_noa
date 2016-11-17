@@ -15,9 +15,20 @@
     <xsl:value-of select="i18n:translate('component.solr.searchresult.resultList')" />
   </xsl:variable>
 
-    <xsl:variable name="linkTo">
-      <xsl:value-of select="concat($ServletsBaseURL,'solr/find?q=')" />
-    </xsl:variable>
+  <xsl:variable name="owner">
+    <xsl:choose>
+      <xsl:when test="mcrxsl:isCurrentUserInRole('admin') or mcrxsl:isCurrentUserInRole('editor')">
+        <xsl:text>*</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$CurrentUser" />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+  <xsl:variable name="linkTo">
+    <xsl:value-of select="concat($ServletsBaseURL,'solr/select?owner=createdby:', $owner,'&amp;', 'q=')" />
+  </xsl:variable>
 
   <xsl:template match="/response">
 
