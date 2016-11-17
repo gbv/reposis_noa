@@ -14,7 +14,7 @@ $(document).ready(function() {
       $(this).remove();
   });
 
-  $("a[href='http://noa.gwlb.de/servlets/solr/find?qry=%20%2Bmods.type:%22journal%22&amp;XSL.Style=selectIssue&amp;rows=1000']").attr('href', 'http://noa.gwlb.de/servlets/solr/find?qry=%20%2Bmods.type:%22journal%22&XSL.Style=selectIssue&rows=1000');
+  $("a[href='http://noa.gwlb.de/servlets/solr/find?q=%20%2Bmods.type:%22journal%22&amp;XSL.Style=selectIssue&amp;rows=1000']").attr('href', 'http://noa.gwlb.de/servlets/solr/find?q=%20%2Bmods.type:%22journal%22&XSL.Style=selectIssue&rows=1000');
 
   // adjust editor from id
   setEditorID();

@@ -16,7 +16,7 @@
   </xsl:variable>
 
     <xsl:variable name="linkTo">
-      <xsl:value-of select="concat($ServletsBaseURL,'solr/find?qry=')" />
+      <xsl:value-of select="concat($ServletsBaseURL,'solr/find?q=')" />
     </xsl:variable>
 
   <xsl:template match="/response">

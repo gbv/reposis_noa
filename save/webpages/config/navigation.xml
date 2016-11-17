@@ -19,11 +19,11 @@
     <menu id="browse">
         <label xml:lang="de">Recherche</label>
         <label xml:lang="en">Investigate</label>
-        <item href="/servlets/solr/find?qry=*&amp;rows=0&amp;facet.field=mods.nameByRole.corporate.pbl&amp;facet.sort=index&amp;XSL.Style=filter" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/servlets/solr/find?q=*&amp;rows=0&amp;facet.field=mods.nameByRole.corporate.pbl&amp;facet.sort=index&amp;XSL.Style=filter" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">nach Einrichtung</label>
             <label xml:lang="en">Institutions</label>
         </item>
-        <item href="/servlets/solr/find?qry=*&amp;rows=0&amp;facet.field=topic&amp;facet.sort=index&amp;XSL.Style=filter" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/servlets/solr/find?q=*&amp;rows=0&amp;facet.field=topic&amp;facet.sort=index&amp;XSL.Style=filter" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">nach Schlagworten</label>
             <label xml:lang="en">Subjects</label>
         </item>
