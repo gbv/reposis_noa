@@ -1,84 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Ablieferungshinweise">
-    <div>
-      <div>
-        <h1>Hinweise zur Ablieferung von elektronischen Pflichtexemplaren</h1>
-        <p>Die Gottfried Wilhelm Leibniz Bibliothek – Niedersächsische
-          Landesbibliothek hat den gesetzlichen Auftrag, Pflichtexemplare der
-          in Niedersachsen erscheinenden Publikationen (sowohl
-          Verlagsveröffentlichungen als auch Erscheinungen außer­halb des
-          Buchhandels) zu sammeln. Dazu gehören auch elektronische
-          Publikationen.</p>
-        <h2>Gesetzliche Grundlagen</h2>
-        <ul>
-          <li>
-            <a
-              href="http://www.nds-voris.de/jportal/?quelle=jlink&amp;query=PresseG+ND&amp;psml=bsvorisprod.psml&amp;max=true&amp;aiz=true">Niedersächsisches Pressegesetz</a>
-             (§ 7 und § 12)
-          </li>
-          <li>
-            Gemeinsamer 
-            <a href="http://www.gwlb.de/pflichtexemplare/AbgabeErl-amtlVeroeffentl">Runderlass</a>
-             des MWK, der Staatskanzlei und der übrigen Ministerien vom
-            11.12.2012
-          </li>
-        </ul>
-        <h2>Neuaufnahme von Dokumenten</h2>
-        <p>Abhängig von der Art des Dokuments, wählen Sie im Menü
-          das Neuaufnahmeformular aus. Es gibt die Dokumenttypen: Buch/
-          Broschüre, Zeitschriftenheft und Artikel.</p>
-        <p>Im ausgewählten Neuaufnahmeformular werden verschiedene
-          Daten zu Ihrer Publikation abgefragt, die so genannten Metadaten.
-          Sie dienen der bibliographischen Erfassung und zum Wiederauffinden
-          der Publikation/des Dokumentes in der Suche. Pflichtfelder sind mit
-          * markiert. Diese müssen von Ihnen ausgefüllt werden. Darüber
-          hinaus können Sie weitere Angaben zu Ihrer Publikation machen, die
-          die Recherchierbarkeit Ihrer Dokumente im Niedersächsischen
-          Online-Archiv verbessern.</p>
-        <p>
-          Zu den einzelnen Eingabefeldern gibt es kleine Hilfstexte, die Sie
-          sich durch Anklicken der 
-          <img alt="" height="26"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAIAAACHPC9vAAAAYElEQVRIie3WsQnAMAwEQO2kab3GN1//ZHaRJqRIQiRMjPUDHNYjg6wnxSQhHEkGIP4cAAX9CnJv7i0KHcqjNRHqWaO9zHQo2tG56bSyCyroK3RZyBtu3U+7O0Qyfo2QHJx2NK/EojqBAAAAAElFTkSuQmCC"
-            width="19" />
-          - Felder anzeigen lassen können.
-        </p>
-        <p>Im nächsten Schritt laden Sie die Dateien hoch.</p>
-        <h2>Hochladen von Dateien (PDF, ...)</h2>
-        <p>Zum Hochladen von Ihrer Publikation müssen Sie in die
-          Titelvollanzeige eines Dokumentes gehen, rechts oberhalb des Titels
-          mit dem Button „Aktionen“ ein Scrollmenü öffnen und hier den Punkt
-          „Hinzufügen eines Datenobjektes“ auswählen. Bei der nun geöffneten
-          Uploadseite können Sie eine oder mehrere Dateien (wenn die
-          Publikation aus mehreren Dateien besteht) aus Ihren lokalen
-          Verzeichnissen hochladen.</p>
-        <p>Der Vorgang des Hochladens kann einige Zeit in Anspruch
-          nehmen.</p>
-        <p>Nach erfolgreichem Upload erscheint in der
-          Titelvollanzeige die Vorschau des Dokuments.</p>
-        <h2>Kontakt</h2>
-        <p>
-          Gottfried Wilhelm Leibniz Bibliothek
-          <br />
-          Niedersächsische Landesbibliothek
-          <br />
-          Waterloostraße 8
-          <br />
-          30169 Hannover
-          <br />
-          Tel. 49 511 1267-0
-          <br />
-          Fax 49 511 1267-202
-          <br />
-          <a href="http://www.gwlb.de/">http://www.gwlb.de</a>
-          <br />
-          <a href="mailto:pflichtexemplar@gwlb.de">pflichtexemplar@gwlb.de</a>
-        </p>
-      </div>
-    </div>
-  </section>
-  <meta>
-    <log lastEditor="adminNOA" date="2016-03-17" time="11:47" />
-  </meta>
-</MyCoReWebPage>
+<MyCoReWebPage><section xml:lang="de" title="Ablieferungshinweise"><div>
+<div>
+<h1>Hinweise zur Ablieferung von elektronischen Pflichtexemplaren</h1>
+
+<p>Die Gottfried Wilhelm Leibniz Bibliothek – Niedersächsische Landesbibliothek hat den gesetzlichen Auftrag, Pflichtexemplare der in Niedersachsen erscheinenden Publikationen (sowohl Verlagsveröffentlichungen als auch Erscheinungen außer­halb des Buchhandels) zu sammeln. Dazu gehören auch elektronische Publikationen.</p>
+
+<h2>Gesetzliche Grundlagen</h2>
+
+<ul>
+	<li><a href="http://www.nds-voris.de/jportal/?quelle=jlink&amp;query=PresseG+ND&amp;psml=bsvorisprod.psml&amp;max=true&amp;aiz=true">Niedersächsisches Pressegesetz</a> (§ 7 und § 12)</li>
+	<li>Gemeinsamer <a href="http://www.gwlb.de/pflichtexemplare/AbgabeErl-amtlVeroeffentl">Runderlass</a> des MWK, der Staatskanzlei und der übrigen Ministerien vom 11.12.2012</li>
+</ul>
+
+<h2>Neuaufnahme von Dokumenten</h2>
+
+<p>Abhängig von der Art des Dokuments, wählen Sie im Menü das Neuaufnahmeformular aus. Es gibt die Dokumenttypen: Buch/ Broschüre, Zeitschriftenheft und Artikel.</p>
+
+<p>Im ausgewählten Neuaufnahmeformular werden verschiedene Daten zu Ihrer Publikation abgefragt, die so genannten Metadaten. Sie dienen der bibliographischen Erfassung und zum Wiederauffinden der Publikation/des Dokumentes in der Suche. Pflichtfelder sind mit * markiert. Diese müssen von Ihnen ausgefüllt werden. Darüber hinaus können Sie weitere Angaben zu Ihrer Publikation machen, die die Recherchierbarkeit Ihrer Dokumente im Niedersächsischen Online-Archiv verbessern.</p>
+
+<p>Zu den einzelnen Eingabefeldern gibt es kleine Hilfstexte, die Sie sich durch Anklicken der <img alt="" height="26" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAIAAACHPC9vAAAAYElEQVRIie3WsQnAMAwEQO2kab3GN1//ZHaRJqRIQiRMjPUDHNYjg6wnxSQhHEkGIP4cAAX9CnJv7i0KHcqjNRHqWaO9zHQo2tG56bSyCyroK3RZyBtu3U+7O0Qyfo2QHJx2NK/EojqBAAAAAElFTkSuQmCC" width="19" />- Felder anzeigen lassen können.</p>
+
+<p>Im nächsten Schritt laden Sie die Dateien hoch.</p>
+
+<h2>Hochladen von Dateien (PDF, ...)</h2>
+
+<p>Zum Hochladen von Ihrer Publikation müssen Sie in die Titelvollanzeige eines Dokumentes gehen, rechts oberhalb des Titels mit dem Button „Aktionen“ ein Scrollmenü öffnen und hier den Punkt „Hinzufügen eines Datenobjektes“ auswählen. Bei der nun geöffneten Uploadseite können Sie eine oder mehrere Dateien (wenn die Publikation aus mehreren Dateien besteht) aus Ihren lokalen Verzeichnissen hochladen.<strong> Die Dateinamen dürfen keine Sonderzeichen enthalten, nur Underscore "_" und Minus "-" sind möglich. </strong>Bitte keine Klammern, Prozentzeichen u. ä. verwenden. Die Datei darf keine technischen Schutzmaßnahmen ("Kopierschutz") haben.</p>
+
+<p>Der Vorgang des Hochladens kann einige Zeit in Anspruch nehmen.</p>
+
+<p>Nach erfolgreichem Upload erscheint in der Titelvollanzeige die Vorschau des Dokuments.</p>
+
+<h2><strong>Kontakt</strong></h2>
+
+<p><strong>Gottfried Wilhelm Leibniz Bibliothek<br />
+Niedersächsische Landesbibliothek<br />
+Waterloostraße 8<br />
+30169 Hannover<br />
+Tel. 49 511 1267-0<br />
+Fax 49 511 1267-202<br />
+<a href="http://www.gwlb.de/">http://www.gwlb.de</a><br />
+<a href="mailto:pflichtexemplar@gwlb.de">pflichtexemplar@gwlb.de</a></strong></p>
+</div>
+</div></section><meta><log lastEditor="adminNOA" date="2016-11-14" time="11:46" /></meta></MyCoReWebPage>
