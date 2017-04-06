@@ -545,7 +545,7 @@
                   </xsl:choose>
                 </li>
               </xsl:if>
-              <xsl:if test="$CurrentUser=$MCR.Users.Superuser.UserName">
+              <xsl:if test="string-length($editURL_allMods) &gt; 0">
                 <li>
                   <a href="{$editURL_allMods}">
                     <xsl:value-of select="i18n:translate('component.mods.object.editAllModsXML')" />
@@ -679,7 +679,7 @@
       </div>
     </xsl:if>
 
-    <xsl:if test="key('rights', $deriv)/@write">
+    <xsl:if test="key('rights', $deriv)/@read">
       <xsl:variable select="concat('mcrobject:',$deriv)" name="derivlink" />
       <xsl:variable select="document($derivlink)" name="derivate" />
       <xsl:variable name="derivateWithURN" select="mcrurn:hasURNDefined($deriv)" />
@@ -693,38 +693,43 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right">
+            <xsl:if test="key('rights', $deriv)/@write">
             <li>
               <a href="{$WebApplicationBaseURL}editor/editor-derivate.xed{$HttpSession}?derivateid={$deriv}" class="option">
-                <!-- xsl:value-of select="i18n:translate('component.swf.derivate.updateFile')" / -->
-                Beschriftung bearbeiten
+                <xsl:value-of select="i18n:translate('component.mods.metaData.options.updateDerivateName')" />
               </a>
             </li>
+            </xsl:if>
+            <xsl:if test="key('rights', $deriv)/@write">
             <li>
               <a href="{$ServletsBaseURL}MCRDisplayHideDerivateServlet?derivate={$deriv}" class="option">
                 <xsl:value-of select="i18n:translate(concat('mir.derivate.display.', $derivate//derivate/@display))" />
               </a>
             </li>
+            </xsl:if>
             <xsl:if test="key('rights', $deriv)/@read">
               <li>
-                <a href="{$ServletsBaseURL}MCRZipServlet/{$deriv}" class="option">
+                <a href="{$ServletsBaseURL}MCRZipServlet/{$deriv}" class="option hidden downloadzip">
                   <xsl:value-of select="i18n:translate('component.mods.metaData.options.zip')" />
                 </a>
               </li>
             </xsl:if>
+            <xsl:if test="key('rights', $deriv)/@write">
             <xsl:choose>
               <xsl:when test="$derivateWithURN=false()">
                 <li>
                   <a href="{$ServletsBaseURL}derivate/update{$HttpSession}?objectid={../../../@ID}&amp;id={$deriv}" class="option">
-                    <xsl:value-of select="i18n:translate('component.swf.derivate.addFile')" />
+                    <xsl:value-of select="i18n:translate('component.mods.metaData.options.addFile')" />
                   </a>
                 </li>
               </xsl:when>
               <xsl:otherwise>
-                <li><!-- xsl:value-of select="i18n:translate('component.swf.derivate.addFile')" /-->
-                  Bearbeitung wg. URN gesperrt
+                <li>
+                  <xsl:value-of select="i18n:translate('component.mods.metaData.options.derivateLocked')" />
                 </li>
               </xsl:otherwise>
             </xsl:choose>
+            </xsl:if>
             <xsl:if test="$derivateWithURN=false() and mcrxsl:isAllowedObjectForURNAssignment($parentObjID) and key('rights', $deriv)/@addurn">
               <xsl:variable name="apos">
                 <xsl:text>'</xsl:text>
@@ -743,11 +748,11 @@
             <xsl:if test="key('rights', $deriv)/@delete and $derivateWithURN=false()">
               <li class="last">
                 <a href="{$ServletsBaseURL}derivate/delete{$HttpSession}?id={$deriv}" class="confirm_deletion option" data-text="{i18n:translate('mir.confirm.derivate.text')}">
-                  <xsl:value-of select="i18n:translate('component.swf.derivate.delDerivate')" />
+                  <xsl:value-of select="i18n:translate('component.mods.metaData.options.delDerivate')" />
                 </a>
               </li>
             </xsl:if>
-            <xsl:if test="key('rights', $deriv)/@accKeyEnabled">
+            <xsl:if test="key('rights', $deriv)/@accKeyEnabled and key('rights', $deriv)/@write">
               <xsl:variable name="action">
                 <xsl:choose>
                   <xsl:when test="key('rights', $deriv)/@readKey">
@@ -802,11 +807,14 @@
               <xsl:value-of select="mcrxsl:getDisplayName('mir_genres',$mods-type)" />
             </span>
           </div>
-          <xsl:if test="mods:originInfo[not(@eventType) or @eventType='publication']/mods:dateIssued">
+          <xsl:if test="mods:originInfo[not(@eventType) or @eventType='publication']/mods:dateIssued or mods:relatedItem/mods:originInfo[not(@eventType) or @eventType='publication']/mods:dateIssued">
             <div class="hit_date">
               <span class="label label-primary">
                 <xsl:variable name="dateIssued">
-                  <xsl:apply-templates mode="mods.datePublished" select="mods:originInfo[not(@eventType) or @eventType='publication']/mods:dateIssued" />
+                  <xsl:choose>
+                    <xsl:when test="mods:originInfo[not(@eventType) or @eventType='publication']/mods:dateIssued"><xsl:apply-templates mode="mods.datePublished" select="mods:originInfo[not(@eventType) or @eventType='publication']/mods:dateIssued" /></xsl:when>
+                    <xsl:otherwise><xsl:apply-templates mode="mods.datePublished" select="mods:relatedItem/mods:originInfo[not(@eventType) or @eventType='publication']/mods:dateIssued" /></xsl:otherwise>
+                  </xsl:choose>
                 </xsl:variable>
                 <xsl:variable name="format">
                   <xsl:choose>
