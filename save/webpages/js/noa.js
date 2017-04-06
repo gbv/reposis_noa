@@ -6,6 +6,15 @@ $(document).ready(function() {
   var newHref = 'https://noa.gwlb.de/servlets/solr/select?q=createdby:' + userID + '&fq=objectType:mods';
   $("a[href='https://noa.gwlb.de/servlets/solr/select?q=createdby:USERNAME']").attr('href', newHref);
 
+
+  // replace login deep link on guidelines page
+  var pathname = window.location.pathname;
+  console.log('Pathname: ' + pathname);
+  if (pathname === '/content/publish/guidelines.xml') {
+    $("#loginURL").attr('href', 'https://noa.gwlb.de/servlets/MCRLoginServlet?url=https%3A%2F%2Fnoa.gwlb.de%2Fcontent%2Findex.xml');
+  }
+
+
   // spam protection for mails
   $('span.madress').each(function(i) {
       var text = $(this).text();
