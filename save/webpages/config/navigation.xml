@@ -15,6 +15,10 @@
             <label xml:lang="de">Kontakt</label>
             <label xml:lang="en">Contact</label>
         </item>
+        <item href="/content/brand/rights.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Datenschutz</label>
+            <label xml:lang="en">Rights</label>
+        </item>
     </menu>
     <menu id="browse">
         <label xml:lang="de">Recherche</label>

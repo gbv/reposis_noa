@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Hinweise zur Nutzung und zur rechtlichen Situation">
+  <div>
+    <h1>Datenschutz</h1>
+    <h2>Anonymisierte Nutzungsanalyse mit Piwik und dem Plugin AnonymizeIP</h2>
+    <p>
+      Für die Optimierung unserer Angebote liefern personenbezogene Daten keinerlei Mehrwert. Für die Webanalyse
+      setzten wir daher die von Datenschützern empfohlene Nutzungsanalyse-Software Piwik ein. Durch eine automatische
+      Anonymisierung der IP-Adressen mit dem Plugin AnonymizeIP können die erhobenen Daten nicht mehr bestimmten
+      Personen zugeordnet werden. Damit ist ausgeschlossen, dass Nutzungsdaten oder Nutzungsprofile mit
+      personenbezogenen Daten in Verbindung gebracht werden.
+    </p>
+    <iframe style="border: 0; height: 250px; width: 100%;"
+      src="https://piwik.gbv.de/index.php?module=CoreAdminHome&amp;action=optOut&amp;idsite=25&amp;language=de"></iframe>
+  </div>
+  </section>
+  <meta>
+    <log lastEditor="administrator" date="2017-04-06" time="12:07" />
+  </meta>
+</MyCoReWebPage>
