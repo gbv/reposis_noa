@@ -118,10 +118,10 @@
     </div>
   </xed:template>
 
-  <!-- use external schema copyrightMD, see http://www.cdlib.org/groups/rmg/copyrightMD.html#type_copyright.status -->
+  <!-- use external schema copyrightMD, see https://www.cdlib.org/groups/rmg/copyrightMD.html#type_copyright.status -->
   <!-- TODO: copyright.status and publication.status shouldn't be static -->
   <xed:template id="copyrightMD">
-    <xed:bind xpath="mods:accessCondition[@type='copyrightMD']/cmd:copyright[@copyright.status='copyrighted'][@publication.status='published'][@xsi:schemaLocation='http://www.cdlib.org/inside/diglib/copyrightMD http://www.cdlib.org/groups/rmg/docs/copyrightMD.xsd']">
+    <xed:bind xpath="mods:accessCondition[@type='copyrightMD']/cmd:copyright[@copyright.status='copyrighted'][@publication.status='published'][@xsi:schemaLocation='https://www.cdlib.org/inside/diglib/copyrightMD https://www.cdlib.org/groups/rmg/docs/copyrightMD.xsd']">
       <mir:textarea xpath="cmd:rights.holder/cmd:name" label="mir.rightsHolder" rows="2" repeat="true" min="1" max="10" help-text="{i18n:mir.help.rightsHolder}" class="required" />
     </xed:bind>
   </xed:template>
