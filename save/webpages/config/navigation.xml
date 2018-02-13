@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <navigation hrefStartingPage="/content/index.xml" dir="/content" template="template_mir">
     <menu id="brand" dir="/content/brand">
         <label xml:lang="de">MIR-Menü</label>

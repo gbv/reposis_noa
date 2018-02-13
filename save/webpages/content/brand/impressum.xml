@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Impressum">
-    <div class="row">
-      <div class="col-md-12" lang="de">
-        <h1>Impressum</h1>
-        <p>Die folgenden Inhalte enthalten die gesetzlich vorgesehenen
-          Pflichtangaben zur Anbieterkennzeichnung, sowie wichtige rechtliche
-          Hinweise zur Internetpräsenz ‚Niedersächsisches Online-Archiv’.</p>
-        <h2>Anbieter</h2>
-        <p>
-          Anbieter dieser Internetpräsenz ist im Rechtssinne die Gottfried
-          Wilhelm Leibniz Bibliothek. Die Gottfried Wilhelm Leibniz
-          Bibliothek wird gesetzlich vertreten durch ihre Direktorin, Frau
-          Anne May.
-          <br />
-          <br />
-          Gottfried Wilhelm Leibniz Bibliothek<br />
-          Niedersächsische Landesbibliothek<br />
-          Waterloostraße 8<br />
-          30169 Hannover<br />
-          Tel. 49 511 1267-0<br />
-          Fax 49 511 1267-202<br />
-          <a href="http://www.gwlb.de">http://www.gwlb.de</a><br />
-          <span class="madress">pflichtexemplar [at] gwlb.de</span>
-        </p>
-        <h2>Redaktion</h2>
-        <p>Redaktionell verantwortlich für die Internetpräsenz
-          ‚Niedersächsisches Online-Archiv’ ist das Webteam. Ansprechpartner
-          ist Dr. Jens Reinbach.</p>
-        <h2>Rechtliche Hinweise zum Urheberrecht</h2>
-        <p>
-          Das Layout der Internetseiten, die verwendeten Grafiken sowie die
-          sonstigen Inhalte sind urheberrechtlich geschützt.
-          <br />
-          <a href="http://www.disclaimer.de/disclaimer.htm">Haftungsausschluss</a>
-          <br />
-          © 2005–2017 Gottfried Wilhelm Leibniz Bibliothek.
-        </p>
-      </div>
-    </div>
-  </section>
-  <meta>
-    <log lastEditor="adminNOA" date="2016-02-05" time="09:14" />
-  </meta>
-</MyCoReWebPage>
+<MyCoReWebPage><section xml:lang="de" title="Impressum"><div class="row">
+<div class="col-md-12" lang="de">
+<h1>Impressum</h1>
+
+<h2><br />
+Anbieter</h2>
+
+<p>Anbieter dieser Internetpräsenz ist im Rechtssinne die Gottfried Wilhelm Leibniz Bibliothek.</p>
+
+<p>Gottfried Wilhelm Leibniz Bibliothek<br />
+Niedersächsische Landesbibliothek<br />
+Waterloostraße 8<br />
+30169 Hannover</p>
+
+<p>Tel.:       +49 511 1267-0<br />
+Fax:       +49 511 1267-202<br />
+E-Mail:    <span class="madress">information [at] gwlb.de</span><br />
+Internet: <a href="http://www.gwlb.de">https://www.gwlb.de</a></p>
+
+<p>Die Gottfried Wilhelm Leibniz Bibliothek ist eine Körperschaft des öffentlichen Rechts. Sie wird gesetzlich vertreten durch die Leitende Bibliotheksdirektorin Anne May.</p>
+
+<p>Umsatzsteueridentifikationsnummer: DE 811 253 778</p>
+
+<p>Zuständige Aufsichtsbehörde:<br />
+Niedersächsisches Ministerium für Wissenschaft und Kultur<br />
+Leibnizufer 9<br />
+30169 Hannover<br />
+ </p>
+
+<h2>Technischer Betrieb</h2>
+
+<p>Verbundzentrale des GBV<br />
+Platz der Göttinger Sieben 1<br />
+37073 Göttingen</p>
+
+<p>E-Mail:    <a href="mailto:dms-list@lists.gbv.de">dms-list@lists.gbv.de</a><br />
+Internet: <a href="https://www.gbv.de/Verbundzentrale/serviceangebote/reposis-repository-service">https://www.gbv.de/Verbundzentrale/serviceangebote/reposis-repository-service</a></p>
+</div>
+</div>
+</section><meta><log lastEditor="adminNOA" date="2017-09-22" time="16:50" /></meta></MyCoReWebPage>
