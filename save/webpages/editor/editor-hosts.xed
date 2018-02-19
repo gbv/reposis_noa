@@ -104,6 +104,10 @@
         <xed:bind xpath="@xlink:href" initially="mir_mods_00000000"> <input id="relItem-journal" type="hidden" /> </xed:bind>
         <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="title.journal.relItemsearch" />
         <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="identifier.issn.journal.relItemsearch" />
+        <xed:bind xpath="mods:titleInfo/mods:title">
+          <xed:validate  test="(string-length(.) > 0)or not (../../@xlink:href = 'mir_mods_00000000')" i18n="mir.validation.relatedItem.title" display="global" />
+        </xed:bind>
+        <!-- test="or not (../../@xlink:href = mir_mods_00000000)" -->
       </xed:bind>
     </div>
   </xed:template>

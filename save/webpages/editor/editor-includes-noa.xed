@@ -253,7 +253,7 @@
   </xed:template>
 
   <xed:template id="title.journal.relItemsearch">
-    <mir:relItemsearch searchengine="title" genre="journal" responsefield="mods.title" xpath="mods:titleInfo/mods:title" label="mir.title.journal" class="required" required="true" required-text="{i18n:noa.validation.journal}" />
+    <mir:relItemsearch searchengine="title" genre="journal" responsefield="mods.title" xpath="mods:titleInfo/mods:title" label="mir.title.journal" class="required" />
   </xed:template>
 
   <xed:template id="identifier.issn.journal.relItemsearch">
