@@ -283,6 +283,32 @@
       </div>
     </div>
   </xed:template>
+  
+  <xed:template id="cancel.redirect.submit">
+    <div class="form-group" id="editor-buttons">
+      <div class="col-md-offset-2 col-md-6">
+        <button type="submit" class="btn btn-default" xed:target="cancel">
+          <xed:output i18n="button.cancel" />
+        </button>
+        <xed:choose>
+          <!-- xed:when test="/mycoreobject/@ID = 'mir_mods_00000000'" -->
+          <xed:when test="contains(/mycoreobject/@ID, '_00000000')">
+            <button type="submit" class="btn btn-primary" xed:target="servlet" xed:href="CreateObjectAppendDerivateServlet">
+              <xed:output i18n="button.saveandredirect" />
+            </button>
+            <button type="submit" class="btn btn-primary" xed:target="servlet" xed:href="CreateObjectServlet">
+              <xed:output i18n="button.save" />
+            </button>
+          </xed:when>
+          <xed:otherwise>
+            <button type="submit" class="btn btn-primary" xed:target="servlet" xed:href="UpdateObjectServlet">
+              <xed:output i18n="button.save" />
+            </button>
+          </xed:otherwise>
+        </xed:choose>
+      </div>
+    </div>
+  </xed:template>
 
   <xed:template id="validation-rules">
     <xed:validate xpath="//mods:mods/mods:genre[@authorityURI='http://www.mycore.org/classifications/mir_genres']/@valueURIxEditor" required="true" i18n="mir.validation.genre" display="global" />
