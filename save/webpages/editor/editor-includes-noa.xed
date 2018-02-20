@@ -203,27 +203,19 @@
   </xed:template>
 
   <xed:template id="host.pages">
-    <xed:bind xpath="mods:part/mods:extent[@unit='pages']/mods:start"> <!-- Move down to get the "required" validation right -->
+    <xed:bind xpath="mods:part/mods:extent[@unit='pages']/mods:list"> <!-- Move down to get the "required" validation right -->
       <div class="form-group required {$xed-validation-marker}">
-        <xed:bind xpath=".."> <!-- Move up again after validation marker is set -->
+        <!-- <xed:bind xpath="..">  --> <!-- Move up again after validation marker is set --> 
           <label class="col-md-3 control-label">
-            <xed:output i18n="mir.pages.from" />
+            <xed:output i18n="mir.pages" />
           </label>
           <div class="col-md-6">
             <div class="form-inline">
-              <xed:bind xpath="mods:part/mods:extent[@unit='pages']">
-                <xed:bind xpath="mods:start">
-                  <input type="text" size="10" class="form-control form-control-inline" />
-                </xed:bind>
-                &amp;npsp;<xed:output i18n="mir.pages.to" />&amp;npsp;
-                <xed:bind xpath="mods:end">
-                  <input type="text" size="10" class="form-control form-control-inline" />
-                </xed:bind>
-              </xed:bind>
+              <input type="text" size="20" class="form-control form-control-inline" />
             </div>
           </div>
           <mir:help-pmud help-text="{i18n:mir.help.host.pages}" pmud="false" />
-        </xed:bind>
+        <!--</xed:bind>-->
       </div>
     </xed:bind>
   </xed:template>
@@ -334,7 +326,7 @@
 
   <xed:template id="validation-rules.article">
     <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:detail[@type='volume']/mods:number" required="true" i18n="noa.validation.volume" display="global" />
-    <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:extent[@unit='pages']/mods:start" required="true" i18n="noa.validation.pages" display="global" />
+    <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:extent[@unit='pages']/mods:list" required="true" i18n="noa.validation.pages" display="global" />
   </xed:template>
 
   <xed:template id="validation-rules.title">
