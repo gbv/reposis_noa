@@ -7,8 +7,8 @@
   <section title="Create MODS document" xml:lang="en"/>
 
   <section xml:lang="all">
-
-  <xed:form xmlns:xed="http://www.mycore.de/xeditor" xmlns:cmd="http://www.cdlib.org/inside/diglib/copyrightMD" method="post" role="form" class="form-horizontal">
+    <div id="editor-admin-form">
+      <xed:form xmlns:xed="http://www.mycore.de/xeditor" xmlns:cmd="http://www.cdlib.org/inside/diglib/copyrightMD" method="post" role="form" class="form-horizontal">
         <xed:include uri="webapp:editor/editor-includes.xed" ref="in.out" />
         <xed:bind xpath="/mycoreobject">
           <xed:include uri="webapp:editor/editor-includes.xed" ref="mycore.common" />
