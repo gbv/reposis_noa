@@ -4,6 +4,7 @@
  <section xml:lang="all" xmlns:xed="http://www.mycore.de/xeditor"
     xmlns:mir="http://www.mycore.de/mir"
     i18n="component.mods.editor.search.complex.pagetitle">
+  <div id="complexSearch">
     <xed:form class="form-horizontal" role="form">
       <xed:cleanup-rule xpath="//condition" relevant-if="(string-length(@value) &gt; 0) or value[string-length(text()) &gt; 0 ]" />
       <xed:cleanup-rule xpath="//boolean" relevant-if="boolean|condition" />
@@ -180,8 +181,8 @@
                     </xed:bind>
                   </div>
                 </div>
-              </div>
-            </xed:bind>
+              </xed:bind>
+            </div>
           </div>
           <!-- submit -->
           <div class="panel-footer clearfix">
@@ -193,5 +194,6 @@
         </div>
       </xed:bind>
     </xed:form>
+  </div>
   </section>
 </MyCoReWebPage>
