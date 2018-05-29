@@ -7,17 +7,19 @@
   <section title="Create MODS document" xml:lang="en"/>
 
   <section xml:lang="all">
-    <div id="editor-admin-form">
-      <xed:form xmlns:xed="http://www.mycore.de/xeditor" xmlns:cmd="https://www.cdlib.org/inside/diglib/copyrightMD" method="post" role="form" class="form-horizontal">
+
+  <xed:form xmlns:xed="http://www.mycore.de/xeditor" xmlns:cmd="http://www.cdlib.org/inside/diglib/copyrightMD" method="post" role="form" class="form-horizontal">
         <xed:include uri="webapp:editor/editor-includes.xed" ref="in.out" />
         <xed:bind xpath="/mycoreobject">
           <xed:include uri="webapp:editor/editor-includes.xed" ref="mycore.common" />
+
+      <xed:bind xpath="metadata/def.modsContainer[@class='MCRMetaXML'][@notinherit='true']/modsContainer/mods:mods">
           <xed:include uri="webapp:editor/editor-includes.xed" ref="failed-validation-messages" />
-          <xed:bind xpath="service">
+        <xed:bind xpath="mods:typeOfResource/@mcr:categId" initially="typeOfResource:text"/>
+        <xed:bind xpath="../../../../service">
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="status" />
           </xed:bind>
-          <xed:bind xpath="metadata/def.modsContainer[@class='MCRMetaXML'][@notinherit='true']/modsContainer/mods:mods">
-            <xed:bind xpath="mods:typeOfResource" initially="text" />
+
             <div id="genre"><xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="genre.simple" /></div>
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.publicationType" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="access" />
@@ -38,6 +40,7 @@
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="date.issued" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="date.range.issued" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="extent" />
+            <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="identifier.managed" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="identifier.repeated" />
             <xed:bind xpath="mods:relatedItem[@type='series']">
               <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="series.title.optional" />

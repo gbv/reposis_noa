@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage>
-  <section title="Komplexe Suche über alle Publikationen" xml:lang="de" />
 
-  <section title="Complex search mask for all publications" xml:lang="en" />
-
-  <section xml:lang="all" xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
-
-    <div id="complexSearch">
+ <section xml:lang="all" xmlns:xed="http://www.mycore.de/xeditor"
+    xmlns:mir="http://www.mycore.de/mir"
+    i18n="component.mods.editor.search.complex.pagetitle">
     <xed:form class="form-horizontal" role="form">
-      <xed:cleanup-rule xpath="//condition" relevant-if="string-length(@value)&gt;0" />
+      <xed:cleanup-rule xpath="//condition" relevant-if="(string-length(@value) &gt; 0) or value[string-length(text()) &gt; 0 ]" />
       <xed:cleanup-rule xpath="//boolean" relevant-if="boolean|condition" />
+      <xed:cleanup-rule xpath="//condition[@selectable='true']" relevant-if="@id = ../selectCondition/@keep" />
+      <xed:cleanup-rule xpath="//*/@selectable|//selectCondition" relevant-if="false()" />
       <xed:source uri="searchInput:{id}" />
       <xed:source uri="webapp:search/complex.xml" />
       <xed:bind xpath="query">
-        <xed:bind xpath="@mask" default="content/search/complex.xed" />
+        <xed:bind xpath="@mask" default="content/search/complex_intern.xed" />
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">
@@ -88,6 +87,11 @@
           <!-- Genre -->
                 <mir:template name="selectInput" xpath="condition[@field='category.top'][2]/@value" id="inputGenre1" i18n="editor.search.mir.genre"
                   tooltip="editor.search.genre.tooltip" uri="xslStyle:items2options:classification:editorComplete:-1:children:mir_genres" />
+          <!-- Licenses -->
+                <mir:template name="selectInput"
+                    xpath="condition[@field='category.top'][3]/@value" id="inputLicense1"
+                    i18n="editor.search.mir.license" tooltip="editor.search.license.tooltip"
+                    uri="xslStyle:items2options:classification:editorComplete:-1:children:mir_licenses" />
           <!-- Status -->
                 <mir:template name="selectInput" xpath="condition[@field='state']/@value" id="inputStatus1" i18n="editor.search.status"
                   tooltip="editor.search.status.tooltip" uri="xslStyle:items2options:classification:editor:-1:children:state" />
@@ -115,15 +119,33 @@
                     </div>
                   </xed:bind>
                 </div>
-          <!-- Volltext -->
+              <!-- Volltext -->
                 <div class="form-group">
-                  <div class="col-md-offset-3 col-md-9">
-                    <xed:bind xpath="condition[@field='derCount'][@value='0']/@operator" default="&gt;=">
-                      <label class="checkbox-inline">
-                        <input type="checkbox" value="&gt;" />
-                        <xed:output i18n="editor.search.mir.hasFiles" />
-                      </label>
-                    </xed:bind>
+                  <label for="inputFulltext1" class="col-md-3 control-label">
+                    <xed:output i18n="mir.dropdown.content" />
+                  </label>
+                  <div class="col-md-9">
+                    <div class="input-group">
+                      <xed:bind xpath="condition[@field='derCount'][@value='0'][@operator='&gt;'][@selectable='true'][@id='condFullText']" />
+                      <xed:bind xpath="condition[@field='worldReadableComplete'][@value='true'][@operator='='][@selectable='true'][@id='condOpenAccess']" />
+                                  <!-- selectCondition must always be after @selectable conditions for xed:cleanup-rule to work -->
+                      <xed:bind xpath="selectCondition[@delete='true']/@keep">
+                        <select class="form-control input-md" id="inputFulltext1">
+                          <option value="">
+                            <xed:output i18n="mir.select" />
+                          </option>
+                          <option value="condFullText">
+                            <xed:output i18n="editor.search.mir.hasFiles" />
+                          </option>
+                          <option value="condOpenAccess">
+                            <xed:output i18n="editor.search.mir.openAccess" />
+                          </option>
+                        </select>
+                        <span class="input-group-addon" data-toggle="tooltip" data-html="true" title="{i18n:editor.search.fulltext.tooltip}">
+                          <i class="glyphicon glyphicon-info-sign" />
+                        </span>
+                      </xed:bind>
+                    </div>
                   </div>
                 </div>
               </xed:bind>
@@ -158,19 +180,18 @@
                     </xed:bind>
                   </div>
                 </div>
-              </xed:bind>
               </div>
-            </div>
-            <!-- submit -->
-            <div class="panel-footer clearfix">
-              <div class="pull-right">
-                <!-- button type="submit" class="btn btn-default" xed:target="debug">Debug</button -->
-                <mir:template name="submitButton" i18n="editor.search.search" target="servlet_MCRQLSearchServlet" />
-              </div>
+            </xed:bind>
+          </div>
+          <!-- submit -->
+          <div class="panel-footer clearfix">
+            <div class="pull-right">
+            <mir:template name="submitButton" i18n="editor.search.search"
+              target="servlet_MCRQLSearchServlet" order="primary-button"/>
             </div>
           </div>
+        </div>
       </xed:bind>
     </xed:form>
-    </div>
   </section>
 </MyCoReWebPage>
