@@ -3,11 +3,11 @@
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
 
   <xed:template id="title">
-    <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" class="required" />
+    <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" label="mir.title" help-text="{i18n:mir.help.title}" class="required" required="true" required-i18n="mir.validation.title" />
   </xed:template>
 
   <xed:template id="title.optional">
-    <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" />
+    <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" label="mir.title" help-text="{i18n:mir.help.title}" required-i18n="mir.validation.title" />
   </xed:template>
 
   <xed:template id="title.complex.repeated">
@@ -121,16 +121,12 @@
   <!-- use external schema copyrightMD, see https://www.cdlib.org/groups/rmg/copyrightMD.html#type_copyright.status -->
   <!-- TODO: copyright.status and publication.status shouldn't be static -->
   <xed:template id="copyrightMD">
-    <xed:bind xpath="mods:accessCondition[@type='copyrightMD']/cmd:copyright[@copyright.status='copyrighted'][@publication.status='published'][@xsi:schemaLocation='https://www.cdlib.org/inside/diglib/copyrightMD https://www.cdlib.org/groups/rmg/docs/copyrightMD.xsd']">
+    <xed:bind xpath="mods:accessCondition[@type='copyrightMD']/cmd:copyright[@copyright.status='copyrighted'][@publication.status='published'][@xsi:schemaLocation='http://www.cdlib.org/inside/diglib/copyrightMD https://www.cdlib.org/groups/rmg/docs/copyrightMD.xsd']">
       <mir:textarea xpath="cmd:rights.holder/cmd:name" label="mir.rightsHolder" rows="2" repeat="true" min="1" max="10" help-text="{i18n:mir.help.rightsHolder}" class="required" />
     </xed:bind>
   </xed:template>
 
   <!-- redefine some input fields with other style definition -->
-  <xed:template id="author.repeated">
-    <mir:role.repeated role="aut" label="mir.role.author" help-text="{i18n:mir.help.role.author}" />
-  </xed:template>
-
   <xed:template id="publisher">
     <mir:textarea xpath="mods:originInfo[@eventType='publication']/mods:publisher" rows="2" label="mir.publisher" help-text="{i18n:mir.help.publisher}" />
   </xed:template>
@@ -141,10 +137,6 @@
 
   <xed:template id="host.volume">
     <mir:textfield xpath="mods:part/mods:detail[@type='volume']/mods:number" label="mir.volume" class="required" />
-  </xed:template>
-
-  <xed:template id="host.issue">
-    <mir:textfield xpath="mods:part/mods:detail[@type='issue']/mods:number" label="mir.issue" class="mir-modspart" />
   </xed:template>
 
   <xed:template id="date.issued">
@@ -178,20 +170,20 @@
   </xed:template>
 
   <xed:template id="language.repeated">
-    <xed:repeat xpath="mods:language" max="5" >
-      <xed:bind xpath="mods:languageTerm[@authority='rfc4646'][@type='code']" initially="">
-        <div class="form-group required {$xed-validation-marker}">
-          <label class="col-md-3 control-label">
-            <xed:output i18n="mir.language" />
-          </label>
-          <div class="col-md-6">
+    <xed:repeat xpath="mods:language" max="5">
+      <div class="form-group required {$xed-validation-marker}">
+        <label class="col-md-3 control-label">
+          <xed:output i18n="mir.language" />
+        </label>
+        <div class="col-md-6">
+          <xed:bind xpath="mods:languageTerm[@authority='rfc4646'][@type='code']" initially="">
             <div class="controls">
-              <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="lang.list" />
+              <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="lang.list" />
             </div>
-          </div>
-          <mir:help-pmud help-text="{i18n:mir.help.language}" pmud="true" />
+          </xed:bind>
         </div>
-      </xed:bind>
+        <mir:help-pmud help-text="{i18n:mir.help.language}" pmud="true" />
+      </div>
     </xed:repeat>
   </xed:template>
 
@@ -241,69 +233,15 @@
   </xed:template>
 
   <xed:template id="comment">
-    <mir:textarea xpath="mods:note" label="mir.comment" rows="2" />
+    <mir:textarea xpath="mods:note" help-text="{i18n:mir.help.comment}" label="mir.comment" rows="2" />
   </xed:template>
 
-  <xed:template id="title.journal.relItemsearch">
-    <mir:relItemsearch searchengine="title" genre="journal" responsefield="mods.title" xpath="mods:titleInfo/mods:title" label="mir.title.journal" class="required" />
-  </xed:template>
-
-  <xed:template id="identifier.issn.journal.relItemsearch">
-    <mir:relItemsearch searchengine="issn" genre="journal" responsefield="identifier.type.issn" xpath="mods:identifier[@type='issn']" label="mir.identifier.issn" />
-  </xed:template>
-
-  <xed:template id="cancel.submit">
-    <div class="form-group" id="editor-buttons">
-      <div class="col-md-offset-2 col-md-6">
-        <!-- button type="submit" class="btn btn-default" xed:target="debug">Debug</button -->
-        <button type="submit" class="btn btn-default" xed:target="cancel">
-          <xed:output i18n="button.cancel" />
-        </button>
-        <xed:choose>
-          <!-- xed:when test="/mycoreobject/@ID = 'mir_mods_00000000'" -->
-          <xed:when test="contains(/mycoreobject/@ID, '_00000000')">
-            <button type="submit" class="btn btn-primary" xed:target="servlet" xed:href="CreateObjectServlet">
-              <xed:output i18n="button.save" />
-            </button>
-          </xed:when>
-          <xed:otherwise>
-            <button type="submit" class="btn btn-primary" xed:target="servlet" xed:href="UpdateObjectServlet">
-              <xed:output i18n="button.save" />
-            </button>
-          </xed:otherwise>
-        </xed:choose>
-      </div>
-    </div>
-  </xed:template>
-  
-  <xed:template id="cancel.redirect.submit">
-    <div class="form-group" id="editor-buttons">
-      <div class="col-md-offset-2 col-md-6">
-        <button type="submit" class="btn btn-default" xed:target="cancel">
-          <xed:output i18n="button.cancel" />
-        </button>
-        <xed:choose>
-          <!-- xed:when test="/mycoreobject/@ID = 'mir_mods_00000000'" -->
-          <xed:when test="contains(/mycoreobject/@ID, '_00000000')">
-            <button type="submit" class="btn btn-primary" xed:target="servlet" xed:href="CreateObjectAppendDerivateServlet">
-              <xed:output i18n="button.saveandredirect" />
-            </button>
-            <button type="submit" class="btn btn-primary" xed:target="servlet" xed:href="CreateObjectServlet">
-              <xed:output i18n="button.save" />
-            </button>
-          </xed:when>
-          <xed:otherwise>
-            <button type="submit" class="btn btn-primary" xed:target="servlet" xed:href="UpdateObjectServlet">
-              <xed:output i18n="button.save" />
-            </button>
-          </xed:otherwise>
-        </xed:choose>
-      </div>
-    </div>
-  </xed:template>
 
   <xed:template id="validation-rules">
-    <xed:validate xpath="//mods:mods/mods:genre[@authorityURI='http://www.mycore.org/classifications/mir_genres']/@valueURIxEditor" required="true" i18n="mir.validation.genre" display="global" />
+    <xed:load-resource name="mir_genres" uri="classification:metadata:-1:children:mir_genres" />
+    <xed:validate xpath="//mods:mods/mods:genre[@authorityURI=$mir_genres/label[@xml:lang='x-uri']/@text]/@valueURIxEditor" required="true" i18n="mir.validation.genre" display="global" />
+    
+    
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
     <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc4646']" required="true" i18n="noa.validation.language" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
@@ -313,8 +251,10 @@
     <xed:validate xpath="//mods:mods/mods:identifier[@type='doi']" matches="10\.\d+.*" i18n="mir.validation.doi" display="global" />
     <xed:validate xpath="//mods:mods/mods:identifier[@type='hdl']" matches="\S+/\S+" i18n="mir.validation.handle" display="global" />
     <xed:validate xpath="//mods:mods/mods:identifier[@type='urn']" matches="urn:nbn:[a-z]{2}:\S*" i18n="mir.validation.urn" display="global" />
+    <xed:validate xpath="//mods:mods/mods:identifier[@type='ppn']" class="org.mycore.mir.validation.MIRValidationHelper" method="validatePPN" display="global" i18n="mir.validation.ppn" />
     <xed:validate xpath="//mods:mods/mods:url|//mods:abstract/@xlink:href" matches="(ftp|http|https)://[\w\d.]+\S*" i18n="mir.validation.url" display="global" />
-    <xed:validate xpath="//mods:*[@encoding='w3cdtf']" matches="\d{4}(\-\d{2}(\-\d{2})?)?" type="datetime" format="yyyy;yyyy-MM;yyyy-MM-dd" i18n="mir.validation.date" display="global" />
+    <xed:validate xpath="//mods:*[@encoding='w3cdtf']|//mods:mods/mods:accessCondition[@type='embargo']" matches="\d{4}(\-\d{2}(\-\d{2})?)?" type="datetime" format="yyyy;yyyy-MM;yyyy-MM-dd" i18n="mir.validation.date" display="global" />
+    <xed:validate xpath="//mods:part/@order" type="integer" display="global" i18n="mir.validation.order" />
     <xed:validate xpath="//mods:mods/mods:relatedItem/mods:titleInfo/mods:title" test="(string-length(.) >= 0) or (string-length(../../@xlink:href) >= 0)" i18n="mir.validation.relatedItem.title" display="global" />
   </xed:template>
 
@@ -337,38 +277,6 @@
 
   <xed:template id="validation-rules.sdnb">
     <xed:validate xpath="//mods:mods/mods:classification[@authority='sdnb'][@displayLabel='sdnb']" required="true" i18n="mir.validation.sdnb" display="global" />
-  </xed:template>
-
-  <xed:template id="publisher.organization.repeat">
-    <xed:repeat xpath="mods:name[@type='corporate'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='pbl']"><!--  Publisher [pbl]  -->
-      <div class="form-group">
-        <label class="col-md-3 control-label">
-          <xed:output i18n="mir.publisherOrganization" />
-          :
-        </label>
-        <div class="col-md-6">
-          <div class="search-organization">
-            <xed:bind xpath="@type" initially="personal">
-              <input type="hidden" class="nameType" />
-            </xed:bind> 
-            <xed:bind xpath="mods:displayForm">
-              <input type="text" size="26" class="form-control form-control-inline" data-search="searchEntity" data-search-type="select"
-                data-search-entity-type="organisation" data-search-output=".nameIdentifier" data-search-output-type=".nameIdentifierType" 
-                data-search-output-name-type=".nameType" data-search-button="{i18n:button.search}"
-                data-search-button-loading="{i18n:button.loading}" data-search-result-empty="{i18n:mir.searchIdentifier.noResult}" data-target=".search-organization"
-                placeholder="{i18n:mir.placeholder.name.organization}" />
-            </xed:bind>
-            <xed:bind xpath="mods:nameIdentifier">
-              <input type="hidden" class="nameIdentifier" />
-            </xed:bind>
-            <xed:bind xpath="mods:nameIdentifier/@type">
-              <input type="hidden" class="nameIdentifierType" />
-            </xed:bind>
-          </div>
-        </div>
-        <mir:help-pmud help-text="{i18n:mir.help.editor.organization}" pmud="true" />
-      </div>
-    </xed:repeat>
   </xed:template>
 
 </xed:template>

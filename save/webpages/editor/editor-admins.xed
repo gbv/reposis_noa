@@ -28,11 +28,11 @@
             <fieldset>
               <legend class="mir-fieldset-legend">Personen</legend><!-- TODO: i18n -->
               <div class="mir-fieldset-content">
-                <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="author.repeated" />
+                <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="author.repeated" />
                 <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="editor.repeated" />
               </div>
             </fieldset>
-            <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="publisher.organization.repeat" />
+            <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="publisher.organization.repeat" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="copyrightMD" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="edition" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="place" />
@@ -54,7 +54,7 @@
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="related.item.search.of.all.items" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="comment" />
 
-            <xed:include uri="webapp:editor/editor-includes-noa.xed" ref="cancel.submit" />
+            <xed:include uri="webapp:editor/editor-includes.xed" ref="cancel.submit" />
             <xed:include uri="webapp:editor/editor-includes.xed" ref="cleanup-rules" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.sdnb" />
