@@ -559,10 +559,38 @@ ul.navbar-nav {
   text-overflow: ellipsis;
 }
 
+
 /* print media ************************************************************* */
 
+@page {
+  size: A4;
+  margin: 0;
+}
+
 @media print {
-  .ellipsis {
+
+  html, body {
+    width: 210mm;
+    height: 297mm;
+  }
+  
+  #main_content_column, #main_col, .result_list {
+    width: 100%;
+  }
+  
+  .result_searchline , .result_filter {
     display: none;
+  }
+  
+  .hit_item, .panel  {
+    page-break-inside: avoid;
+  }
+  
+  #head, #menu_toggle, #side_nav_column, #mir-abstract-overlay, .button_box, #record_detail {
+    display: none;
+  }
+  
+  .detail_block .ellipsis {
+    max-height: none;
   }
 }
