@@ -273,6 +273,25 @@ footer .container #menu #copyright {
   margin-right: -1px;
 }
 
+#main_content .select2-selection {
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  padding: 6px 8px;
+  height: 31px;
+  line-height: 1.42857143;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #777 !important;
+}
+
+.select2-results__options {
+  color: #777 !important;
+  font-size: 12px;
+  line-height: 1.42857143;
+}
+
 .tooltip {
   font-family:Verdana;
   font-size:11px;
