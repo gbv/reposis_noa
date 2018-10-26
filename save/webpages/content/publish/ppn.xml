@@ -20,6 +20,14 @@
           method="get"
           action="../../editor/editor-admins.xed">
 
+<!-- doi -->
+      <div class="row form-group">
+        <label for="genre" class="col-sm-4 col-lg-3 control-label">mit der DOI:</label>
+        <div class="col-sm-7 col-md-5  col-lg-4">
+          <input type="text" name="modsId" id="modsId" class="form-control" size="20" placeholder="z.B. 10.1093/pq/pqu057" />
+          <input id="type" name="type" value="doi" type="hidden" />
+        </div>
+      </div>
 
 <!-- ppn -->
       <div class="row form-group">

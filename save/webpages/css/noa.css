@@ -279,11 +279,11 @@ footer .container #menu #copyright {
   border-radius: 0px;
   padding: 6px 8px;
   height: 31px;
-  line-height: 1.42857143;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: #777 !important;
+  line-height: 1.42857143 !important;
 }
 
 .select2-results__options {
