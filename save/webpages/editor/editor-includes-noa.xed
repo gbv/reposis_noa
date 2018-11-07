@@ -243,7 +243,7 @@
     
     
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
-    <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc4646']" required="true" i18n="noa.validation.language" display="global" />
+    <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc5646']" required="true" i18n="noa.validation.language" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='restriction on access']" required="true" i18n="noa.validation.access" display="global" />
     <xed:validate xpath="//mods:mods/mods:identifier[@type='isbn']" matches="^((978|979)-?)?([\d -]{12}|\d{9})(\d|X)$" i18n="mir.validation.isbn" display="global" />
