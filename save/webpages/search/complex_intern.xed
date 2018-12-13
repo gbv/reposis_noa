@@ -41,7 +41,7 @@
                           <option value="mods.nameByRole.corporate.pbl">
                             <xed:output i18n="editor.search.corporate.pbl" />
                           </option>
-                          <option value="topic">
+                          <option value="mods.subject">
                             <xed:output i18n="editor.search.topic" />
                           </option>
                           <option value="allMeta">
