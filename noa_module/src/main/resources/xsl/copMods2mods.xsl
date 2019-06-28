@@ -18,6 +18,16 @@
 
     <xsl:variable name="lang" select="'en'" />
 
+    <xsl:template match="mods:mods">
+        <mods:mods version="3.6">
+            <xsl:apply-templates />
+            <mods:classification displayLabel="publication type" authorityURI="http://www.noa-gwlb.de/classifications/noa_pubtype" valueURI="http://www.noa-gwlb.de/classifications/noa_pubtype#pflichtexemplar" />
+            <xsl:if test="count(mods:typeofResource) = 0">
+                <mods:typeOfResource>text</mods:typeOfResource>
+            </xsl:if>
+        </mods:mods>
+    </xsl:template>
+
     <xsl:template match="mods:titleInfo">
         <mods:titleInfo xml:lang="{$lang}">
             <mods:title><xsl:value-of select="mods:title"/></mods:title>

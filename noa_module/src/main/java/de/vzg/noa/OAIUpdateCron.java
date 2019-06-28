@@ -43,6 +43,7 @@ import org.mycore.datamodel.metadata.MCRMetaLinkID;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
+import org.mycore.mods.MCRMODSSorter;
 import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.mods.enrichment.MCREnrichmentResolver;
 import org.mycore.solr.MCRSolrClientFactory;
@@ -188,7 +189,10 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         final Element identifierElement = new Element("identifier", MCRConstants.MODS_NAMESPACE);
         identifierElement.setAttribute("type", "importID");
         identifierElement.setText(oaiId);
-        new MCRMODSWrapper(cop).addElement(identifierElement);
+        final MCRMODSWrapper wrapper = new MCRMODSWrapper(cop);
+        wrapper.addElement(identifierElement);
+
+        MCRMODSSorter.sort(wrapper.getMODS());
 
         return cop;
     }
@@ -243,6 +247,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
 
         LOGGER.info("create object {}", oid);
         setState(object);
+        MCRMODSSorter.sort(wrapper.getMODS());
         new MCREnrichmentResolver().enrichPublication(mods,"import");
         MCRMetadataManager.create(object);
         return oid;
@@ -288,7 +293,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                 final RecordTransformer recordTransformer = new RecordTransformer(
                     CONFIG.getString("OAI.Harvest.Host"),
                     CONFIG.getString("OAI.Harvest.Format"),
-                    null);
+                    "OAI.Harvest.Set");
 
 
                 recordTransformer.transformAll(CONFIG.getString("OAI.Harvest.Stylesheet"), lastHarvest, null)
@@ -312,7 +317,10 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
     private MCRFixedUserCallable<Void> getCreateOrUpdateCallable(MCRObject object) {
         return new MCRFixedUserCallable<>(() -> {
             final MCRMODSWrapper mw = new MCRMODSWrapper(object);
-            new MCREnrichmentResolver().enrichPublication(mw.getMODS(), "import");
+            try {
+                new MCREnrichmentResolver().enrichPublication(mw.getMODS(), "import");
+            } catch (Throwable ignore) {
+            }
 
             /*
             final XPathExpression<Element> oaiXP = XPathFactory.instance()
@@ -360,7 +368,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                                 existingIssnMap.put(issn, objectID);
                             }
                         } catch (Exception e) {
-                            throw new RuntimeException("Error checking for exist: " + issn);
+                            throw new RuntimeException("Error checking for exist: " + issn, e);
                         }
                     }
                 });
