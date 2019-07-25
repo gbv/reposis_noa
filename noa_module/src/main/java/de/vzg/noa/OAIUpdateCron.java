@@ -1,6 +1,9 @@
 package de.vzg.noa;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -43,9 +47,9 @@ import org.mycore.datamodel.metadata.MCRMetaLinkID;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
+import org.mycore.datamodel.niofs.MCRPath;
 import org.mycore.mods.MCRMODSSorter;
 import org.mycore.mods.MCRMODSWrapper;
-import org.mycore.mods.enrichment.MCREnrichmentResolver;
 import org.mycore.solr.MCRSolrClientFactory;
 import org.mycore.solr.search.MCRSolrSearchUtils;
 import org.mycore.util.concurrent.MCRFixedUserCallable;
@@ -248,7 +252,6 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         LOGGER.info("create object {}", oid);
         setState(object);
         MCRMODSSorter.sort(wrapper.getMODS());
-        new MCREnrichmentResolver().enrichPublication(mods,"import");
         MCRMetadataManager.create(object);
         return oid;
     }
@@ -293,7 +296,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                 final RecordTransformer recordTransformer = new RecordTransformer(
                     CONFIG.getString("OAI.Harvest.Host"),
                     CONFIG.getString("OAI.Harvest.Format"),
-                    "OAI.Harvest.Set");
+                    CONFIG.getString("OAI.Harvest.Set"));
 
 
                 recordTransformer.transformAll(CONFIG.getString("OAI.Harvest.Stylesheet"), lastHarvest, null)
@@ -317,10 +320,6 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
     private MCRFixedUserCallable<Void> getCreateOrUpdateCallable(MCRObject object) {
         return new MCRFixedUserCallable<>(() -> {
             final MCRMODSWrapper mw = new MCRMODSWrapper(object);
-            try {
-                new MCREnrichmentResolver().enrichPublication(mw.getMODS(), "import");
-            } catch (Throwable ignore) {
-            }
 
             /*
             final XPathExpression<Element> oaiXP = XPathFactory.instance()
@@ -381,36 +380,34 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                     MCRMetadataManager.update(object);
                 }  else {
                     MCRMetadataManager.create(object);
+                    Optional.ofNullable(mw.getElement("mods:location/mods:url[@access='raw object']"))
+                        .map(Element::getTextTrim)
+                        .map(s -> {
+                            try {
+                                return new URL(s);
+                            } catch (MalformedURLException e) {
+                                return null;
+                            }
+                        }).filter(url-> {
+                        return mw.getMCRObject().getStructure().getDerivates().size() <= 0;
+                    }).ifPresent(url -> {
+                        try (InputStream is = url.openStream()) {
+                            // detect the file name
+                            final String[] parts = url.getPath().split("/");
+                            final String fileName = parts[parts.length - 1];
+
+                            // we can open the stream, so we can create the derivate!
+                            final MCRDerivate derivate = createDerivate(object.getId(), fileName);
+                            final MCRPath dest = MCRPath.getPath(derivate.getId().toString(), "/" + fileName);
+                            Files.copy(is, dest);
+                        } catch (IOException | MCRAccessException e) {
+                            LOGGER.error("Error while downloading file!", e);
+                        }
+                    });
                 }
             } catch (MCRAccessException e) {
                 throw new MCRException("Error while creating " + object.getId().toString(), e);
             }
-
-            /*Optional.ofNullable(mw.getElement("mods:location/mods:url[@access='raw object']"))
-                .map(Element::getTextTrim)
-                .map(s -> {
-                    try {
-                        return new URL(s);
-                    } catch (MalformedURLException e) {
-                        return null;
-                    }
-                }).filter(url-> {
-                return mw.getMCRObject().getStructure().getDerivates().size() <= 0;
-            }).ifPresent(url -> {
-                try (InputStream is = url.openStream()) {
-                    // detect the file name
-                    final String[] parts = url.getPath().split("/");
-                    final String fileName = parts[parts.length - 1];
-
-                    // we can open the stream, so we can create the derivate!
-                    final MCRDerivate derivate = createDerivate(object.getId(), fileName);
-                    final MCRPath dest = MCRPath.getPath(derivate.getId().toString(), "/" + fileName);
-                    Files.copy(is, dest);
-                } catch (IOException | MCRAccessException e) {
-                    LOGGER.error("Error while downloading file!", e);
-                }
-            });*/
-
             return null;
         }, MCRSystemUserInformation.getJanitorInstance());
     }
