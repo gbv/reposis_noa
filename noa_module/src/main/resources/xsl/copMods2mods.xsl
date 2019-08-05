@@ -22,7 +22,7 @@
         <mods:mods version="3.6">
             <xsl:apply-templates />
             <mods:classification displayLabel="publication type" authorityURI="http://www.noa-gwlb.de/classifications/noa_pubtype" valueURI="http://www.noa-gwlb.de/classifications/noa_pubtype#pflichtexemplar" />
-            <xsl:if test="count(mods:typeofResource) = 0">
+            <xsl:if test="count(mods:typeOfResource) = 0">
                 <mods:typeOfResource>text</mods:typeOfResource>
             </xsl:if>
         </mods:mods>
