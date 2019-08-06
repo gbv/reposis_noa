@@ -26,7 +26,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="sdnb.optional" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="rights" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.title" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.accessAndIssued" />
@@ -52,7 +52,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="sdnb.optional" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="rights" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.issue" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.accessAndIssued" />
@@ -97,7 +97,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="sdnb.optional" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="rights" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.article" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.title" />

@@ -101,7 +101,7 @@
 
   <xed:template id="noa.publicationType">
     <div class="form-group">
-      <label class="col-md-3 control-label">
+      <label class="col-md-3 control-label required">
         <xed:output i18n="noa.publicationType" />
       </label>
       <xed:bind xpath="mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']/@valueURIxEditor" initially="">
@@ -240,8 +240,11 @@
   <xed:template id="validation-rules">
     <xed:load-resource name="mir_genres" uri="classification:metadata:-1:children:mir_genres" />
     <xed:validate xpath="//mods:mods/mods:genre[@authorityURI=$mir_genres/label[@xml:lang='x-uri']/@text]/@valueURIxEditor" required="true" i18n="mir.validation.genre" display="global" />
-    
-    
+    <!-- don't validate author, date issued and rights for journal etc.  -->
+    <xed:if test="//mods:mods/mods:genre[@valueURIxEditor!='journal'][@valueURIxEditor!='issue'][@valueURIxEditor!='newspaper'][@valueURIxEditor!='series'][@valueURIxEditor!='lecture']">
+      <xed:validate xpath="//mods:mods/mods:accessCondition[@type='use and reproduction']" required="true" i18n="mir.validation.rights" display="global" />
+    </xed:if>
+
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
     <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc5646']" required="true" i18n="noa.validation.language" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
@@ -256,6 +259,7 @@
     <xed:validate xpath="//mods:*[@encoding='w3cdtf']|//mods:mods/mods:accessCondition[@type='embargo']" matches="\d{4}(\-\d{2}(\-\d{2})?)?" type="datetime" format="yyyy;yyyy-MM;yyyy-MM-dd" i18n="mir.validation.date" display="global" />
     <xed:validate xpath="//mods:part/@order" type="integer" display="global" i18n="mir.validation.order" />
     <xed:validate xpath="//mods:mods/mods:relatedItem/mods:titleInfo/mods:title" test="(string-length(.) >= 0) or (string-length(../../@xlink:href) >= 0)" i18n="mir.validation.relatedItem.title" display="global" />
+    <xed:validate xpath="//mods:mods/mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']/@valueURIxEditor" required="true" i18n="noa.validation.pubtype" display="global" />
   </xed:template>
 
   <xed:template id="validation-rules.issue">
