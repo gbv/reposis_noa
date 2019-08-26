@@ -100,22 +100,24 @@
   </xed:template>
 
   <xed:template id="noa.publicationType">
-    <xed:bind xpath="mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']/@valueURIxEditor" initially="">
-      <div class="form-group {$xed-validation-marker}">
-        <label class="col-md-3 control-label required">
+    <xed:repeat xpath="mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']" min="1" max="10" method="build">
+      <div class="form-group {$xed-validation-marker} required">
+        <label class="col-md-3 control-label">
           <xed:output i18n="noa.publicationType" />
         </label>
         <div class="col-md-6">
           <div class="controls">
-            <select class="form-control form-control-inline">
-              <option value=""><xed:output i18n="mir.select.optional" /></option>
-              <xed:include uri="xslStyle:items2options:classification:editor:-1:children:noa_pubtype" />
-            </select>
+            <xed:bind xpath="@valueURIxEditor">
+	            <select class="form-control form-control-inline">
+	              <option value=""><xed:output i18n="mir.select.optional" /></option>
+	              <xed:include uri="xslStyle:items2options:classification:editor:-1:children:noa_pubtype" />
+	            </select>
+            </xed:bind>
           </div>
         </div>
-        <mir:help-pmud help-text="{i18n:noa.help.publicationType}" pmud="false" />
+        <mir:help-pmud help-text="{i18n:noa.help.publicationType}" pmud="true" />
       </div>
-    </xed:bind>
+    </xed:repeat>
   </xed:template>
 
   <!-- use external schema copyrightMD, see https://www.cdlib.org/groups/rmg/copyrightMD.html#type_copyright.status -->
