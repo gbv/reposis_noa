@@ -13,11 +13,13 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.servlet.ServletContext;
 
@@ -47,6 +49,7 @@ import org.mycore.datamodel.metadata.MCRMetaLinkID;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
+import org.mycore.datamodel.metadata.MCRObjectStructure;
 import org.mycore.datamodel.niofs.MCRPath;
 import org.mycore.mods.MCRMODSSorter;
 import org.mycore.mods.MCRMODSWrapper;
@@ -174,12 +177,12 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         SolrDocument first = null;
         try {
             first = MCRSolrSearchUtils
-                .first(MCRSolrClientFactory.getMainSolrClient(), "mods.identifier:\"" + oaiId+"\"");
-        } catch (SolrServerException|IOException e) {
+                .first(MCRSolrClientFactory.getMainSolrClient(), "mods.identifier:\"" + oaiId + "\"");
+        } catch (SolrServerException | IOException e) {
         }
         final MCRObject cop;
         if (first == null) {
-             cop = MCRMODSWrapper.wrapMODSDocument(modsRoot, CONFIG.getString("OAI.Harvest.ProjectID"));
+            cop = MCRMODSWrapper.wrapMODSDocument(modsRoot, CONFIG.getString("OAI.Harvest.ProjectID"));
             cop.setId(nextFreeID());
         } else {
             final String id = (String) first.getFieldValue("id");
@@ -188,7 +191,6 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
             cop = MCRMetadataManager.retrieveMCRObject(objectID);
             new MCRMODSWrapper(cop).setMODS(modsRoot);
         }
-
 
         final Element identifierElement = new Element("identifier", MCRConstants.MODS_NAMESPACE);
         identifierElement.setAttribute("type", "importID");
@@ -210,7 +212,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         }
         try {
             final SolrDocument first = MCRSolrSearchUtils
-                .first(MCRSolrClientFactory.getMainSolrClient(), "mods.identifier:\"" + recordID+"\"");
+                .first(MCRSolrClientFactory.getMainSolrClient(), "mods.identifier:\"" + recordID + "\"");
             if (first != null) {
                 LOGGER.info("Object for OAI Record {} already exists!", oaiRecord.getRecord().getHeader().getId());
                 final String id = (String) first.getFirstValue("id");
@@ -298,7 +300,6 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                     CONFIG.getString("OAI.Harvest.Format"),
                     CONFIG.getString("OAI.Harvest.Set"));
 
-
                 recordTransformer.transformAll(CONFIG.getString("OAI.Harvest.Stylesheet"), lastHarvest, null)
                     .map(this::mapToObject)
                     .map(this::getCreateOrUpdateCallable)
@@ -320,20 +321,6 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
     private MCRFixedUserCallable<Void> getCreateOrUpdateCallable(MCRObject object) {
         return new MCRFixedUserCallable<>(() -> {
             final MCRMODSWrapper mw = new MCRMODSWrapper(object);
-
-            /*
-            final XPathExpression<Element> oaiXP = XPathFactory.instance()
-                .compile("mods:identifier[@type='importID']", Filters.element(), null,
-                    MCRConstants.MODS_NAMESPACE);
-            final Element oaiIDElement = oaiXP.evaluateFirst(mw.getMODS());
-
-            String oaiID = oaiIDElement.getTextTrim();
-            final SolrDocument first = MCRSolrSearchUtils
-                .first(MCRSolrClientFactory.getMainSolrClient(), "mods.identifier:\"" + issn+"\"");
-            if (first == null) {
-
-            }*/
-
             // assign right parent
             mw.getElements("mods:relatedItem")
                 .forEach(relatedItemElement -> {
@@ -350,7 +337,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                     } else {
                         try {
                             final SolrDocument first = MCRSolrSearchUtils
-                                .first(MCRSolrClientFactory.getMainSolrClient(), "mods.identifier:\"" + issn+"\"");
+                                .first(MCRSolrClientFactory.getMainSolrClient(), "mods.identifier:\"" + issn + "\"");
                             if (first == null) {
                                 LOGGER.info("Create parent Object for issn {} !", issn);
                                 // create object
@@ -376,11 +363,24 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
             try {
                 setState(object);
                 LOGGER.info("Create child object {}!", object.getId().toString());
-                if(MCRMetadataManager.exists(object.getId())){
-                    MCRMetadataManager.update(object);
-                }  else {
+                final Optional<MCRObjectID> alreadyExists = Optional.of(object.getId())
+                    .filter(MCRMetadataManager::exists);
+
+                final boolean hasDerivate = !alreadyExists
+                    .map(MCRMetadataManager::retrieveMCRObject)
+                    .map(MCRObject::getStructure)
+                    .map(MCRObjectStructure::getDerivates)
+                    .map(List::size)
+                    .filter(s -> s > 0)
+                    .isPresent();
+
+                AtomicBoolean hasFiles = new AtomicBoolean(hasDerivate);
+                if (!alreadyExists.isPresent()) {
                     MCRMetadataManager.create(object);
-                    Optional.ofNullable(mw.getElement("mods:location/mods:url[@access='raw object']"))
+
+                    // create files
+                    final Optional<URL> urlOpt = Optional
+                        .ofNullable(mw.getElement("mods:location/mods:url[@access='raw object']"))
                         .map(Element::getTextTrim)
                         .map(s -> {
                             try {
@@ -388,23 +388,32 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                             } catch (MalformedURLException e) {
                                 return null;
                             }
-                        }).filter(url-> {
-                        return mw.getMCRObject().getStructure().getDerivates().size() <= 0;
-                    }).ifPresent(url -> {
-                        try (InputStream is = url.openStream()) {
+                        });
+                    if (urlOpt.isPresent()) {
+                        try (InputStream is = urlOpt.get().openStream()) {
                             // detect the file name
-                            final String[] parts = url.getPath().split("/");
+                            final String[] parts = urlOpt.get().getPath().split("/");
                             final String fileName = parts[parts.length - 1];
 
                             // we can open the stream, so we can create the derivate!
                             final MCRDerivate derivate = createDerivate(object.getId(), fileName);
                             final MCRPath dest = MCRPath.getPath(derivate.getId().toString(), "/" + fileName);
                             Files.copy(is, dest);
+                            hasFiles.set(true);
                         } catch (IOException | MCRAccessException e) {
                             LOGGER.error("Error while downloading file!", e);
                         }
-                    });
+                    }
                 }
+
+                if (!hasFiles.get()) {
+                    final Element note = new Element("note", MCRConstants.MODS_NAMESPACE);
+                    note.setAttribute("type", "content");
+                    note.setText(CONFIG.getString("OAI.Harvest.NoFileMessage"));
+                    mw.addElement(note);
+                }
+
+                MCRMetadataManager.update(object);
             } catch (MCRAccessException e) {
                 throw new MCRException("Error while creating " + object.getId().toString(), e);
             }
@@ -413,6 +422,6 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
     }
 
     private void setState(MCRObject object) {
-        object.getService().setState(MCRCategoryID.fromString("state:"+ CONFIG.getString("OAI.Harvest.DocStatus")));
+        object.getService().setState(MCRCategoryID.fromString("state:" + CONFIG.getString("OAI.Harvest.DocStatus")));
     }
 }
