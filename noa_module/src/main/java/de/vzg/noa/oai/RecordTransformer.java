@@ -181,7 +181,7 @@ public class RecordTransformer {
         return result;
     }
 
-    private Stream<OAIRecord> processRecords(Stream<Header> recordStream, String stylesheet) {
+    public Stream<OAIRecord> processRecords(Stream<Header> recordStream, String stylesheet) {
         return recordStream.parallel().map(h -> {
             try {
                 return this.transform(h.getId(), stylesheet);
