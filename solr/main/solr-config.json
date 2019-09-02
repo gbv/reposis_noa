@@ -16,7 +16,7 @@
         "facet.field":  [
           "mods.genre",
           "worldReadableComplete",
-          "noa_pubtype"
+          "noa.pubtype"
         ],
         "facet.mincount": "1"
       }
@@ -46,7 +46,7 @@
         "facet.field": [
           "mods.genre",
           "worldReadableComplete",
-          "noa_pubtype"
+          "noa.pubtype"
         ],
         "facet.mincount": "1"
       },
@@ -82,7 +82,7 @@
         "facet.field": [
           "mods.genre",
           "worldReadableComplete",
-          "noa_pubtype"
+          "noa.pubtype"
         ],
         "facet.mincount": "1"
       }
@@ -117,7 +117,7 @@
         "facet.field": [
           "mods.genre",
           "worldReadableComplete",
-          "noa_pubtype"
+          "noa.pubtype"
         ],
         "facet.mincount": "1"
       }

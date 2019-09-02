@@ -228,7 +228,7 @@
             <div class="panel-body collapse in">
               <ul class="filter">
                 <xsl:apply-templates select="/response/lst[@name='facet_counts']/lst[@name='facet_fields']">
-                  <xsl:with-param name="facet_name" select="'noa_pubtype'" />
+                  <xsl:with-param name="facet_name" select="'noa.pubtype'" />
                   <xsl:with-param name="classId" select="'noa_pubtype'" />
                 </xsl:apply-templates>
               </ul>

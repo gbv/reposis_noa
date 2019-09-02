@@ -30,6 +30,9 @@
   MCR.Solr.Core.classification.Name=noa_class
   MCR.Solr.Indexer.ThreadCount=1
 
+# add noa specific searchfields
+  MCR.URIResolver.xslImports.solr-document=%MCR.URIResolver.xslImports.solr-document%,noa-solr.xsl
+
 # data and save directory
   MCR.datadir=/mcr/noa/data
   MCR.Save.FileSystem=/mcr/noa/.mycore/noa/save

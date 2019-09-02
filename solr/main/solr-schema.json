@@ -1,7 +1,7 @@
 [
   {
     "add-field": {
-        "name":"noa_pubtype",
+        "name":"noa.pubtype",
         "type":"string",
         "multiValued":true}
   }
