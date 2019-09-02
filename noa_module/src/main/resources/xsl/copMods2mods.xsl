@@ -28,6 +28,9 @@
         </mods:mods>
     </xsl:template>
 
+    <xsl:template match="mods:detail/mods:caption">
+    </xsl:template>
+
     <xsl:template match="mods:titleInfo">
         <mods:titleInfo xml:lang="{$lang}">
             <mods:title><xsl:value-of select="mods:title"/></mods:title>

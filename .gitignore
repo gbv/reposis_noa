@@ -14,3 +14,4 @@ resources/META-INF/persistence.xml
 noa_module/target
 noa_module/noa_module.iml
 reposis_noa.iml
+noa_module/noa-module.iml
