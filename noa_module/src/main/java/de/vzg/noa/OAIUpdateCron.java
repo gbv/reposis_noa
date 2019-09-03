@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletContext;
 
@@ -53,6 +54,9 @@ import org.mycore.datamodel.metadata.MCRObjectStructure;
 import org.mycore.datamodel.niofs.MCRPath;
 import org.mycore.mods.MCRMODSSorter;
 import org.mycore.mods.MCRMODSWrapper;
+import org.mycore.oai.pmh.Header;
+import org.mycore.oai.pmh.harvester.HarvesterBuilder;
+import org.mycore.oai.pmh.harvester.HarvesterUtil;
 import org.mycore.solr.MCRSolrClientFactory;
 import org.mycore.solr.search.MCRSolrSearchUtils;
 import org.mycore.util.concurrent.MCRFixedUserCallable;
@@ -168,6 +172,20 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         } catch (IOException e) {
             LOGGER.error("Error while writing lastHarvestDate", e);
         }
+    }
+
+
+    public static void main(String[] args) {
+        final RecordTransformer recordTransformer = new RecordTransformer("http://oai-pmh.copernicus.org/", "mods", "copernicus");
+        final Stream<Header> headerStream = HarvesterUtil
+            .streamHeaders(HarvesterBuilder.createNewInstance("http://oai-pmh.copernicus.org/"), "mods", null, null,
+                "copernicus");
+
+        headerStream.forEach(hs->{
+            if(hs.getId().equals("oai:publications.copernicus.org:angeo33803")){
+                System.out.println("Found it!");
+            }
+        });
     }
 
     private MCRObject mapToObject(OAIRecord oaiRecord) {
@@ -366,7 +384,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                 final Optional<MCRObjectID> alreadyExists = Optional.of(object.getId())
                     .filter(MCRMetadataManager::exists);
 
-                final boolean hasDerivate = !alreadyExists
+                final boolean hasDerivate = alreadyExists
                     .map(MCRMetadataManager::retrieveMCRObject)
                     .map(MCRObject::getStructure)
                     .map(MCRObjectStructure::getDerivates)
