@@ -54,6 +54,7 @@ import org.mycore.datamodel.metadata.MCRObjectStructure;
 import org.mycore.datamodel.niofs.MCRPath;
 import org.mycore.mods.MCRMODSSorter;
 import org.mycore.mods.MCRMODSWrapper;
+import org.mycore.mods.enrichment.MCREnrichmentResolver;
 import org.mycore.oai.pmh.Header;
 import org.mycore.oai.pmh.harvester.HarvesterBuilder;
 import org.mycore.oai.pmh.harvester.HarvesterUtil;
@@ -273,6 +274,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         setState(object);
         MCRMODSSorter.sort(wrapper.getMODS());
         MCRMetadataManager.create(object);
+        new MCREnrichmentResolver().enrichPublication(wrapper.getMODS(), "copernicus");
         return oid;
     }
 
