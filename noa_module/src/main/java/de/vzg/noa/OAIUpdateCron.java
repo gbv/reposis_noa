@@ -273,8 +273,8 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         LOGGER.info("create object {}", oid);
         setState(object);
         MCRMODSSorter.sort(wrapper.getMODS());
-        MCRMetadataManager.create(object);
         new MCREnrichmentResolver().enrichPublication(wrapper.getMODS(), "copernicus");
+        MCRMetadataManager.create(object);
         return oid;
     }
 
