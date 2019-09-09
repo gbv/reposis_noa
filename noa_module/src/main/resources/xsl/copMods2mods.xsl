@@ -28,6 +28,15 @@
         </mods:mods>
     </xsl:template>
 
+    <xsl:template match="mods:relatedItem">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|*"/>
+            <mods:classification displayLabel="publication type"
+                                 authorityURI="http://www.noa-gwlb.de/classifications/noa_pubtype"
+                                 valueURI="http://www.noa-gwlb.de/classifications/noa_pubtype#pflichtexemplar"/>
+        </xsl:copy>
+    </xsl:template>
+
     <xsl:template match="mods:detail/mods:caption">
     </xsl:template>
 
