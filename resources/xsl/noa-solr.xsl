@@ -16,7 +16,7 @@
   </xsl:template>
 
   <xsl:template match="mods:mods" mode="noa">
-    <xsl:for-each select="mods:classification/@displayLabel='publication type'">
+    <xsl:for-each select="mods:classification[@displayLabel='publication type']">
       <field name="noa.pubtype">
         <xsl:value-of select="substring-after(@valueURI, '#')" />
       </field>

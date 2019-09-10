@@ -10,8 +10,11 @@ mycore.active.properties
 /mycore.properties
 mycore.resolved.properties
 resources/META-INF/persistence.xml
+MCRWebCLI-unprocessed-commands.txt
 
+# noa specific files on server
 noa_module/target
 noa_module/noa_module.iml
 reposis_noa.iml
-noa_module/noa-module.iml
+OAILastHarvest.txt
+lib/noa-module-1.0-SNAPSHOT.jar
