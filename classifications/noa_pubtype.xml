@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="noa_pubtype">
-  <label xml:lang="en" text="Type of publication" />
-  <label xml:lang="de" text="Publikationsart" />
   <label xml:lang="x-uri" text="http://www.noa-gwlb.de/classifications/noa_pubtype" />
-  <label xml:lang="x-access" text="editor admin" />
+  <label xml:lang="en" text="Type of publication" />
+  <label xml:lang="de" text="Art der Veröffentlichung" />
   <categories>
-    <category ID="amtsdruckschrift" counter="1">
-      <label xml:lang="de" text="Amtsdruckschrift" />
+    <category ID="amtsdruckschrift">
+      <label xml:lang="de" text="Amtliche Veröffentlichung" />
     </category>
-    <category ID="pflichtexemplar" counter="1">
-      <label xml:lang="de" text="Pflichtexemplar" />
+    <category ID="pflichtexemplar">
+      <label xml:lang="de" text="Verlagsveröffentlichung" />
+    </category>
+    <category ID="freiwillige_ablieferung">
+      <label xml:lang="de" text="Sonstige Veröffentlichung" />
     </category>
   </categories>
 </mycoreclass>
