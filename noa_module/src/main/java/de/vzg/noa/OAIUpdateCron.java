@@ -288,7 +288,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         return mods;
     }
 
-    @Override
+
     public String getName() {
         return getClass().getName();
     }
@@ -397,34 +397,34 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                 AtomicBoolean hasFiles = new AtomicBoolean(hasDerivate);
                 if (!alreadyExists.isPresent()) {
                     MCRMetadataManager.create(object);
-
-                    // create files
-                    final Optional<URL> urlOpt = Optional
-                        .ofNullable(mw.getElement("mods:location/mods:url[@access='raw object']"))
-                        .map(Element::getTextTrim)
-                        .map(s -> {
-                            try {
-                                return new URL(s);
-                            } catch (MalformedURLException e) {
-                                return null;
-                            }
-                        });
-                    if (urlOpt.isPresent()) {
-                        try (InputStream is = urlOpt.get().openStream()) {
-                            // detect the file name
-                            final String[] parts = urlOpt.get().getPath().split("/");
-                            final String fileName = parts[parts.length - 1];
-
-                            // we can open the stream, so we can create the derivate!
-                            final MCRDerivate derivate = createDerivate(object.getId(), fileName);
-                            final MCRPath dest = MCRPath.getPath(derivate.getId().toString(), "/" + fileName);
-                            Files.copy(is, dest);
-                            hasFiles.set(true);
-                        } catch (IOException | MCRAccessException e) {
-                            LOGGER.error("Error while downloading file!", e);
+                }
+                    // create if files if not present
+                final Optional<URL> urlOpt = Optional
+                    .ofNullable(mw.getElement("mods:location/mods:url[@access='raw object']"))
+                    .map(Element::getTextTrim)
+                    .map(s -> {
+                        try {
+                            return new URL(s);
+                        } catch (MalformedURLException e) {
+                            return null;
                         }
+                    });
+                if (urlOpt.isPresent() && !hasFiles.get()) {
+                    try (InputStream is = urlOpt.get().openStream()) {
+                        // detect the file name
+                        final String[] parts = urlOpt.get().getPath().split("/");
+                        final String fileName = parts[parts.length - 1];
+
+                        // we can open the stream, so we can create the derivate!
+                        final MCRDerivate derivate = createDerivate(object.getId(), fileName);
+                        final MCRPath dest = MCRPath.getPath(derivate.getId().toString(), "/" + fileName);
+                        Files.copy(is, dest);
+                        hasFiles.set(true);
+                    } catch (IOException | MCRAccessException e) {
+                        LOGGER.error("Error while downloading file!", e);
                     }
                 }
+
 
                 if (!hasFiles.get()) {
                     final Element note = new Element("note", MCRConstants.MODS_NAMESPACE);

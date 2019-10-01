@@ -14,6 +14,7 @@ MCRWebCLI-unprocessed-commands.txt
 
 # noa specific files on server
 noa_module/target
+noa_module/noa-module.iml
 noa_module/noa_module.iml
 reposis_noa.iml
 OAILastHarvest.txt
