@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:mods="http://www.loc.gov/mods/v3"
@@ -40,10 +40,7 @@
     <xsl:template match="mods:detail/mods:caption">
     </xsl:template>
 
-    <xsl:template match="mods:titleInfo">
-        <mods:titleInfo xml:lang="{$lang}">
-            <mods:title><xsl:value-of select="mods:title"/></mods:title>
-        </mods:titleInfo>
+    <xsl:template match="*[@altFormat]">
     </xsl:template>
 
     <xsl:template match="mods:roleTerm[@authority='marcrelator'][@type='text']">
