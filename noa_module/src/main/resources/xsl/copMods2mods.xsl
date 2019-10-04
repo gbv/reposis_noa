@@ -18,10 +18,7 @@
 
     <xsl:variable name="lang">
         <xsl:variable name="tempLang" select="//mods:mods/mods:language/mods:languageTerm" />
-        <xsl:choose>
-            <xsl:when test="$tempLang='eng'"><xsl:value-of select="replace($tempLang,'eng','en')" /></xsl:when>
-            <xsl:otherwise><xsl:value-of select="replace($tempLang,'deu|ger','de')" /></xsl:otherwise>
-        </xsl:choose>
+        <xsl:value-of select="replace(replace($tempLang,'deu|ger','de'),'eng','en')" />
     </xsl:variable>
 
     <xsl:template match="mods:mods">
