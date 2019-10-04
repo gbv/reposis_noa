@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:mods="http://www.loc.gov/mods/v3"
@@ -16,7 +16,13 @@
 
     <xsl:mode on-no-match="shallow-copy"/>
 
-    <xsl:variable name="lang" select="'en'" />
+    <xsl:variable name="lang">
+        <xsl:variable name="tempLang" select="//mods:mods/mods:language/mods:languageTerm" />
+        <xsl:choose>
+            <xsl:when test="$tempLang='eng'"><xsl:value-of select="replace($tempLang,'eng','en')" /></xsl:when>
+            <xsl:otherwise><xsl:value-of select="replace($tempLang,'deu|ger','de')" /></xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
     <xsl:template match="mods:mods">
         <mods:mods version="3.6">
@@ -40,6 +46,12 @@
     <xsl:template match="mods:detail/mods:caption">
     </xsl:template>
 
+    <xsl:template match="mods:titleInfo">
+        <mods:titleInfo xml:lang="{$lang}">
+            <mods:title><xsl:value-of select="mods:title"/></mods:title>
+        </mods:titleInfo>
+    </xsl:template>
+
     <xsl:template match="*[@altFormat]">
     </xsl:template>
 
@@ -59,7 +71,6 @@
                 </xsl:choose>
             </xsl:attribute>
         </mods:genre>
-
     </xsl:template>
     
     <xsl:template match="mods:mods/mods:originInfo">
