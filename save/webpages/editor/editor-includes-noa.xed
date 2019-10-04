@@ -118,6 +118,7 @@
         <mir:help-pmud help-text="{i18n:noa.help.publicationType}" pmud="true" />
       </div>
     </xed:repeat>
+    <xed:validate xpath="//mods:mods/mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']/@valueURIxEditor" required="true" i18n="noa.validation.pubtype" display="global" />
   </xed:template>
 
   <!-- use external schema copyrightMD, see https://www.cdlib.org/groups/rmg/copyrightMD.html#type_copyright.status -->
@@ -247,7 +248,6 @@
       <xed:validate xpath="//mods:mods/mods:accessCondition[@type='use and reproduction']" required="true" i18n="mir.validation.rights" display="global" />
     </xed:if>
 
-    <xed:validate xpath="//mods:mods/mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']/@valueURIxEditor" required="true" i18n="noa.validation.pubtype" display="global" />
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
     <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc5646']" required="true" i18n="noa.validation.language" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
