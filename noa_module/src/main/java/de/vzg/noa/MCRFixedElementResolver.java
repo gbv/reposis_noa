@@ -38,7 +38,7 @@ public class MCRFixedElementResolver implements URIResolver {
             jsoup.outputSettings().syntax(Document.OutputSettings.Syntax.xml);
 
             final String cleanText = jsoup.text();
-            final String cleanXML = jsoup.html();
+            final String cleanXML = jsoup.body().html();
 
             final String lang = MCRLanguageDetector.detectLanguage(cleanText);
 
