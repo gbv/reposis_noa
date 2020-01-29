@@ -173,3 +173,13 @@
 ##############################################################################
 # Set mcr_error properties in your mycore.properties.private to show OA error page without StackTrace
 #  MCR.ContentTransformer.mcr_error.Stylesheet=xsl/errorPage.xsl,%MCR.LayoutTransformerFactory.Default.Stylesheets%
+
+##############################################################################
+# MIR OAS                                                                    #
+##############################################################################
+# show OAS Statistics in metadata view ('show', 'hide')
+  MIR.OAS=show
+
+# URL of the graphprovider
+  MIR.OAS.GraphProviderURL=https://noa.gwlb.de/graphprovider/
+  MIR.OAS.Prefix=
