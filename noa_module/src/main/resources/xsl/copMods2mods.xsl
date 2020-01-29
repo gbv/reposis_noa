@@ -10,9 +10,9 @@
     <xsl:output method="xml"
                 version="1.0"
                 encoding="UTF-8"
-                indent="yes" />
+                indent="yes"/>
 
-    <xsl:strip-space elements="*" />
+    <xsl:strip-space elements="*"/>
 
     <xsl:mode on-no-match="shallow-copy"/>
 
@@ -44,12 +44,16 @@
     </xsl:template>
 
     <xsl:template match="mods:titleInfo">
-        <mods:titleInfo xml:lang="{$lang}">
-            <mods:title><xsl:value-of select="mods:title"/></mods:title>
-        </mods:titleInfo>
+        <xsl:if test="@altFormat">
+            <xsl:variable name="fixUrl" select="concat('fixelement:', local-name(), ':', @altFormat)" />
+            <xsl:copy-of select="document($fixUrl)"/>
+        </xsl:if>
     </xsl:template>
 
-    <xsl:template match="*[@altFormat]">
+    <xsl:template match="mods:abstract">
+        <xsl:if test="@altFormat">
+            <xsl:copy-of select="document(concat('fixelement:', local-name(), ':', @altFormat))"/>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="mods:roleTerm[@authority='marcrelator'][@type='text']">
@@ -59,7 +63,7 @@
             </xsl:choose>
         </mods:roleTerm>
     </xsl:template>
-    
+
     <xsl:template match="mods:genre">
         <mods:genre type="intern" authorityURI="http://www.mycore.org/classifications/mir_genres">
             <xsl:attribute name="valueURI">
@@ -102,10 +106,7 @@
             <mods:languageTerm authority="rfc5646" type="code"><xsl:value-of select="$lang"/></mods:languageTerm>
         </mods:language>
     </xsl:template>
-    
-    <xsl:template match="mods:abstract">
-        <mods:abstract xml:lang="{$lang}"><xsl:value-of select="."/></mods:abstract>
-    </xsl:template>
+
 
 
     <xsl:template match="mods:accessCondition[@type='use and reproduction']">

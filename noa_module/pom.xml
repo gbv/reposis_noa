@@ -70,6 +70,11 @@
     <version>4.0.1</version>
     <scope>compile</scope>
   </dependency>
+  <dependency>
+    <groupId>org.jsoup</groupId>
+    <artifactId>jsoup</artifactId>
+    <version>1.12.1</version>
+  </dependency>
   <!-- https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE -->
   <dependency>
     <groupId>net.sf.saxon</groupId>
@@ -87,7 +92,7 @@
             <manifestEntries>
               <MCR-Artifact-Id>${project.artifactId}</MCR-Artifact-Id>
               <MCR-Application-Module>${project.name}</MCR-Application-Module>
-              <Priority>99</Priority>
+              <Priority>97</Priority>
               <MCR-Auto-Deploy>true</MCR-Auto-Deploy>
             </manifestEntries>
           </archive>
@@ -108,6 +113,7 @@
                <includes>
                  <include>org.mycore:oaipmh</include>
                  <include>org.mycore:oaipmh-harvester</include>
+                 <include>org.jsoup:jsoup</include>
                </includes>
              </artifactSet>
             </configuration>

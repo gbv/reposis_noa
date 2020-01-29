@@ -45,6 +45,7 @@ import org.jdom2.output.XMLOutputter;
 import org.jdom2.transform.JDOMResult;
 import org.jdom2.transform.JDOMSource;
 import org.mycore.common.MCRClassTools;
+import org.mycore.common.xml.MCRURIResolver;
 import org.mycore.oai.pmh.CannotDisseminateFormatException;
 import org.mycore.oai.pmh.Header;
 import org.mycore.oai.pmh.IdDoesNotExistException;
@@ -172,6 +173,7 @@ public class RecordTransformer {
 
         Source xslt = new StreamSource(xis);
         Transformer transformer = factory.newTransformer(xslt);
+        transformer.setURIResolver(MCRURIResolver.instance());
         Optional.ofNullable(params).ifPresent(p -> p.forEach(transformer::setParameter));
         JDOMResult result = new JDOMResult();
         transformer.transform(new JDOMSource(xml), result);
