@@ -2,6 +2,23 @@
 
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
 
+  <xed:template id="in.out">
+    <xed:source uri="xslStyle:import/remove-genres,import/mods2mycoreobject,editor/mods2xeditor:enrich:import:buildxml:_rootName_=mods:mods&amp;mods:identifier={$modsId}&amp;mods:identifier/@type={$type}" />
+    <xed:source uri="xslStyle:pica2mods,mods2mirMods,editor/mods2xeditor:http://unapi.k10plus.de/?format=picaxml&amp;id=gvk:ppn:{$ppn}" />
+    <xed:source uri="xslStyle:RDF-mods-journal,editor/mods2xeditor:http://ld.zdb-services.de/data/{$zdbid}.rdf" />
+    <xed:source uri="xslStyle:editor/mods2xeditor:{$sourceUri}" />
+    <xed:source uri="xslStyle:mycoreobject-editor,editor/mods2xeditor:mcrobject:{$id}" />
+    <xed:source uri="xslStyle:mycoreobject-copyof,editor/mods2xeditor:mcrobject:{$copyofid}" />
+    <xed:source uri="xslStyle:mods-addPreceding,mycoreobject-copyof,editor/mods2xeditor:mcrobject:{$oldVersion}" />
+    <xed:source uri="xslStyle:as{$relatedItemType},editor/mods2xeditor:mcrobject:{$relatedItemId}" />
+
+    <xed:cancel
+      url="../servlets/MCRLockServlet?action=unlock&amp;id={$id}&amp;url=/receive/{$id}?XSL.Status.Message=mir.editstatus.canceled&amp;XSL.Status.Style=danger" />
+    <xed:cancel url="{$cancelUrl}?XSL.Status.Message=mir.editstatus.canceled&amp;XSL.Status.Style=danger" />
+    <xed:cancel url="../index.html?XSL.Status.Message=mir.editstatus.canceled&amp;XSL.Status.Style=danger" />
+    <xed:post-processor xsl="editor/xeditor2mods.xsl" />
+  </xed:template>
+
   <xed:template id="title">
     <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" label="mir.title" help-text="{i18n:mir.help.title}" class="required" required="true" required-i18n="mir.validation.title" />
   </xed:template>
