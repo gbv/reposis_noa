@@ -129,7 +129,7 @@
   </xsl:template>
   
   <xsl:template name="COMMON_MIR_Language">
-    <xsl:variable name="languages" select="document('classification:metadata:-1:children:rfc4646')" />
+    <xsl:variable name="languages" select="document('classification:metadata:-1:children:rfc5646')" />
     <xsl:for-each select="./p:datafield[@tag='010@']"> <!-- 1500 Language -->
       <!-- weiter Unterfelder für Orginaltext / Zwischenübersetzung nicht abbildbar -->
       <xsl:for-each select="./p:subfield[@code='a']">
@@ -138,7 +138,7 @@
           <xsl:value-of select="$languages//category[label[@xml:lang='x-bibl']/@text = $biblCode]/@ID" />
         </xsl:variable>
         <mods:language>
-          <mods:languageTerm authority="rfc4646" type="code">
+          <mods:languageTerm authority="rfc5646" type="code">
             <xsl:value-of select="$rfcCode"/>
           </mods:languageTerm>
           <mods:languageTerm type="code" authority="iso639-2b">
