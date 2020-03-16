@@ -1108,7 +1108,7 @@
       </xsl:choose>
       <xsl:if test="./p:subfield[@code='n']">
         <xsl:variable name="date_vorlage" select="./p:subfield[@code='n']" />
-        <mods:dateIssued>
+        <mods:dateIssued encoding="text">
           <xsl:if test="contains($date_vorlage,'?')">
             <xsl:attribute name="qualifier"><xsl:value-of select="'questionable'" /></xsl:attribute>
           </xsl:if>

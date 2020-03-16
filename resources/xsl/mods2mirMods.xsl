@@ -16,16 +16,6 @@
   <xsl:include href="copynodes.xsl" />  
   
    
-  <!--<xsl:template match="/">
-    <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd" version="3.6">
-      <mods:titleInfo>
-        <mods:title>Grenzfälle_mods2mir</mods:title>
-        <mods:subTitle>als Test für ...2</mods:subTitle>
-      </mods:titleInfo>
-      <mods:typeOfResource>text</mods:typeOfResource>
-    </mods:mods>
-  </xsl:template>  -->
-  
   <!-- Set the prefix mods to all mods nodes. -->
   <xsl:template match="*[contains(namespace-uri(),'www.loc.gov/mods')]">  
     <xsl:element name="mods:{local-name()}"> 
