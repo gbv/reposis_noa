@@ -22,6 +22,12 @@
   <xsl:template match="mods:classification">
   </xsl:template>
   
+  <xsl:template match="mods:identifier[@type='local' and starts-with (.,'(DE-601)')]">
+  </xsl:template>
+  
+  <xsl:template match="mods:identifier[@type='PPN']">
+  </xsl:template>
+    
   <xsl:template match="mods:name[@type='corporate'][not(mods:role)]">
     <xsl:copy>
       <xsl:apply-templates select="@*" />
