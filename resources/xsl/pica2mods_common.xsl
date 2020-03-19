@@ -1263,4 +1263,21 @@
     </mods:note>
   </xsl:template>
   
+  <xsl:template name="COMMON_Subject">
+    <xsl:for-each select="./p:datafield[@tag='044K']">
+      <mods:subject >
+        <xsl:if test="./p:subfield[@code='a']">
+          <mods:topic><xsl:value-of select="./p:subfield[@code='a']" /></mods:topic>
+        </xsl:if>
+        <xsl:if test="./p:subfield[@code='z']">
+          <mods:temporal><xsl:value-of select="./p:subfield[@code='z']" /></mods:temporal>
+        </xsl:if>
+        <xsl:if test="./p:subfield[@code='g']">
+          <mods:geographic><xsl:value-of select="./p:subfield[@code='g']" /></mods:geographic>
+        </xsl:if>
+      </mods:subject>
+    </xsl:for-each>
+ 
+  </xsl:template>
+  
 </xsl:stylesheet> 

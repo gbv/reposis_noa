@@ -290,6 +290,7 @@
     <xsl:call-template name="COMMON_CLASS" />
     <xsl:call-template name="COMMON_ABSTRACT" />
     <xsl:call-template name="COMMON_Location" />
+    <xsl:call-template name="COMMON_Subject" />
     
     <xsl:for-each select="./p:datafield[@tag='030F']">
       <xsl:call-template name="COMMON_Conference" />
