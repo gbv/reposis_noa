@@ -53,7 +53,9 @@
   </xsl:template>
   
   <xsl:template match="mods:location">
-      
+  </xsl:template>
+  
+  <xsl:template match="mods:dateIssued[not(@encoding = 'w3cdtf')][../mods:dateIssued/@encoding = 'w3cdtf']">
   </xsl:template>
   
 </xsl:stylesheet>
