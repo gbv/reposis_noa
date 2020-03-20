@@ -58,4 +58,7 @@
   <xsl:template match="mods:dateIssued[not(@encoding = 'w3cdtf')][../mods:dateIssued/@encoding = 'w3cdtf']">
   </xsl:template>
   
+  <xsl:template match="mods:name[ not(mods:role/mods:roleTerm[@authority='marcrelator'] = 'aut' or mods:role/mods:roleTerm[@authority='marcrelator'] = 'edt' or mods:role/mods:roleTerm[@authority='marcrelator'] = 'pbl')]">
+  </xsl:template>
+  
 </xsl:stylesheet>
