@@ -14,14 +14,20 @@
       <xsl:variable name="now" select="ex:date-time()"/>
       <xsl:variable name="now-1year">
         <xsl:choose>
-          <xsl:when test="ex:monthInYear($now)=12">
-            <xsl:value-of select="ex:year($now)" />-01
+          <xsl:when test="ex:monthInYear($now) = 9 and ex:dayInMonth($now) = 29">
+            <xsl:value-of select="concat(ex:year($now)-1,'-02-28')" />
           </xsl:when>
-          <xsl:when test="ex:monthInYear($now)=11 or ex:monthInYear($now)=10">
-            <xsl:value-of select="ex:year($now)-1" />-<xsl:value-of select="ex:monthInYear($now)+1" />
+          <xsl:when test="ex:monthInYear($now) &gt; 9 and ex:dayInMonth($now) &gt; 9">
+            <xsl:value-of select="concat(ex:year($now)-1,'-',ex:monthInYear($now),'-',ex:dayInMonth($now))" />
+          </xsl:when>
+          <xsl:when test="ex:monthInYear($now) &gt; 9 ">
+            <xsl:value-of select="concat(ex:year($now)-1,'-',ex:monthInYear($now),'-0',ex:dayInMonth($now))" />
+          </xsl:when>
+          <xsl:when test="ex:dayInMonth($now) &gt; 9">
+            <xsl:value-of select="concat(ex:year($now)-1,'-0',ex:monthInYear($now),'-',ex:dayInMonth($now))" />
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="ex:year($now)-1" />-0<xsl:value-of select="ex:monthInYear($now)+1" />
+            <xsl:value-of select="concat(ex:year($now)-1,'-0',ex:monthInYear($now),'-0',ex:dayInMonth($now))" />
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
