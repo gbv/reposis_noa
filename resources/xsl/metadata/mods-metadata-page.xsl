@@ -11,8 +11,7 @@
       <xsl:copy-of select="@*" />
       <head>
         <xsl:apply-templates select="citation_meta" mode="copyContent" />
-        <link href="{$WebApplicationBaseURL}assets/jquery/plugins/shariff/shariff.min.css" rel="stylesheet" />
-        <script type="text/javascript" src="{$WebApplicationBaseURL}assets/jquery/plugins/shave/jquery.shave.min.js" />
+        <link href="{$WebApplicationBaseURL}mir-layout/assets/jquery/plugins/shariff/shariff.complete.css" rel="stylesheet" />
       </head>
 
       <xsl:if test="div[@id='mir-breadcrumb']">
@@ -71,7 +70,10 @@
             <xsl:apply-templates select="div[@id='mir-abstract-plus']" mode="copyContent" />
           <!-- End: ABSTRACT -->
           </div>
-
+          <!-- fileupload -->
+          <xsl:if test="div[contains(@id,'mir-file-upload')]">
+            <xsl:apply-templates select="div[@id='mir-file-upload']" mode="copyContent" />
+          </xsl:if>
           <!-- viewer -->
           <xsl:if test="div[@id = 'mir-viewer']">
             <xsl:apply-templates select="div[@id='mir-viewer']" mode="copyContent" />
@@ -98,9 +100,11 @@
             <!-- Start: METADATA -->
               <xsl:apply-templates select="div[@id='mir-metadata']" mode="newMetadata" />
             <!-- End: METADATA -->
-              <link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.3.3/css/ol.css" />
-              <script type="text/javascript" src="https://openlayers.org/en/v4.3.3/build/ol.js" />
+              <xsl:if test="div[contains(@id,'mir-metadata')]/table[@class='mir-metadata']/tr/td/div[contains(@class,'openstreetmap-container')]">
+                <link rel="stylesheet" type="text/css" href="{$WebApplicationBaseURL}assets/openlayers/ol.css" />
+                <script type="text/javascript" src="{$WebApplicationBaseURL}assets/openlayers/ol.js" />
               <script type="text/javascript" src="{$WebApplicationBaseURL}js/mir/geo-coords.min.js"></script>
+              </xsl:if>
             </div>
           </xsl:if>
 
@@ -114,7 +118,8 @@
           <xsl:if test="div[@id='mir-citation']">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Zitieren</h3>
+                <h3 class="panel-title">
+                  <xsl:value-of select="i18n:translate('metaData.quote')" /></h3>
               </div>
               <div class="panel-body">
                 <!-- Start: CITATION -->
@@ -143,7 +148,7 @@
           <xsl:if test="div[@id='mir-access-rights']">
             <div id="mir_access_rights_panel" class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Rechte</h3>
+                <h3 class="panel-title"><xsl:value-of select="i18n:translate('metaData.rights')" /></h3>
               </div>
               <div class="panel-body">
                 <!-- Start: CITATION -->
@@ -156,7 +161,7 @@
           <xsl:if test="div[@id='mir-export']">
             <div id="mir_export_panel" class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Export</h3>
+                <h3 class="panel-title"><xsl:value-of select="i18n:translate('metaData.export')" /></h3>
               </div>
               <div class="panel-body">
                   <!-- Start: EXPORT -->
@@ -166,7 +171,7 @@
             </div>
           </xsl:if>
 <!-- system -->
-          <xsl:if test="mcrxsl:isCurrentUserInRole('editor') or mcrxsl:isCurrentUserInRole('admin')">
+          <xsl:if test="not(mcrxsl:isCurrentUserGuestUser()) and @read">
             <div id="mir_admindata_panel" class="panel panel-default system">
               <div class="panel-heading">
                 <h3 class="panel-title">
@@ -208,7 +213,7 @@
 
 <!--  end: detail row -->
       </div>
-      <script src="{$WebApplicationBaseURL}assets/jquery/plugins/shariff/shariff.min.js"></script>
+      <script src="{$WebApplicationBaseURL}mir-layout/assets/jquery/plugins/shariff/shariff.min.js"></script>
       <script src="{$WebApplicationBaseURL}assets/moment/min/moment.min.js"></script>
       <script src="{$WebApplicationBaseURL}assets/handlebars/handlebars.min.js"></script>
       <script src="{$WebApplicationBaseURL}js/mir/derivate-fileList.min.js"></script>
@@ -217,16 +222,10 @@
   </xsl:template>
 
   <xsl:template match="citation_meta" mode="copyContent">
-    <xsl:message>
-      <xsl:value-of select="'Handling citation meta tags'" />
-    </xsl:message>
     <xsl:copy-of select="./*" />
   </xsl:template>
 
   <xsl:template match="div" mode="copyContent">
-    <xsl:message>
-      <xsl:value-of select="concat('Handling div: ',@id)" />
-    </xsl:message>
     <xsl:copy-of select="./*" />
   </xsl:template>
 
