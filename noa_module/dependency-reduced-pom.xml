@@ -3,7 +3,7 @@
   <parent>
     <artifactId>mycore-parent</artifactId>
     <groupId>org.mycore</groupId>
-    <version>38-SNAPSHOT</version>
+    <version>38</version>
     <relativePath>../pom.xml/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -19,7 +19,7 @@
             <manifestEntries>
               <MCR-Artifact-Id>${project.artifactId}</MCR-Artifact-Id>
               <MCR-Application-Module>${project.name}</MCR-Application-Module>
-              <Priority>99</Priority>
+              <Priority>97</Priority>
               <MCR-Auto-Deploy>true</MCR-Auto-Deploy>
             </manifestEntries>
           </archive>
@@ -39,6 +39,7 @@
                 <includes>
                   <include>org.mycore:oaipmh</include>
                   <include>org.mycore:oaipmh-harvester</include>
+                  <include>org.jsoup:jsoup</include>
                 </includes>
               </artifactSet>
             </configuration>
@@ -71,13 +72,13 @@
     <dependency>
       <groupId>org.mycore</groupId>
       <artifactId>mycore-base</artifactId>
-      <version>2018.06.0.3-SNAPSHOT</version>
+      <version>2018.06.0.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.mycore</groupId>
       <artifactId>mycore-mods</artifactId>
-      <version>2018.06.0.3-SNAPSHOT</version>
+      <version>2018.06.0.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

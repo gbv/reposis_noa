@@ -2,11 +2,14 @@ package de.vzg.noa;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +23,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 import javax.servlet.ServletContext;
@@ -77,9 +81,9 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
 
     private static final Date EARLY_DATE = new Date(1);
 
-    private static HashMap<String, MCRObjectID> existingIssnMap = new HashMap<>();
+    private static final HashMap<String, MCRObjectID> existingIssnMap = new HashMap<>();
 
-    private static HashMap<String, MCRObjectID> existingOAIIDMap = new HashMap<>();
+    private static final HashMap<String, MCRObjectID> existingOAIIDMap = new HashMap<>();
 
     private ScheduledExecutorService cronExecutorService;
 
@@ -135,6 +139,48 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         }
     }
 
+    public static void main(String[] args) {
+        final RecordTransformer recordTransformer = new RecordTransformer("http://oai-pmh.copernicus.org/", "mods",
+            "copernicus");
+        final Stream<Header> headerStream = HarvesterUtil
+            .streamHeaders(HarvesterBuilder.createNewInstance("http://oai-pmh.copernicus.org/"), "mods", null, null,
+                "copernicus");
+
+        headerStream.forEach(hs -> {
+            if (hs.getId().equals("oai:publications.copernicus.org:angeo33803")) {
+                System.out.println("Found it!");
+            }
+        });
+    }
+
+    public static void downloadFile(MCRObject object, AtomicBoolean hasFiles, URL url,
+        BiFunction<MCRObject, String, MCRDerivate> derivateResolver) throws IOException {
+        URLConnection connection = url.openConnection();
+
+        if (connection instanceof HttpURLConnection) {
+            HttpURLConnection httpURLConnection = (HttpURLConnection) connection;
+            System.out.println(httpURLConnection.getResponseCode());
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP) {
+                URL redirectUrl = new URL(httpURLConnection.getHeaderField("Location"));
+                connection = redirectUrl.openConnection();
+            }
+        }
+
+        try (InputStream is = connection.getInputStream()) {
+            // detect the file name
+            final String[] parts = url.getPath().split("/");
+            final String fileName = parts[parts.length - 1];
+
+            // we can open the stream, so we can create the derivate!
+            final MCRDerivate derivate = derivateResolver.apply(object, fileName);
+            final MCRPath dest = MCRPath.getPath(derivate.getId().toString(), "/" + fileName);
+            Files.copy(is, dest, StandardCopyOption.REPLACE_EXISTING);
+            hasFiles.set(true);
+        } catch (IOException e) {
+            LOGGER.error("Error while downloading file!", e);
+        }
+    }
+
     private Date getLastHarvestDate() {
         final Path lastHarvestFile = getLastHarvestDateFilePath();
 
@@ -173,20 +219,6 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         } catch (IOException e) {
             LOGGER.error("Error while writing lastHarvestDate", e);
         }
-    }
-
-
-    public static void main(String[] args) {
-        final RecordTransformer recordTransformer = new RecordTransformer("http://oai-pmh.copernicus.org/", "mods", "copernicus");
-        final Stream<Header> headerStream = HarvesterUtil
-            .streamHeaders(HarvesterBuilder.createNewInstance("http://oai-pmh.copernicus.org/"), "mods", null, null,
-                "copernicus");
-
-        headerStream.forEach(hs->{
-            if(hs.getId().equals("oai:publications.copernicus.org:angeo33803")){
-                System.out.println("Found it!");
-            }
-        });
     }
 
     private MCRObject mapToObject(OAIRecord oaiRecord) {
@@ -287,7 +319,6 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
         mods.removeChildren("part", MCRConstants.MODS_NAMESPACE);
         return mods;
     }
-
 
     public String getName() {
         return getClass().getName();
@@ -398,7 +429,7 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                 if (!alreadyExists.isPresent()) {
                     MCRMetadataManager.create(object);
                 }
-                    // create if files if not present
+                // create if files if not present
                 final Optional<URL> urlOpt = Optional
                     .ofNullable(mw.getElement("mods:location/mods:url[@access='raw object']"))
                     .map(Element::getTextTrim)
@@ -410,21 +441,14 @@ public class OAIUpdateCron implements MCRStartupHandler.AutoExecutable, Runnable
                         }
                     });
                 if (urlOpt.isPresent() && !hasFiles.get()) {
-                    try (InputStream is = urlOpt.get().openStream()) {
-                        // detect the file name
-                        final String[] parts = urlOpt.get().getPath().split("/");
-                        final String fileName = parts[parts.length - 1];
-
-                        // we can open the stream, so we can create the derivate!
-                        final MCRDerivate derivate = createDerivate(object.getId(), fileName);
-                        final MCRPath dest = MCRPath.getPath(derivate.getId().toString(), "/" + fileName);
-                        Files.copy(is, dest);
-                        hasFiles.set(true);
-                    } catch (IOException | MCRAccessException e) {
-                        LOGGER.error("Error while downloading file!", e);
-                    }
+                    downloadFile(object, hasFiles, urlOpt.get(), (obj, filename) -> {
+                        try {
+                            return createDerivate(obj.getId(), filename);
+                        } catch (IOException | MCRAccessException e) {
+                            throw new MCRException("Error while creating derivate!", e);
+                        }
+                    });
                 }
-
 
                 if (!hasFiles.get()) {
                     final Element note = new Element("note", MCRConstants.MODS_NAMESPACE);

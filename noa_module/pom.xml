@@ -10,7 +10,7 @@
   <parent>
     <groupId>org.mycore</groupId>
     <artifactId>mycore-parent</artifactId>
-    <version>38-SNAPSHOT</version>
+    <version>38</version>
   </parent>
   <repositories>
     <repository>
@@ -50,12 +50,12 @@
   <dependency>
     <groupId>org.mycore</groupId>
     <artifactId>mycore-base</artifactId>
-    <version>2018.06.0.3-SNAPSHOT</version>
+    <version>2018.06.0.3</version>
   </dependency>
   <dependency>
     <groupId>org.mycore</groupId>
     <artifactId>mycore-mods</artifactId>
-    <version>2018.06.0.3-SNAPSHOT</version>
+    <version>2018.06.0.3</version>
   </dependency>
 
   <dependency>
