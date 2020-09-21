@@ -81,6 +81,7 @@
                     <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='brand']/item[@href='/content/brand/impressum.xml']" />
                     <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='brand']/item[@href='/content/brand/contact.xml']" />
                     <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='brand']/item[@href='/content/brand/rights.xml']" />
+                    <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='brand']/item[@href='/content/brand/accessibility.xml']" />
                 </ul>
             </div>
             <div class="col-xs-6">
