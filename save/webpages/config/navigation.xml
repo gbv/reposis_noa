@@ -19,6 +19,10 @@
             <label xml:lang="de">Datenschutz</label>
             <label xml:lang="en">Rights</label>
         </item>
+        <item href="/content/brand/accessibility.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Barrierefreiheit</label>
+            <label xml:lang="en">Accessibility</label>
+        </item>
     </menu>
     <menu id="browse">
         <label xml:lang="de">Recherche</label>
