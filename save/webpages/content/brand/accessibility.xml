@@ -6,9 +6,14 @@
       <div class="col-md-10" lang="de">
         <h1>Erklärung zur Barrierefreiheit</h1>
         <p>
-          Die Gottfried Wilhelm Leibniz Bibliothek ist bemüht, ihre Website noa.gwlb.de im Einklang
+          Die Gottfried Wilhelm Leibniz Bibliothek ist bemüht, ihre Website <a href="https://noa.gwlb.de/">noa.gwlb.de</a>
+          im Einklang
           mit dem Niedersächsischen Behindertengleichstellungsgesetz (NBGG) zur Umsetzung der Richtlinie (EU) 2016/2102
           des Europäischen Parlaments und des Rates barrierefrei zugänglich zu machen.
+        </p>
+        <p>
+          Für die Website <a href="https://noa.gwlb.de/">noa.gwlb.de</a> wird demnächst ein BITV-Test durchgeführt und
+          das Testergebnis an dieser Stelle veröffentlicht.
         </p>
         <p>
           Der Dokumentenserver NOA dient der Aufbewahrung und Bereitstellung von elektronischen Pflichtexemplaren
@@ -24,16 +29,16 @@
           Feedback und Kontaktangaben
         </h2>
         <p>
-          Bitte informieren Sie uns, wenn Sie auf unserer Website noa.gwlb.de auf erläuterungsbedürftige
-          Inhalte oder Inhalte, die schwer zugänglich sind, stoßen:<br/>
+          Bitte informieren Sie uns, wenn Sie auf unserer Website <a href="https://noa.gwlb.de/">noa.gwlb.de</a> 
+          auf erläuterungsbedürftige Inhalte oder Inhalte, die schwer zugänglich sind, stoßen:<br/>
           <br/>
           Gottfried Wilhelm Leibniz Bibliothek – Niedersächsische Landesbibliothek<br/>
           Waterloostraße 8<br/>
           30169 Hannover<br/>
           <br/>
           E-Mail: barrierefreiheit@gwlb.de<br/>
-          Tel.: 0511/1267-… <br/>
-          Fax.: 0511/1267-… <br/>
+          Tel.: 0511/1267-303 <br/>
+          Fax.: 0511/1267-207 <br/>
         </p>
         <h2>
           Schlichtungsverfahren
@@ -56,7 +61,7 @@
           30159 Hannover<br/>
           Tel.: 0511/120-4010<br/>
           Fax: 0511/120-99 4010<br/>
-          E-Mail: schlichtungsstelle@ms.niedersachsen.de<br/>
+          E-Mail: <span class="madress">schlichtungsstelle [at] ms.niedersachsen.de</span><br/>
         </p>
       </div>
     </div>
