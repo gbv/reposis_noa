@@ -100,7 +100,11 @@
   MCR.OAIDataProvider.OAI2.RecordSampleID=mir_mods_00000479
 
   MCR.OAIDataProvider.OAI2.MetadataFormats=oai_dc,mods,epicur,xMetaDissPlus
-  MCR.OAIDataProvider.OAI2.Sets=doc-type,open_access,GENRE,xmetadissplus
+  MCR.OAIDataProvider.OAI2.Sets=doc-type,open_access,openaire,driver,ec_fundedresources,GENRE,ddc,institute,epicur
+
+  # add epicure Set
+  MCR.OAIDataProvider.OAI2.Sets.epicur.URI=webapp:oai/set_epicur.xml
+  MCR.OAIDataProvider.OAI2.Sets.epicur.Query=mods.identifier:urn*
 
   # xMetaDissPlus
   MCR.OAIDataProvider.MetadataFormat.xMetaDissPlus.Schema=http://files.dnb.de/standards/xmetadissplus/xmetadissplus.xsd
