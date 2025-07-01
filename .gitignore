@@ -1,7 +1,7 @@
 # eclipse
 .project
 .settings/
-
+.idea/
 # application specific files on server
 jwt.secret
 messages_de.resolved.properties
@@ -9,7 +9,7 @@ messages_en.resolved.properties
 mycore.active.properties
 /mycore.properties
 mycore.resolved.properties
-resources/META-INF/persistence.xml
+src/main/resources/META-INF/persistence.xml
 MCRWebCLI-unprocessed-commands.txt
 
 # noa specific files on server
