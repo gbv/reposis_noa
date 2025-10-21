@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<select>
-  <option title="Autoren" value="submitter">Autoren</option>
-  <option title="Bearbeiter" value="editor">Bearbeiter</option>
-  <option title="Leser" value="reader">Leser</option>
-</select>
