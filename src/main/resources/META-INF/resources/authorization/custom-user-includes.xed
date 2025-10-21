@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mcruser="http://www.mycore.de/components/mcruser">
 
-  <xed:template id="institution">
+  <xed:template id="user_institution">
+    test1
     <mcruser:template name="textInput" xpath="attributes/attribute[@name='institution']/@value" id="institution" i18n="noa.user2.admin.institution" maxlength="64" />
   </xed:template>
 
-  <xed:template id="street">
+  <xed:template id="user_street">
     <mcruser:template name="textInput" xpath="attributes/attribute[@name='street']/@value" id="street" i18n="noa.user2.admin.street" maxlength="64" />
   </xed:template>
 
-  <xed:template id="city">
+  <xed:template id="user_city">
     <mcruser:template name="textInput" xpath="attributes/attribute[@name='city']/@value" id="city" i18n="noa.user2.admin.city" maxlength="20" />
   </xed:template>
 
-  <xed:template id="postalcode">
+  <xed:template id="user_postalcode">
     <mcruser:template name="textInput" xpath="attributes/attribute[@name='postalcode']/@value" id="postalcode" i18n="noa.user2.admin.postalcode" maxlength="5" />
   </xed:template>
 
-  <xed:template id="tel">
+  <xed:template id="user_tel">
     <mcruser:template name="textInput" xpath="attributes/attribute[@name='tel']/@value" id="tel" i18n="noa.user2.admin.tel" maxlength="20" />
   </xed:template>
 
-  <xed:template id="note">
+  <xed:template id="user_note">
     <mcruser:template name="textArea" xpath="attributes/attribute[@name='note']/@value" id="note" i18n="noa.user2.admin.note" rows="3" />
+  </xed:template>
+
+  <xed:template id="address4user">
+    <xed:include ref="user_institution" />
+    <xed:include ref="user_street" />
+    <xed:include ref="user_city" />
+    <xed:include ref="user_postalcode" />
+    <xed:include ref="user_tel" />
+    <xed:include ref="user_note" />
   </xed:template>
 
   <xed:modify ref="editor4changeAdmins">
@@ -32,13 +42,5 @@
   <xed:modify ref="editor4newAdmins">
     <xed:include ref="address4user" after="email" />
   </xed:modify>
-
-  <xed:template id="address4user">
-    <xed:include ref="institution" />
-    <xed:include ref="street" />
-    <xed:include ref="city" />
-    <xed:include ref="postalcode" />
-    <xed:include ref="tel" />
-  </xed:template>
 
 </xed:template>
