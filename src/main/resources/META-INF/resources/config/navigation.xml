@@ -56,7 +56,7 @@
       <label xml:lang="de">Erweiterte Suche</label>
       <label xml:lang="en">Extended Search</label>
     </item>
-    <item href="/content/search/search-expert.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+    <item href="/search/search-expert.xed" type="intern" replaceMenu="false" constrainPopUp="false">
       <label xml:lang="de">Expertensuche</label>
       <label xml:lang="en">Expert Search</label>
     </item>
