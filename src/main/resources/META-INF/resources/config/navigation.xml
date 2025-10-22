@@ -47,16 +47,16 @@
       <label xml:lang="de">nach Personen</label>
       <label xml:lang="en">Persons</label>
     </item>
-    <item href="/search/complex.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+    <item href="/content/search/complex.xed" type="intern" replaceMenu="false" constrainPopUp="false">
       <label xml:lang="de">Erweiterte Suche</label>
       <label xml:lang="en">Extended Search</label>
     </item>
-    <item href="/search/complex_intern.xed" type="intern" replaceMenu="false"
+    <item href="/content/search/complex_intern.xed" type="intern" replaceMenu="false"
       constrainPopUp="false">
       <label xml:lang="de">Erweiterte Suche</label>
       <label xml:lang="en">Extended Search</label>
     </item>
-    <item href="/search/search-expert.xed" type="intern" replaceMenu="false" constrainPopUp="false">
+    <item href="/content/search/search-expert.xed" type="intern" replaceMenu="false" constrainPopUp="false">
       <label xml:lang="de">Expertensuche</label>
       <label xml:lang="en">Expert Search</label>
     </item>
