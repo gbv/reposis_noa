@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
+
+  <xed:template id="admin.fields">
+    <xed:bind xpath="../../../../service">
+      <xed:include ref="status" />
+    </xed:bind>
+    <div id="genre">
+      <xed:include ref="genre.simple"/>
+    </div>
+    <xed:include ref="noa.publicationType"/>
+    <xed:include ref="access"/>
+    <xed:include ref="embargo"/>
+    <xed:include ref="title.complex.repeated"/>
+    <fieldset>
+      <legend class="mir-fieldset-legend">Personen</legend><!-- TODO: i18n -->
+      <div class="mir-fieldset-content">
+        <xed:include ref="author.repeated"/>
+        <xed:include ref="editor.repeated"/>
+      </div>
+    </fieldset>
+    <xed:include ref="publisher.organization.repeat" />
+    <xed:include ref="copyrightMD" />
+    <xed:include ref="edition" />
+    <xed:include ref="place" />
+    <xed:include ref="publisher" />
+    <xed:include ref="date.issued" />
+    <xed:include ref="date.range.issued" />
+    <xed:include ref="extent" />
+    <xed:include ref="identifier.managed" />
+    <xed:include ref="identifier.repeated" />
+    <xed:include ref="language" />
+    <xed:include ref="sdnb" />
+    <xed:include ref="subject.simple" />
+    <xed:include ref="abstract.simple" />
+    <xed:include ref="link.repeated" />
+    <xed:include ref="rights" />
+    <xed:include ref="related.item.search.of.all.items" />
+    <xed:include ref="comment" />
+
+    <xed:include ref="cancel.submit" />
+    <xed:include ref="cleanup-rules" />
+    <xed:include ref="validation-rules" />
+    <xed:include ref="validation-rules.sdnb" />
+
+    <xed:include ref="javascript" />
+    <!-- frame for modal window -->
+    <xed:include ref="modal.name" />
+    <xed:include ref="modal.body" />
+  </xed:template>
+
+  <xed:template id="genres.book">
+    <xed:include ref="noa.common" />
+    <xed:include ref="edition" />
+    <xed:include ref="place" />
+    <xed:include ref="publisher" />
+    <xed:include ref="year.issued" />
+    <xed:include ref="extent" />
+    <xed:include ref="identifier.isbn" />
+    <xed:bind xpath="mods:relatedItem[@type='series']">
+      <xed:include ref="series.title.optional" />
+    </xed:bind>
+    <xed:include ref="language" />
+    <xed:include ref="sdnb.optional" />
+    <xed:include ref="subject.simple" />
+    <xed:include ref="abstract.simple" />
+    <xed:include ref="rights" />
+    <xed:include ref="comment" />
+    <xed:include ref="validation-rules.title" />
+    <xed:include ref="validation-rules.accessAndIssued" />
+  </xed:template>
+
+  <xed:template id="genres.issue">
+    <xed:include ref="access" />
+    <xed:include ref="title.optional" />
+    <xed:include ref="author.repeated" />
+    <xed:include ref="editor.repeated" />
+    <xed:include ref="publisher.organization.repeat" />
+    <xed:include ref="copyrightMD" />
+    <xed:include ref="place" />
+    <xed:include ref="publisher" />
+    <xed:include ref="year.issued" />
+    <xed:bind xpath="mods:relatedItem[@type='host']">
+      <xed:include ref="host.volume" />
+      <xed:include ref="host.issue" />
+    </xed:bind>
+    <xed:include ref="extent" />
+    <xed:include ref="identifier.issn" />
+    <xed:include ref="language" />
+    <xed:include ref="sdnb.optional" />
+    <xed:include ref="subject.simple" />
+    <xed:include ref="abstract.simple" />
+    <xed:include ref="rights" />
+    <xed:include ref="comment" />
+    <xed:include ref="validation-rules.issue" />
+    <xed:include ref="validation-rules.accessAndIssued" />
+  </xed:template>
+
+  <xed:template id="genres.journal">
+    <xed:include ref="title.journal" />
+    <xed:include ref="genres.journal.common" />
+  </xed:template>
+
+  <xed:template id="genres.series">
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="title" />
+    <xed:include uri="webapp:editor/editor-genres.xed" ref="journal.common" />
+  </xed:template>
+
+  <xed:template id="genres.journal.common">
+    <xed:include ref="title.abbreviated" />
+    <xed:include ref="editor.repeated" />
+    <xed:include ref="place" />
+    <xed:include ref="publisher" />
+    <xed:include ref="date.onlyrange.issued.datetimepicker" />
+    <xed:include ref="language" />
+    <xed:include ref="identifier.issn" />
+    <xed:include ref="identifier.zdbid" />
+    <xed:include ref="abstract.simple" />
+    <xed:include ref="comment" />
+    <xed:include ref="validation-rules.title" />
+  </xed:template>
+
+  <xed:template id="genres.article">
+    <xed:include ref="noa.common" />
+    <xed:include ref="place" />
+    <xed:include ref="publisher" />
+    <xed:include ref="year.issued" />
+    <xed:bind xpath="mods:relatedItem[@type='host']">
+      <xed:include ref="host.volume" />
+      <xed:include ref="host.issue" />
+      <xed:include ref="host.pages" />
+    </xed:bind>
+    <xed:include ref="language" />
+    <xed:include ref="sdnb.optional" />
+    <xed:include ref="subject.simple" />
+    <xed:include ref="abstract.simple" />
+    <xed:include ref="rights" />
+    <xed:include ref="comment" />
+    <xed:include ref="validation-rules.article" />
+    <xed:include ref="validation-rules.title" />
+    <xed:include ref="validation-rules.accessAndIssued" />
+  </xed:template>
+
+  <!-- hosts modifications -->
+  <xed:modify ref="hosts.series">
+    <xed:include ref="year.issued.modspart" after="series.volume" />
+  </xed:modify>
+
+  <xed:modify ref="hosts.collection">
+    <xed:include ref="shelfmark.collection.relItemsearch" after="identifier.isbn.collection.relItemsearch" />
+  </xed:modify>
+
+  <xed:modify ref="hosts.festschrift">
+    <xed:include ref="shelfmark.festschrift.relItemsearch" after="identifier.isbn.festschrift.relItemsearch" />
+  </xed:modify>
+
+  <xed:modify ref="hosts.lexicon">
+    <xed:include ref="shelfmark.lexicon.relItemsearch" after="identifier.isbn.lexicon.relItemsearch" />
+  </xed:modify>
+
+  <xed:modify ref="hosts.proceedings">
+    <xed:include ref="shelfmark.proceedings.relItemsearch" after="identifier.isbn.proceedings.relItemsearch" />
+  </xed:modify>
+
+  <xed:template id="hosts.journal">
+    <div class="mir-form-group-body">
+      <xed:bind xpath="mods:relatedItem[@type='host']">
+        <xed:bind xpath="@xlink:href" initially="{$MIR.projectid.default}_mods_00000000"> <input id="relItem-journal" type="hidden" /> </xed:bind>
+        <xed:include ref="title.journal.relItemsearch" />
+        <xed:include ref="identifier.issn.journal.relItemsearch" />
+        <xed:bind xpath="mods:titleInfo/mods:title">
+          <xed:validate  test="(string-length(.) > 0)or not (../../@xlink:href = 'mir_mods_00000000')" i18n="mir.validation.relatedItem.title" display="global" />
+        </xed:bind>
+        <!-- test="or not (../../@xlink:href = mir_mods_00000000)" -->
+      </xed:bind>
+    </div>
+  </xed:template>
+
+  <!-- fields -->
+
+  <xed:template id="noa.common">
+    <xed:include ref="access" />
+    <xed:include ref="title" />
+    <xed:include ref="author.repeated" />
+    <xed:include ref="editor.repeated" />
+    <xed:include ref="publisher.organization.repeat" />
+    <xed:include ref="copyrightMD" />
+  </xed:template>
+
+  <xed:template id="title.optional">
+    <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" label="mir.title" help-text="{i18n:mir.help.title}" required-i18n="mir.validation.title" />
+  </xed:template>
+
+  <xed:template id="series.title.optional">
+    <mir:textfield xpath="mods:titleInfo/mods:title" label="mir.series.title" placeholder="{i18n:mir.placeholder.series.title}" id="series-title" />
+  </xed:template>
+
+  <xed:template id="noa.publicationType">
+    <xed:repeat xpath="mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']" min="1" max="10" method="build">
+      <div class="mir-form-group row required {$xed-validation-marker} required">
+        <label class="col-md-3 col-form-label text-end form-label">
+          <xed:output i18n="noa.publicationType" />
+        </label>
+        <div class="col-md-6">
+          <div class="controls">
+            <xed:bind xpath="@valueURIxEditor">
+              <select class="form-control form-control-inline form-select">
+                <option value=""><xed:output i18n="mir.select.optional" /></option>
+                <xed:include uri="xslStyle:items2options:classification:editor:-1:children:noa_pubtype" />
+              </select>
+            </xed:bind>
+          </div>
+        </div>
+        <mir:help-pmud help-text="{i18n:noa.help.publicationType}" pmud="true" />
+      </div>
+    </xed:repeat>
+    <xed:validate xpath="//mods:mods/mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']/@valueURIxEditor" required="true" i18n="noa.validation.pubtype" display="global" />
+  </xed:template>
+
+
+  <xed:template id="sdnb.optional">
+    <xed:bind xpath="mods:classification[@authority='sdnb'][@displayLabel='sdnb']">
+      <div class="mir-form-group row">
+        <label class="col-md-3 col-form-label text-end form-label">
+          <xed:output i18n="editor.search.mir.sdnb" />
+          :
+        </label>
+        <div class="col-md-6">
+          <select class="form-control form-control-inline mir-form__js-select--large form-select">
+            <option value="">
+              <xed:output i18n="mir.select" />
+            </option>
+            <xed:include uri="xslStyle:items2options:classification:editor:-1:children:SDNB" />
+          </select>
+        </div>
+        <mir:help-pmud help-text="{i18n:mir.help.sdnb}" />
+      </div>
+    </xed:bind>
+  </xed:template>
+
+
+
+  <xed:template id="validation-rules">
+    <xed:load-resource name="mir_genres" uri="classification:metadata:-1:children:mir_genres" />
+    <xed:validate xpath="//mods:mods/mods:genre[@authorityURI=$mir_genres/label[@xml:lang='x-uri']/@text]/@valueURIxEditor" required="true"
+      i18n="mir.validation.genre" display="global" />
+    <!-- don't validate rights for specified genres configured in MIR.Editor.Validate.Genre.Licence -->
+    <xed:if test="//mods:mods/mods:genre[not(contains(concat(' ',$MIR.Editor.Validate.Genre.Licence,' '),concat(' ',@valueURIxEditor,' ')))]">
+      <xed:validate xpath="//mods:mods/mods:accessCondition[@type='use and reproduction']" required="true" i18n="mir.validation.rights" display="global" />
+    </xed:if>
+    <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
+    <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc5646']" required="true" i18n="noa.validation.language" display="global" />
+    <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.copyrightMD" display="global" />
+    <xed:validate xpath="//mods:mods/mods:accessCondition[@type='restriction on access']" required="true" i18n="noa.validation.access" display="global" />
+    <xed:validate xpath="//mods:mods/mods:identifier[@type='isbn']|//mods:relatedItem[contains(@xlink:href,'mods_00000000')]/mods:identifier[@type='isbn']" matches="^((978|979)-?)?([\d -]{12}|\d{9})(\d|X)$" i18n="mir.validation.isbn" display="global" />
+    <xed:validate xpath="//mods:mods/mods:identifier[@type='issn']|//mods:relatedItem[contains(@xlink:href,'mods_00000000')]/mods:identifier[@type='issn']" matches="[\dX]{4}\-[\dX]{4}" i18n="mir.validation.issn" display="global" />
+    <xed:validate xpath="//mods:mods/mods:identifier[@type='doi']" matches="10\.\d+.*" i18n="mir.validation.doi" display="global" />
+    <xed:validate xpath="//mods:mods/mods:identifier[@type='hdl']" matches="\S+/\S+" i18n="mir.validation.handle" display="global" />
+    <xed:validate xpath="//mods:mods/mods:identifier[@type='urn']" matches="urn:nbn:[a-z]{2}:\S*" i18n="mir.validation.urn" display="global" />
+    <xed:validate xpath="//mods:mods/mods:identifier[@type='ppn']" class="org.mycore.mir.validation.MIRValidationHelper" method="validatePPN" display="global" i18n="mir.validation.ppn" />
+    <xed:validate xpath="//mods:url|//mods:abstract/@xlink:href" matches="(ftp|http|https)://[\w\d.]+\S*" i18n="mir.validation.url" display="global" />
+    <xed:validate xpath="//mods:*[@encoding='w3cdtf'][not(ancestor::mods:recordInfo)]|//mods:mods/mods:accessCondition[@type='embargo']" matches="\d{4}(\-\d{2}(\-\d{2})(T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2})?)?"
+      type="datetime" format="yyyy;yyyy-MM;yyyy-MM-dd;yyyy-MM-dd'T'HH:mm:ssZ" i18n="mir.validation.date" display="global" />
+    <xed:validate xpath="//mods:*[@encoding='iso8601']" matches="\d{4}(\d{2}(\d{2})?)?(T\d{2}\d{2}\d{2})?(\/\d{4}(\d{2}(\d{2})?)?(T\d{2}\d{2}\d{2})?)?" display="global"  i18n="mir.validation.date.iso8601"/>
+    <xed:validate xpath="//mods:part/@order" type="integer" display="global" i18n="mir.validation.order" />
+  </xed:template>
+
+  <xed:template id="validation-rules.issue">
+    <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:detail[@type='volume']/mods:number" required="true" i18n="noa.validation.volume" display="global" />
+  </xed:template>
+
+  <xed:template id="validation-rules.article">
+    <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:detail[@type='volume']/mods:number" required="true" i18n="noa.validation.volume" display="global" />
+    <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:extent[@unit='pages']/mods:list" required="true" i18n="noa.validation.pages" display="global" />
+  </xed:template>
+
+  <xed:template id="validation-rules.title">
+    <xed:validate xpath="//mods:mods/mods:titleInfo/mods:title" required="true" i18n="mir.validation.title" display="global" />
+  </xed:template>
+
+  <xed:template id="validation-rules.accessAndIssued">
+    <xed:validate xpath="//mods:mods/mods:originInfo/mods:dateIssued[@encoding='w3cdtf']" required="true" i18n="mir.validation.dateIssued" display="global" />
+  </xed:template>
+
+  <xed:template id="validation-rules.sdnb">
+    <xed:validate xpath="//mods:mods/mods:classification[@authority='sdnb'][@displayLabel='sdnb']" required="true" i18n="mir.validation.sdnb" display="global" />
+  </xed:template>
+
+</xed:template>
