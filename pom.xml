@@ -16,48 +16,45 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
   -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>de.gbv.reposis</groupId>
-        <artifactId>reposis_mir_parent</artifactId>
-        <version>2025.06-SNAPSHOT</version>
-    </parent>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
     <groupId>de.gbv.reposis</groupId>
-    <artifactId>reposis_noa</artifactId>
+    <artifactId>reposis_mir_parent</artifactId>
     <version>2025.06-SNAPSHOT</version>
-    <properties>
-        <MCR.AppName>noa</MCR.AppName>
-    </properties>
+  </parent>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+  <groupId>de.gbv.reposis</groupId>
+  <artifactId>reposis_noa</artifactId>
+  <version>2025.06-SNAPSHOT</version>
+  <properties>
+    <MCR.AppName>noa</MCR.AppName>
+  </properties>
 
-    <repositories>
-        <repository>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-          <id>central-portal-snapshots</id>
-          <name>Central Portal Snapshots</name>
-          <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-	    </repository>
-    </repositories>
-    <dependencies>
-        <!-- enable theese if you write code using them
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>central-portal-snapshots</id>
+      <name>Central Portal Snapshots</name>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <!-- enable theese if you write code using them
         <dependency>
           <groupId>jakarta.servlet</groupId>
           <artifactId>jakarta.servlet-api</artifactId>
@@ -75,11 +72,11 @@
             <artifactId>mycore-pi</artifactId>
         </dependency>
         -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
 </project>
