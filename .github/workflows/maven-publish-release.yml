@@ -21,13 +21,13 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          server-id: ossrhs01 # Value of the distributionManagement/repository/id field of the pom.xml
+          server-id: 'sonatype-central' # Value of the distributionManagement/repository/id field of the pom.xml
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - name: Change Versions
         run: mvn versions:set -DnewVersion=${{ github.ref_name }}-SNAPSHOT
-      - name: Publish to OSSRH with Apache Maven
-        run: mvn --batch-mode deploy
+      - name: Publish to Sonatype Central with Apache Maven
+        run: mvn --batch-mode deploy -P deploy-to-sonatype
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
