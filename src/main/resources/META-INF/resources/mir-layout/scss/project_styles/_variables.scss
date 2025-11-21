@@ -14,8 +14,48 @@
 //  project settings
 // --------------------------------------------------
 
+$noaBlue:     #255595; // button primary
+$noaBlue-10:  #1b3e6c; // 10% darkened
+$noaBlueLight:#3685d4; // button default
+$noaPaper:    #f7f7f7; // page back
+$noaBlack:    #464646; // text
+$noaRed:      #e61f4a; // form has error
 
+
+// unused from old project - so much gray
+// rename befor using
+
+$sitenav:       #191919;  // side nav text
+$copyright:     #333;     // copyright color
+$select:        #777;     // select
+$sidenavBack:   #BCD2F2;  // side nav back
+$placeholder:   #ccc;     // placeholder color
+$navToggle:     #C8D8E8;  // side nav toggle
+$footerBorder:  #ddd;     // footer border
+$buttonBorder:  #D3D3D3;  // button primary border
+$cblistBack:    #EDF5FB;  // cblist back
+
+// --------------------------------------------------
+//  overwrite bootswatch
+// --------------------------------------------------
+
+$web-font-path: "https://webfonts.gbv.de/css?family=Open+Sans";
 
 // --------------------------------------------------
 //  overwrite bootstrap
 // --------------------------------------------------
+
+$primary: $noaBlue;
+$secondary: $noaBlueLight;
+$danger: $noaRed;
+
+$body-color: $noaBlack;
+
+$link-color: $noaBlue;
+$link-hover-color: $noaBlue-10;
+
+// verdana, arial, sans-serif
+$font-family-sans-serif: Verdana, Arial, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+// "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
+$headings-font-family: "Source Sans Pro", Calibri, Candara, Arial, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
