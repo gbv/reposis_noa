@@ -57,6 +57,9 @@ local.properties
 # Eclipse Core
 .project
 
+# visual studi code
+*.code-workspace
+
 # External tool builders
 .externalToolBuilders/
 
