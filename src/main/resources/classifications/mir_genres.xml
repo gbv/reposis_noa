@@ -8,25 +8,25 @@
       <label xml:lang="en" text="Article / Chapter" />
       <label xml:lang="de" text="Artikel / Aufsatz" />
       <label xml:lang="x-hosts" text="journal collection standalone" />
-      <label xml:lang="x-mapping" text="marcgt:article diniPublType:article" />
+      <label xml:lang="x-mapping" text="marcgt:article diniPublType2022:Article" />
     </category>
     <category ID="book">
       <label xml:lang="de" text="Buch / Broschüre" />
       <label xml:lang="x-hosts" text="series standalone" />
       <label xml:lang="en" text="Book" />
-      <label xml:lang="x-mapping" text="marcgt:book diniPublType:book" />
+      <label xml:lang="x-mapping" text="marcgt:book diniPublType2022:Book" />
     </category>
     <category ID="journal">
       <label xml:lang="x-hosts" text="standalone" />
       <label xml:lang="de" text="Zeitschrift" />
       <label xml:lang="en" text="Journal" />
-      <label xml:lang="x-mapping" text="marcgt:journal diniPublType:Periodical" />
+      <label xml:lang="x-mapping" text="marcgt:journal diniPublType2022:Periodical" />
     </category>
     <category ID="issue">
       <label xml:lang="en" text="Issue" />
       <label xml:lang="de" text="Zeitschriftenheft" />
       <label xml:lang="x-hosts" text="journal standalone" />
-      <label xml:lang="x-mapping" text="marcgt:issue diniPublType:PeriodicalPart" />
+      <label xml:lang="x-mapping" text="marcgt:issue diniPublType2022:PeriodicalPart" />
     </category>
   </categories>
 </mycoreclass>
