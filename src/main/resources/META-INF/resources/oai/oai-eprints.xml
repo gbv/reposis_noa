@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description>
+  <eprints xmlns="http://www.openarchives.org/OAI/1.1/eprints"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.openarchives.org/OAI/1.1/eprints http://www.openarchives.org/OAI/1.1/eprints.xsd">
+    <content>
+      <text>
+        The Niedersächsische Online-Archiv (NOA) serves to store and provide access to online publications from and about Lower Saxony.
+      </text>
+      <URL>https://noa.gwlb.de</URL>
+    </content>
+    <metadataPolicy>
+      <text>
+        All bibliographic metadata provided via this interface is hereby made available under CC0 license, free to share and re-use.
+      </text>
+      <URL>http://creativecommons.org/publicdomain/zero/1.0/deed.de</URL>
+    </metadataPolicy>
+    <dataPolicy>
+      <text>
+        The data and electronic documents provided here must be used according to copyright laws, all rights reserved if not otherwise explicitly specified.
+      </text>
+    </dataPolicy>
+    <submissionPolicy>
+      <text>
+        Contents include government publications.
+      </text>
+    </submissionPolicy>
+    <comment>
+      This repository is powered by the MyCoRe repository software, see http://www.mycore.de/ for more information.
+    </comment>
+  </eprints>
+</description>
