@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation"
-    xmlns:mcrver="xalan://org.mycore.common.MCRCoreVersion"
-    xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
-    xmlns:calendar="xalan://java.util.GregorianCalendar"
-    exclude-result-prefixes="i18n mcrver mcrxsl calendar">
+<xsl:stylesheet
+  version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:date="http://exslt.org/dates-and-times"
+  exclude-result-prefixes="date">
 
   <xsl:import href="resource:xsl/layout/mir-common-layout.xsl" />
 
@@ -61,59 +59,59 @@
                 <xsl:for-each select="$loaded_navigation_xml/menu">
                   <xsl:choose>
                     <!-- Ignore some menus, they are shown elsewhere in the layout -->
-                    <xsl:when test="@id='main'"/>
-                    <xsl:when test="@id='brand'"/>
-                    <xsl:when test="@id='below'"/>
-                    <xsl:when test="@id='user'"/>
+                    <xsl:when test="@id='main'" />
+                    <xsl:when test="@id='brand'" />
+                    <xsl:when test="@id='below'" />
+                    <xsl:when test="@id='user'" />
                     <xsl:otherwise>
-                      <xsl:apply-templates select="."/>
+                      <xsl:apply-templates select="." />
                     </xsl:otherwise>
                   </xsl:choose>
                 </xsl:for-each>
                 <xsl:call-template name="mir.basketMenu" />
               </ul>
 
-            <form
-              action="{$WebApplicationBaseURL}servlets/solr/find"
-              class="searchfield_box d-flex"
-              role="search">
-              <!-- Check if 'initialCondQuery' exists and extract its value if it does -->
-              <xsl:variable name="initialCondQuery" select="/response/lst[@name='responseHeader']/lst[@name='params']/str[@name='initialCondQuery']" />
+              <form
+                action="{$WebApplicationBaseURL}servlets/solr/find"
+                class="searchfield_box d-flex"
+                role="search">
+                <!-- Check if 'initialCondQuery' exists and extract its value if it does -->
+                <xsl:variable name="initialCondQuery" select="/response/lst[@name='responseHeader']/lst[@name='params']/str[@name='initialCondQuery']" />
 
-              <input
-                name="condQuery"
-                placeholder="{i18n:translate('mir.navsearch.placeholder')}"
-                class="form-control me-sm-2 search-query"
-                id="searchInput"
-                type="text"
-                aria-label="Search" />
+                <input
+                  name="condQuery"
+                  placeholder="{document('i18n:mir.navsearch.placeholder')/i18n/text()}"
+                  class="form-control me-sm-2 search-query"
+                  id="searchInput"
+                  type="text"
+                  aria-label="Search" />
 
-              <input type="hidden" id="initialCondQueryMirFlatmirLayout" name="initialCondQuery">
-                <xsl:attribute name="value">
-                  <xsl:choose>
-                    <xsl:when test="$initialCondQuery">
-                      <xsl:value-of select="$initialCondQuery"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <xsl:value-of select="'*'"/>
-                    </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:attribute>
-              </input>
+                <input type="hidden" id="initialCondQueryMirFlatmirLayout" name="initialCondQuery">
+                  <xsl:attribute name="value">
+                    <xsl:choose>
+                      <xsl:when test="$initialCondQuery">
+                        <xsl:value-of select="$initialCondQuery" />
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:value-of select="'*'" />
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </xsl:attribute>
+                </input>
 
-              <xsl:choose>
-                <xsl:when test="contains($isSearchAllowedForCurrentUser, 'true')">
-                  <input name="owner" type="hidden" value="createdby:*" />
-                </xsl:when>
-                <xsl:when test="not(mcrxsl:isCurrentUserGuestUser())">
-                  <input name="owner" type="hidden" value="createdby:{$CurrentUser}" />
-                </xsl:when>
-              </xsl:choose>
+                <xsl:choose>
+                  <xsl:when test="contains($isSearchAllowedForCurrentUser, 'true')">
+                    <input name="owner" type="hidden" value="createdby:*" />
+                  </xsl:when>
+                  <xsl:when test="not($CurrentUser='guest')">
+                    <input name="owner" type="hidden" value="createdby:{$CurrentUser}" />
+                  </xsl:when>
+                </xsl:choose>
 
-              <button type="submit" class="btn btn-primary my-2 my-sm-0">
-                <i class="fas fa-search"></i>
-              </button>
-            </form>
+                <button type="submit" class="btn btn-primary my-2 my-sm-0">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
             </div>
           </div>
 
@@ -143,10 +141,9 @@
           </ul>
         </div>
         <div class="col-auto">
-          <xsl:variable name="tmp" select="calendar:new()"/>
           <div id="copyright">
-              <xsl:text>© NOA </xsl:text>
-              <xsl:value-of select="calendar:get($tmp, 1)"/>
+            © NOA
+            <xsl:value-of select="date:year(date:date())" />
           </div>
         </div>
       </div>
@@ -154,7 +151,7 @@
   </xsl:template>
 
   <xsl:template name="mir.powered_by">
-    <xsl:variable name="mcr_version" select="concat('MyCoRe ',mcrver:getCompleteVersion())" />
+    <xsl:variable name="mcr_version" select="document('version:full')/version/text()" />
     <div id="powered_by">
       <a href="http://www.mycore.de">
         <img src="{$WebApplicationBaseURL}mir-layout/images/mycore_logo_small_invert.png" title="{$mcr_version}" alt="powered by MyCoRe" />
