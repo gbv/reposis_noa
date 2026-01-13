@@ -1,31 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-  // spam protection for mails
-  document.querySelectorAll("span.madress").forEach((element) => {
-    const text = element.textContent;
-    const address = text.replace(" [at] ", "@");
-    const mailtoLink = document.createElement("a");
-    mailtoLink.setAttribute("href", "mailto:" + address);
-    mailtoLink.textContent = address;
-    element.parentNode.insertBefore(mailtoLink, element.nextSibling);
-    element.remove();
+function replaceMaskedEmails() {
+  document.querySelectorAll("span.madress").forEach(span => {
+    const address = span.textContent.replace(" [at] ", "@");
+    const link = document.createElement("a");
+    link.href = `mailto:${address}`;
+    link.textContent = address;
+    span.replaceWith(link);
   });
+}
 
-  // replace placeholder USERNAME with username
-  const userID = $("#currentUser strong").html();
-  const linksWithPlaceholder = document.querySelectorAll(
-      "a[href*='createdby:USERNAME']");
-  linksWithPlaceholder.forEach((link) => {
-    const href = link.getAttribute("href");
-    const newHref = href.replace("USERNAME", encodeURIComponent(userID));
-    link.setAttribute("href", newHref);
+function removeGenreOptions(values) {
+  const select = document.querySelector("select#genre");
+  if (!select) {
+    return;
+  }
+  Array.from(select.options).forEach(option => {
+    if (values.includes(option.value)) {
+      option.remove();
+    }
   });
-});
+}
 
-/* TODO: required?
-$( document ).ajaxComplete(function() {
-  // remove series and journal as option from publish/index.xml
-  $("select#genre option[value='series']").remove();
-  $("select#genre option[value='journal']").remove();
-});
-*/
+function setupGenreObserver(values) {
+  const observer = new MutationObserver(() => {
+    removeGenreOptions(values);
+  });
+  observer.observe(document.body, {childList: true, subtree: true});
+  return observer;
+}
+
+function initPage() {
+  const genresToRemove = ["series", "journal"];
+  setupGenreObserver(genresToRemove);
+  replaceMaskedEmails();
+  removeGenreOptions(genresToRemove);
+}
+
+document.addEventListener("DOMContentLoaded", initPage);
