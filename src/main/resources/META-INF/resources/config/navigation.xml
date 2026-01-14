@@ -193,5 +193,17 @@
       <label xml:lang="de">Katalog der GWLB</label>
       <label xml:lang="en">OPAC GWLB</label>
     </item>
+    <item href="https://www.gwlb.de" type="extern" replaceMenu="false" constrainPopUp="false">
+      <label xml:lang="de">Webseite der GWLB</label>
+      <label xml:lang="en">GWLB Website</label>
+    </item>
+    <item href="https://www.niedersaechsische-bibliographie.de" type="extern" replaceMenu="false" constrainPopUp="false">
+      <label xml:lang="de">Niedersächsische Bibliographie</label>
+      <label xml:lang="en">Lower Saxony Bibliography</label>
+    </item>
+    <item href="https://personen.niedersaechsische-bibliographie.de" type="extern" replaceMenu="false" constrainPopUp="false">
+      <label xml:lang="de">Datenbank Niedersächsische Personen</label>
+      <label xml:lang="en">Database of persons from Lower Saxony</label>
+    </item>
   </menu>
 </navigation>
