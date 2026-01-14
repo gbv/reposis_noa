@@ -9,19 +9,19 @@
     </xed:bind>
 
     <div id="genre">
-      <xed:include ref="genre.simple"/>
+      <xed:include ref="genre.simple" />
     </div>
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="publicationType.required"/>
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="publicationType.required" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="access.required" />
-    <xed:include ref="embargo"/>
-    <xed:include ref="title.complex.repeated"/>
+    <xed:include ref="embargo" />
+    <xed:include ref="title.complex.repeated" />
     <fieldset>
       <legend class="mir-fieldset-legend">
         <xed:output i18n="noa.persons" />
       </legend>
       <div class="mir-fieldset-content">
-        <xed:include ref="author.repeated"/>
-        <xed:include ref="editor.repeated"/>
+        <xed:include ref="author.repeated" />
+        <xed:include ref="editor.repeated" />
       </div>
     </fieldset>
     <xed:include ref="publisher.organization.repeat" />
@@ -178,11 +178,13 @@
   <xed:template id="hosts.journal">
     <div class="mir-form-group-body">
       <xed:bind xpath="mods:relatedItem[@type='host']">
-        <xed:bind xpath="@xlink:href" initially="{$MIR.projectid.default}_mods_00000000"> <input id="relItem-journal" type="hidden" /> </xed:bind>
+        <xed:bind xpath="@xlink:href" initially="{$MIR.projectid.default}_mods_00000000">
+          <input id="relItem-journal" type="hidden" />
+        </xed:bind>
         <xed:include ref="title.journal.relItemsearch" />
         <xed:include ref="identifier.issn.journal.relItemsearch" />
         <xed:bind xpath="mods:titleInfo/mods:title">
-          <xed:validate  test="(string-length(.) > 0)or not (../../@xlink:href = 'mir_mods_00000000')" i18n="mir.validation.relatedItem.title" display="global" />
+          <xed:validate test="(string-length(.) > 0)or not (../../@xlink:href = 'mir_mods_00000000')" i18n="mir.validation.relatedItem.title" display="global" />
         </xed:bind>
         <!-- test="or not (../../@xlink:href = mir_mods_00000000)" -->
       </xed:bind>
