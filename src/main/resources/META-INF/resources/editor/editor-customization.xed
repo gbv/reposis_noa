@@ -16,7 +16,9 @@
     <xed:include ref="embargo"/>
     <xed:include ref="title.complex.repeated"/>
     <fieldset>
-      <legend class="mir-fieldset-legend">Personen</legend><!-- TODO: i18n -->
+      <legend class="mir-fieldset-legend">
+        <xed:output i18n="noa.persons" />
+      </legend>
       <div class="mir-fieldset-content">
         <xed:include ref="author.repeated"/>
         <xed:include ref="editor.repeated"/>
