@@ -76,7 +76,9 @@
           <div class="col-md-6">
             <div class="controls">
               <select class="form-control form-control-inline form-select">
-                <option value=""><xed:output i18n="mir.select.optional" /></option>
+                <option value="">
+                  <xed:output i18n="mir.select" />
+                </option>
                 <xed:include uri="xslStyle:items2options:classification:editor:-1:children:noa_pubtype" />
               </select>
             </div>
