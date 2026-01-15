@@ -2,7 +2,6 @@
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mcruser="http://www.mycore.de/components/mcruser">
 
   <xed:template id="user_institution">
-    test1
     <mcruser:template name="textInput" xpath="attributes/attribute[@name='institution']/@value" id="institution" i18n="noa.user2.admin.institution" maxlength="64" />
   </xed:template>
 
