@@ -9,10 +9,6 @@
     <mir:textfield xpath="mods:titleInfo/mods:title" label="mir.series.title" placeholder="{i18n:mir.placeholder.series.title}" id="series-title" />
   </xed:template>
 
-  <xed:template id="noa.place">
-    <mir:textfield xpath="mods:originInfo/mods:place/mods:placeTerm[@type='text']" label="mir.place" help-text="{i18n:mir.help.place}" class="required" />
-  </xed:template>
-
   <xed:template id="noa.comment">
     <mir:textarea xpath="mods:note" help-text="{i18n:mir.help.comment}" label="mir.comment" rows="2" />
   </xed:template>

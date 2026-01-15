@@ -27,7 +27,7 @@
     <xed:include ref="publisher.organization.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="copyrightMD.required" />
     <xed:include ref="edition" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.place" />
+    <xed:include ref="place" />
     <xed:include ref="publisher" />
     <xed:include ref="date.range.issued.datetimepicker" />
     <xed:include ref="extent" />
@@ -65,7 +65,7 @@
   <xed:template id="genres.book">
     <xed:include ref="noa.common" />
     <xed:include ref="edition" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.place" />
+    <xed:include ref="place" />
     <xed:include ref="publisher" />
     <xed:include ref="year.issued" />
     <xed:include ref="extent" />
@@ -90,7 +90,7 @@
     <xed:include ref="editor.repeated" />
     <xed:include ref="publisher.organization.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="copyrightMD.required" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.place" />
+    <xed:include ref="place" />
     <xed:include ref="publisher" />
     <xed:include ref="year.issued" />
     <xed:bind xpath="mods:relatedItem[@type='host']">
@@ -122,7 +122,7 @@
   <xed:template id="genres.journal.common">
     <xed:include ref="title.abbreviated" />
     <xed:include ref="editor.repeated" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.place" />
+    <xed:include ref="place" />
     <xed:include ref="publisher" />
     <xed:include ref="date.onlyrange.issued.datetimepicker" />
     <xed:include ref="language" />
@@ -135,7 +135,7 @@
 
   <xed:template id="genres.article">
     <xed:include ref="noa.common" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.place" />
+    <xed:include ref="place" />
     <xed:include ref="publisher" />
     <xed:include ref="year.issued" />
     <xed:bind xpath="mods:relatedItem[@type='host']">
