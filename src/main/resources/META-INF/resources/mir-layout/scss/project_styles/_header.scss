@@ -47,6 +47,17 @@
 // Small devices (landscape phones, less than 768px)
 @include media-breakpoint-down(md) {
   // sm and lower
+  #project_logo_box {
+    flex-wrap: wrap;
+    a {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: flex-end;
+      &:first-child {
+        justify-content: flex-start;
+      }
+    }
+  }
 }
 
 // X-Small devices (portrait phones, less than 576px)
