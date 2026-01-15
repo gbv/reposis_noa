@@ -9,12 +9,24 @@
     </head>
     <script src='../../js/mir/select-doctype.min.js'> </script>
 
+    <!-- noa custom start -->
+    <h2>Neuaufnahme mit Import externer Daten</h2>
+
+    <div class="row">
+      <div class="col-md-10">
+        <p>
+          Bitte geben Sie die PPN aus dem GVK des GBV oder eine ZDBID aus der Zeitschriftendatenbank an, dann werden diese Daten in die Erfassungsmaske übernommen.
+        </p>
+      </div>
+    </div>
+    <!-- noa custom end -->
+
     <!-- NOA custom change action to editor-admin -->
     <form id="submit_publication"
       class="form-horizontal"
       role="form"
       method="get"
-      action="../../editor/editor-admin.xed">
+      action="../../editor/editor-admins.xed">
 
       <!-- NOA custom start -->
       <!-- delete dynamic select -->
