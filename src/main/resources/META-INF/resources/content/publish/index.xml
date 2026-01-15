@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MyCoReWebPage>
+
+  <section title="Publizieren" xml:lang="de">
+    <head>
+      <meta name="title" content="Publizieren"/>
+      <meta name="description" content="Publizieren mit Metadatenerfassung"/>
+    </head>
+    <script src='../../js/mir/select-doctype.min.js'> </script>
+
+    <!-- NOA custom change action to editor-admin -->
+    <form id="submit_publication"
+      class="form-horizontal"
+      role="form"
+      method="get"
+      action="../../editor/editor-admin.xed">
+
+      <!-- NOA custom start -->
+      <!-- delete dynamic select -->
+      <!-- NOA custom END -->
+
+      <div class="row mir-form-group">
+        <div class="col-sm-3 col-lg-2 control-label">
+          <select name="type" class="form-control form-select">
+            <option value="doi">DOI</option>
+            <!-- noa custom start -->
+            <!-- delete scopus, pubmed, isbn, issn, ieee -->
+            <!-- noa custom end -->
+            <option value="ppn">K10plus-PPN</option>
+            <option value="zdbid">ZDB-ID</option>
+          </select>
+        </div>
+        <div class="col-sm-7 col-md-5 col-lg-4">
+          <input class="form-control" type="text" name="modsId" />
+        </div>
+      </div>
+
+      <!-- submit -->
+      <div class="row mir-form-group mt-4">
+        <div class="col-lg-7 col-sm-12">
+          <button type="submit" class="btn btn-primary float-end">Weiter</button>
+        </div>
+      </div>
+
+    </form>
+  </section>
+
+  <!-- noa custom start -->
+  <!-- delete english section -->
+  <!-- noa custom end -->
+
+
+</MyCoReWebPage>
