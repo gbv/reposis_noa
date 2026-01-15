@@ -9,6 +9,29 @@
     <mir:textfield xpath="mods:titleInfo/mods:title" label="mir.series.title" placeholder="{i18n:mir.placeholder.series.title}" id="series-title" />
   </xed:template>
 
+  <xed:template id="noa.place.required">
+    <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:place/mods:placeTerm[@type='text']" label="mir.place" help-text="{i18n:mir.help.place}" class="required" required="true" required-i18n="noa.validation.place" />
+  </xed:template>
+
+  <xed:template id="noa.language.required">
+    <xed:repeat xpath="mods:language" max="5">
+      <xed:bind xpath="mods:languageTerm[@authority='rfc5646'][@type='code']" initially="de">
+        <div class="mir-form-group row {$xed-validation-marker} required">
+          <label class="col-md-3 col-form-label text-end form-label">
+            <xed:output i18n="mir.language" />
+          </label>
+          <div class="col-md-6">
+            <div class="controls">
+              <xed:include ref="lang.list" />
+            </div>
+          </div>
+          <mir:help-pmud help-text="{i18n:mir.help.language}" pmud="true" />
+        </div>
+      </xed:bind>
+    </xed:repeat>
+    <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc5646']" required="true" i18n="noa.validation.language" display="global" />
+  </xed:template>
+
   <xed:template id="copyrightMD.required">
     <xed:bind
       xpath="mods:accessCondition[@type='copyrightMD']/cmd:copyright[@copyright.status='copyrighted'][@publication.status='published'][@xsi:schemaLocation='http://www.cdlib.org/inside/diglib/copyrightMD https://www.cdlib.org/groups/rmg/docs/copyrightMD.xsd']"
@@ -90,8 +113,6 @@
     <xed:if test="//mods:mods/mods:genre[not(contains(concat(' ',$MIR.Editor.Validate.Genre.Licence,' '),concat(' ',@valueURIxEditor,' ')))]">
       <xed:validate xpath="//mods:mods/mods:accessCondition[@type='use and reproduction']" required="true" i18n="mir.validation.rights" display="global" />
     </xed:if>
-    <xed:validate xpath="//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" required="true" i18n="noa.validation.place" display="global" />
-    <xed:validate xpath="//mods:mods/mods:language/mods:languageTerm[@authority='rfc5646']" required="true" i18n="noa.validation.language" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.rightsHolder" display="global" />
     <xed:validate xpath="//mods:mods/mods:accessCondition[@type='restriction on access']" required="true" i18n="noa.validation.access" display="global" />
     <xed:validate xpath="//mods:mods/mods:identifier[@type='isbn']|//mods:relatedItem[contains(@xlink:href,'mods_00000000')]/mods:identifier[@type='isbn']" matches="^((978|979)-?)?([\d -]{12}|\d{9})(\d|X)$" i18n="mir.validation.isbn" display="global" />
