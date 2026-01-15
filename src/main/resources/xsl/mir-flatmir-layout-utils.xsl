@@ -27,7 +27,7 @@
         </a>
         <a href="{concat($WebApplicationBaseURL,substring($loaded_navigation_xml/@hrefStartingPage,2))}">
           <img
-            src="{$WebApplicationBaseURL}images/noa-logo.png"
+            src="{$WebApplicationBaseURL}images/noa-logo-v3.png"
             class="project-logo"
             alt="" />
         </a>

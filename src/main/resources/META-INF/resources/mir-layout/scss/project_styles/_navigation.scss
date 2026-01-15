@@ -9,11 +9,17 @@
 // No media query since the xxl breakpoint has no upper bound on its width
 
   // overwrites mir
-  .mir-prop-nav .navbar-nav > li > a {
-    color: $link-color;
-    &:hover,
-    &:focus {
-      color: $link-hover-color;
+  .mir-prop-nav {
+    float: none;
+    position: absolute;
+    right: 15px;
+    top: 0;
+    .navbar-nav > li > a {
+      color: $link-color;
+      &:hover,
+      &:focus {
+        color: $link-hover-color;
+      }
     }
   }
 

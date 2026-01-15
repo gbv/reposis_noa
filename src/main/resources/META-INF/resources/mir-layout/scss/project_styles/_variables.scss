@@ -59,3 +59,37 @@ $font-family-sans-serif: Verdana, Arial, system-ui, -apple-system, "Segoe UI", R
 
 // "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
 $headings-font-family: "Source Sans Pro", Calibri, Candara, Arial, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+// Pagination
+// overwrite bootswatch width bs default
+/*
+$pagination-color:                  $white !default;
+$pagination-bg:                     $success !default;
+$pagination-border-width:           0 !default;
+$pagination-border-color:           transparent !default;
+$pagination-hover-color:            $white !default;
+$pagination-hover-bg:               darken($success, 15%) !default;
+$pagination-hover-border-color:     transparent !default;
+$pagination-active-bg:              $pagination-hover-bg !default;
+$pagination-active-border-color:    transparent !default;
+$pagination-disabled-color:         $gray-200 !default;
+$pagination-disabled-bg:            lighten($success, 15%) !default;
+$pagination-disabled-border-color:  transparent !default;
+*/
+
+$prefix: "bs-";
+$component-active-bg:$primary;
+
+$pagination-color:                  var(--#{$prefix}white);
+$pagination-bg:                     var(--#{$prefix}primary);
+$pagination-border-width:           var(--#{$prefix}border-width);
+$pagination-border-color:           var(--#{$prefix}border-color);
+$pagination-hover-color:            var(--#{$prefix}primary);
+$pagination-hover-bg:               var(--#{$prefix}white);
+$pagination-hover-border-color:     var(--#{$prefix}border-color);
+$pagination-active-color:           var(--#{$prefix}primary);
+$pagination-active-bg:              var(--#{$prefix}white);
+$pagination-active-border-color:    var(--#{$prefix}primary-color);
+$pagination-disabled-color:         var(--#{$prefix}secondary-color);
+$pagination-disabled-bg:            var(--#{$prefix}secondary-bg);
+$pagination-disabled-border-color:  var(--#{$prefix}border-color);
