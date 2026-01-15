@@ -40,7 +40,7 @@
     <xed:include ref="link.repeated" />
     <xed:include ref="rights" />
     <xed:include ref="related.item.search.of.all.items" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.comment" />
+    <xed:include ref="comment" />
 
     <xed:include ref="cancel.submit" />
     <xed:include ref="cleanup-rules" />
@@ -78,7 +78,7 @@
     <xed:include ref="subject.simple" />
     <xed:include ref="abstract.simple" />
     <xed:include ref="rights" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.comment" />
+    <xed:include ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.title" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.accessAndIssued" />
   </xed:template>
@@ -104,7 +104,7 @@
     <xed:include ref="subject.simple" />
     <xed:include ref="abstract.simple" />
     <xed:include ref="rights" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.comment" />
+    <xed:include ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.issue" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.accessAndIssued" />
   </xed:template>
@@ -129,7 +129,7 @@
     <xed:include ref="identifier.issn" />
     <xed:include ref="identifier.zdbid" />
     <xed:include ref="abstract.simple" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.comment" />
+    <xed:include ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.title" />
   </xed:template>
 
@@ -148,7 +148,7 @@
     <xed:include ref="subject.simple" />
     <xed:include ref="abstract.simple" />
     <xed:include ref="rights" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="noa.comment" />
+    <xed:include ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.article" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.title" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.accessAndIssued" />
