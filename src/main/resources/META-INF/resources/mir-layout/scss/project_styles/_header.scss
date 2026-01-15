@@ -8,21 +8,17 @@
 // XX-Large devices (larger desktops)
 // No media query since the xxl breakpoint has no upper bound on its width
 
-  header {
-    background-image: url('../../../../images/head-back.jpg');
-    background-position: top right;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-
   #header_box {
     padding-top: 2rem;
     padding-bottom: .5rem;
     margin: 0 auto;
+    position: relative;
   }
 
   #project_logo_box {
+    float: none;
     display: flex;
+    justify-content: space-between;
   }
 
   .parent-logo {
@@ -51,6 +47,17 @@
 // Small devices (landscape phones, less than 768px)
 @include media-breakpoint-down(md) {
   // sm and lower
+  #project_logo_box {
+    flex-wrap: wrap;
+    a {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: flex-end;
+      &:first-child {
+        justify-content: flex-start;
+      }
+    }
+  }
 }
 
 // X-Small devices (portrait phones, less than 576px)

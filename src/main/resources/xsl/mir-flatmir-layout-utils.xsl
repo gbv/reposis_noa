@@ -27,7 +27,7 @@
         </a>
         <a href="{concat($WebApplicationBaseURL,substring($loaded_navigation_xml/@hrefStartingPage,2))}">
           <img
-            src="{$WebApplicationBaseURL}images/noa-logo.png"
+            src="{$WebApplicationBaseURL}images/noa-logo-v3.png"
             class="project-logo"
             alt="" />
         </a>
@@ -44,7 +44,7 @@
               class="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
-              data-target="#mir-main-nav-collapse-box"
+              data-bs-target="#mir-main-nav-collapse-box"
               aria-controls="mir-main-nav-collapse-box"
               aria-expanded="false"
               aria-label="Toggle navigation">
