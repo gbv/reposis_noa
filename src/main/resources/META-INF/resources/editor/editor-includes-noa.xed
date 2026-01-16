@@ -9,11 +9,11 @@
     <mir:textfield xpath="mods:titleInfo/mods:title" label="mir.series.title" placeholder="{i18n:mir.placeholder.series.title}" id="series-title" />
   </xed:template>
 
-  <xed:template id="noa.place.required">
+  <xed:template id="place.required">
     <mir:textfield xpath="mods:originInfo[@eventType='publication']/mods:place/mods:placeTerm[@type='text']" label="mir.place" help-text="{i18n:mir.help.place}" class="required" required="true" required-i18n="noa.validation.place" />
   </xed:template>
 
-  <xed:template id="noa.language.required">
+  <xed:template id="language.required">
     <xed:repeat xpath="mods:language" max="5">
       <xed:bind xpath="mods:languageTerm[@authority='rfc5646'][@type='code']" initially="de">
         <div class="mir-form-group row {$xed-validation-marker} required">
