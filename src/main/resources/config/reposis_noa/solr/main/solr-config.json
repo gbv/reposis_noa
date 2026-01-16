@@ -13,7 +13,7 @@
       },
       "appends": {
         "facet": "true",
-        "facet.field":  [
+        "facet.field": [
           "mods.genre",
           "worldReadableComplete",
           "noa.pubtype"

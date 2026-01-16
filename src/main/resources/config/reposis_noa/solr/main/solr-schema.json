@@ -1,8 +1,9 @@
 [
   {
     "add-field": {
-        "name":"noa.pubtype",
-        "type":"string",
-        "multiValued":true}
+      "name": "noa.pubtype",
+      "type": "string",
+      "multiValued": true
+    }
   }
 ]
