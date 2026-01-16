@@ -44,8 +44,7 @@
 
     <xed:include ref="cancel.submit" />
     <xed:include ref="cleanup-rules" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.sdnb" />
+    <xed:include ref="validation-rules" />
 
     <xed:include ref="javascript" />
     <!-- frame for modal window -->

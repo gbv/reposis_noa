@@ -38,6 +38,7 @@
     >
       <mir:textfield xpath="cmd:rights.holder/cmd:name" label="mir.rightsHolder" rows="2" repeat="true" min="1" max="10" help-text="{i18n:mir.help.rightsHolder}" class="required" />
     </xed:bind>
+    <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.rightsHolder" display="global" />
   </xed:template>
 
   <xed:template id="access.required">
@@ -59,6 +60,7 @@
         <mir:help-pmud help-text="{i18n:mir.help.access}" />
       </div>
     </xed:bind>
+    <xed:validate xpath="//mods:mods/mods:accessCondition[@type='restriction on access']" required="true" i18n="noa.validation.access" display="global" />
   </xed:template>
 
   <xed:template id="sdnb.optional">
@@ -105,29 +107,6 @@
     <xed:validate xpath="//mods:mods/mods:classification[@displayLabel='publication type'][@authorityURI='http://www.noa-gwlb.de/classifications/noa_pubtype']/@valueURIxEditor" required="true" i18n="noa.validation.pubtype" display="global" />
   </xed:template>
 
-  <xed:template id="validation-rules">
-    <xed:load-resource name="mir_genres" uri="classification:metadata:-1:children:mir_genres" />
-    <xed:validate xpath="//mods:mods/mods:genre[@authorityURI=$mir_genres/label[@xml:lang='x-uri']/@text]/@valueURIxEditor" required="true"
-      i18n="mir.validation.genre" display="global" />
-    <!-- don't validate rights for specified genres configured in MIR.Editor.Validate.Genre.Licence -->
-    <xed:if test="//mods:mods/mods:genre[not(contains(concat(' ',$MIR.Editor.Validate.Genre.Licence,' '),concat(' ',@valueURIxEditor,' ')))]">
-      <xed:validate xpath="//mods:mods/mods:accessCondition[@type='use and reproduction']" required="true" i18n="mir.validation.rights" display="global" />
-    </xed:if>
-    <xed:validate xpath="//mods:mods/mods:accessCondition[@type='copyrightMD']/cmd:copyright/cmd:rights.holder/cmd:name" required="true" i18n="noa.validation.rightsHolder" display="global" />
-    <xed:validate xpath="//mods:mods/mods:accessCondition[@type='restriction on access']" required="true" i18n="noa.validation.access" display="global" />
-    <xed:validate xpath="//mods:mods/mods:identifier[@type='isbn']|//mods:relatedItem[contains(@xlink:href,'mods_00000000')]/mods:identifier[@type='isbn']" matches="^((978|979)-?)?([\d -]{12}|\d{9})(\d|X)$" i18n="mir.validation.isbn" display="global" />
-    <xed:validate xpath="//mods:mods/mods:identifier[@type='issn']|//mods:relatedItem[contains(@xlink:href,'mods_00000000')]/mods:identifier[@type='issn']" matches="[\dX]{4}\-[\dX]{4}" i18n="mir.validation.issn" display="global" />
-    <xed:validate xpath="//mods:mods/mods:identifier[@type='doi']" matches="10\.\d+.*" i18n="mir.validation.doi" display="global" />
-    <xed:validate xpath="//mods:mods/mods:identifier[@type='hdl']" matches="\S+/\S+" i18n="mir.validation.handle" display="global" />
-    <xed:validate xpath="//mods:mods/mods:identifier[@type='urn']" matches="urn:nbn:[a-z]{2}:\S*" i18n="mir.validation.urn" display="global" />
-    <xed:validate xpath="//mods:mods/mods:identifier[@type='ppn']" class="org.mycore.mir.validation.MIRValidationHelper" method="validatePPN" display="global" i18n="mir.validation.ppn" />
-    <xed:validate xpath="//mods:url|//mods:abstract/@xlink:href" matches="(ftp|http|https)://[\w\d.]+\S*" i18n="mir.validation.url" display="global" />
-    <xed:validate xpath="//mods:*[@encoding='w3cdtf'][not(ancestor::mods:recordInfo)]|//mods:mods/mods:accessCondition[@type='embargo']" matches="\d{4}(\-\d{2}(\-\d{2})(T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2})?)?"
-      type="datetime" format="yyyy;yyyy-MM;yyyy-MM-dd;yyyy-MM-dd'T'HH:mm:ssZ" i18n="mir.validation.date" display="global" />
-    <xed:validate xpath="//mods:*[@encoding='iso8601']" matches="\d{4}(\d{2}(\d{2})?)?(T\d{2}\d{2}\d{2})?(\/\d{4}(\d{2}(\d{2})?)?(T\d{2}\d{2}\d{2})?)?" display="global" i18n="mir.validation.date.iso8601" />
-    <xed:validate xpath="//mods:part/@order" type="integer" display="global" i18n="mir.validation.order" />
-  </xed:template>
-
   <xed:template id="validation-rules.issue">
     <xed:validate xpath="//mods:mods/mods:relatedItem/mods:part/mods:detail[@type='volume']/mods:number" required="true" i18n="noa.validation.volume" display="global" />
   </xed:template>
@@ -143,10 +122,6 @@
 
   <xed:template id="validation-rules.accessAndIssued">
     <xed:validate xpath="//mods:mods/mods:originInfo/mods:dateIssued[@encoding='w3cdtf']" required="true" i18n="mir.validation.dateIssued" display="global" />
-  </xed:template>
-
-  <xed:template id="validation-rules.sdnb">
-    <xed:validate xpath="//mods:mods/mods:classification[@authority='sdnb'][@displayLabel='sdnb']" required="true" i18n="mir.validation.sdnb" display="global" />
   </xed:template>
 
 </xed:template>
