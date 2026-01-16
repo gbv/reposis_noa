@@ -17,7 +17,7 @@ MCR.UseXSLTemplateCache=false
 MCR.SASS.DeveloperMode=true
 ```
 
-## Project-Specific adaptations
+## Project-specific adaptations
 
 * Additional fields in the user editor for notes and address
 * Extra page `new-author.xed` with a note advising users to contact the GWLB
