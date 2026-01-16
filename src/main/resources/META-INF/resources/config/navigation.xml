@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <navigation hrefStartingPage="/content/index.xml" dir="/content" template="template_mir">
-  <menu id="brand" dir="/content/brand">
-    <label xml:lang="de">MIR-Menü</label>
-    <label xml:lang="en">MIR menu</label>
+  <menu id="main" dir="/content/">
     <item href="/content/index.xml" type="intern" replaceMenu="false" constrainPopUp="false">
       <label xml:lang="de">Start</label>
       <label xml:lang="en">Start</label>
     </item>
+  </menu>
+  <menu id="brand" dir="/content/brand">
+    <label xml:lang="de">MIR-Menü</label>
+    <label xml:lang="en">MIR menu</label>
     <item href="/content/brand/impressum.xml" type="intern" replaceMenu="false"
       constrainPopUp="false">
       <label xml:lang="de">Impressum</label>
