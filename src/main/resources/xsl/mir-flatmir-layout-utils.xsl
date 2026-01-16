@@ -10,14 +10,6 @@
   <xsl:template name="mir.navigation">
 
     <div id="header_box" class="clearfix container">
-      <div id="options_nav_box" class="mir-prop-nav">
-        <nav>
-          <ul class="navbar-nav ms-auto flex-row">
-            <xsl:call-template name="mir.loginMenu" />
-            <xsl:call-template name="mir.languageMenu" />
-          </ul>
-        </nav>
-      </div>
       <div id="project_logo_box">
         <a href="https://www.gwlb.de">
           <img
@@ -56,10 +48,13 @@
               class="collapse navbar-collapse mir-main-nav__entries justify-content-between">
 
               <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <xsl:call-template name="project.generate_single_menu_entry">
+                  <xsl:with-param name="menuID" select="'main'"/>
+                </xsl:call-template>
                 <xsl:for-each select="$loaded_navigation_xml/menu">
                   <xsl:choose>
                     <!-- Ignore some menus, they are shown elsewhere in the layout -->
-                    <xsl:when test="@id='main'" />
+                     <xsl:when test="@id='main'" />
                     <xsl:when test="@id='brand'" />
                     <xsl:when test="@id='below'" />
                     <xsl:when test="@id='user'" />
@@ -118,6 +113,16 @@
         </nav>
       </div>
     </div>
+    <div id="options_nav_box" class="mir-prop-nav">
+      <div class="container">
+        <nav>
+          <ul class="navbar-nav ms-auto flex-row justify-content-end">
+            <xsl:call-template name="mir.loginMenu" />
+            <xsl:call-template name="mir.languageMenu" />
+          </ul>
+        </nav>
+      </div>
+    </div>
   </xsl:template>
 
   <xsl:template name="mir.jumbotwo">
@@ -157,6 +162,35 @@
         <img src="{$WebApplicationBaseURL}mir-layout/images/mycore_logo_small_invert.png" title="{$mcr_version}" alt="powered by MyCoRe" />
       </a>
     </div>
+  </xsl:template>
+
+  <xsl:template name="project.generate_single_menu_entry">
+    <xsl:param name="menuID" />
+
+    <xsl:variable name="activeClass">
+      <xsl:choose>
+        <xsl:when test="$loaded_navigation_xml/menu[@id=$menuID]/item[@href = $browserAddress ]">
+        <xsl:text>active</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>not-active</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <li class="nav-item {$activeClass}">
+
+      <a id="{$menuID}" href="{$WebApplicationBaseURL}{$loaded_navigation_xml/menu[@id=$menuID]/item/@href}" class="nav-link" >
+        <xsl:choose>
+          <xsl:when test="$loaded_navigation_xml/menu[@id=$menuID]/item/label[lang($CurrentLang)] != ''">
+            <xsl:value-of select="$loaded_navigation_xml/menu[@id=$menuID]/item/label[lang($CurrentLang)]" />
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$loaded_navigation_xml/menu[@id=$menuID]/item/label[lang($DefaultLang)]" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </a>
+    </li>
   </xsl:template>
 
 </xsl:stylesheet>

@@ -11,15 +11,31 @@
   // overwrites mir
   .mir-prop-nav {
     float: none;
-    position: absolute;
-    right: 15px;
-    top: 0;
     .navbar-nav > li > a {
       color: $link-color;
+      font-size: 1rem;
       &:hover,
       &:focus {
         color: $link-hover-color;
       }
+    }
+  }
+
+  .internal_links {
+    padding-left: 2rem;
+    li {
+      display: inline;
+      &:before {
+        content: ' • ';
+        padding: 0 3px;
+      }
+      &:first-child::before {
+        content: '';
+        padding-left: 0px;
+      }
+    }
+    .dropdown-item {
+      display: inline;
     }
   }
 
@@ -37,6 +53,21 @@
 // Medium devices (tablets, less than 992px)
 @include media-breakpoint-down(lg) {
   // md and lower
+  .internal_links {
+    li {
+      display: block;
+      &:before {
+        content: none;
+        padding-left: 0px;
+      }
+       &:first-child::before {
+        content: none;
+      }
+    }
+    .dropdown-item {
+      display: block;
+    }
+  }
 }
 
 // Small devices (landscape phones, less than 768px)
