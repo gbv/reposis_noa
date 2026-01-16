@@ -1,6 +1,5 @@
 reload solr configuration main in core main
-update classification from uri resource:classifications/rfc5646.xml
 update classification from uri resource:classifications/mir_access.xml
 update classification from uri resource:classifications/mir_genres.xml
 update classification from uri resource:classifications/noa_pubtype.xml
-update classification from uri resource:classifications/noteTypes.xml
+update classification from uri resource:classifications/rfc5646.xml
