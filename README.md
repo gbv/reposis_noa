@@ -1,6 +1,6 @@
 # noa
 
-## Installation Instructions
+## Installation instructions
 
 * run `mvn clean install`
 * copy jar to `~/.mycore/(dev-)mir/lib/`
