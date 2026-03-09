@@ -1,8 +1,11 @@
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+  xmlns:mcri18n="xalan://org.mycore.services.i18n.MCRTranslation"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  exclude-result-prefixes="mcri18n">
 
   <xsl:variable name="Type" select="'document'" />
-
-  <xsl:variable name="PageTitle" select="document(concat('i18n:titles.pageTitle.error: ', /mcr_error/@HttpError))/i18n/text()" />
+  <xsl:variable name="PageTitle" select="mcri18n:translate('titles.pageTitle.error', /mcr_error/@HttpError)" />
 
   <xsl:template match="/mcr_error">
     <div class="row">
@@ -56,7 +59,7 @@
       <div class="hidden">
         <div class="panel panel-warning">
           <div class="panel-heading">
-            <xsl:value-of select="concat(document('i18n:error.stackTrace')/i18n/text(),' :')" />
+            <xsl:value-of select="concat(mcri18n:translate('error.stackTrace'),' :')" />
           </div>
           <div class="panel-body">
             <xsl:for-each select="exception/trace">
