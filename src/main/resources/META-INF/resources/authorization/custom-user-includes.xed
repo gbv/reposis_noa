@@ -26,6 +26,8 @@
   </xed:template>
 
   <xed:template id="address4user">
+    <xed:cleanup-rule xpath="//attribute" relevant-if="@value and string-length(@value) &gt; 0" />
+
     <xed:include ref="user_institution" />
     <xed:include ref="user_street" />
     <xed:include ref="user_city" />
