@@ -66,7 +66,7 @@
     <xed:include ref="edition" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="place.required" />
     <xed:include ref="publisher" />
-    <xed:include ref="year.issued" />
+    <xed:include ref="year.issued.required" />
     <xed:include ref="extent" />
     <xed:include ref="identifier.isbn" />
     <xed:bind xpath="mods:relatedItem[@type='series']">
@@ -79,7 +79,6 @@
     <xed:include ref="rights" />
     <xed:include ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.title" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.accessAndIssued" />
   </xed:template>
 
   <xed:template id="genres.issue">
@@ -91,7 +90,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="copyrightMD.required" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="place.required" />
     <xed:include ref="publisher" />
-    <xed:include ref="year.issued" />
+    <xed:include ref="year.issued.required" />
     <xed:bind xpath="mods:relatedItem[@type='host']">
       <xed:include ref="host.volume" />
       <xed:include ref="host.issue" />
@@ -105,7 +104,6 @@
     <xed:include ref="rights" />
     <xed:include ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.issue" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.accessAndIssued" />
   </xed:template>
 
   <xed:template id="genres.journal">
@@ -136,7 +134,7 @@
     <xed:include ref="noa.common" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="place.required" />
     <xed:include ref="publisher" />
-    <xed:include ref="year.issued" />
+    <xed:include ref="year.issued.required" />
     <xed:bind xpath="mods:relatedItem[@type='host']">
       <xed:include ref="host.volume" />
       <xed:include ref="host.issue" />
@@ -150,7 +148,6 @@
     <xed:include ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.article" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.title" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-noa.xed" ref="validation-rules.accessAndIssued" />
   </xed:template>
 
   <!-- hosts modifications -->
