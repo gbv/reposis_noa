@@ -204,7 +204,6 @@
         </xsl:when>
       </xsl:choose>
       <a href="{$WebApplicationBaseURL}receive/{@id}">
-        xx
         <xsl:choose>
           <xsl:when test="string-length(field[@name='mir.toc.title']) &gt; 0">
             <xsl:value-of select="field[@name='mir.toc.title']" />
