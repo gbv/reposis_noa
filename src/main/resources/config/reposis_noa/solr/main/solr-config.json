@@ -123,5 +123,29 @@
         "facet.mincount": "1"
       }
     }
-  }
+  },
+  {
+    "update-requestHandler": {
+      "name": "/oai_search",
+      "class": "solr.StandardRequestHandler",
+      "invariants": {
+        "sort": "id desc"
+      },
+      "defaults": {
+        "echoParams": "explicit",
+        "rows": 20,
+        "df": "allMeta",
+        "fl": "*,score",
+        "q.alt": "*:* -objectType:data_file -objectType:derivate",
+        "tie": "0.1",
+        "wt": "xml"
+      },
+      "appends": {
+        "fq": [
+          "objectType:\"mods\"",
+          "state:published"
+        ]
+      }
+    }
+  },
 ]
